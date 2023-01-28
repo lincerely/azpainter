@@ -54,6 +54,7 @@ struct _LayerList
 //---------------------
 
 #define _TOPITEM(p)        ((LayerItem *)p->tree.top)
+#define _PREV_ITEM(p)      (LayerItem *)((p)->i.prev)
 #define _NEXT_ITEM(p)      (LayerItem *)((p)->i.next)
 #define _NEXT_TREEITEM(p)  (LayerItem *)mTreeItemGetNext((mTreeItem *)(p))
 #define _PREV_TREEITEM(p)  (LayerItem *)mTreeItemGetPrev((mTreeItem *)(p))
@@ -606,6 +607,29 @@ mlkbool LayerList_haveCheckedLayer(LayerList *p)
 	}
 
 	return FALSE;
+}
+
+/** 同一階層内のレイヤの表示フラグ変更 */
+
+void LayerList_setVisible_all_currentLevel(LayerList *p,LayerItem *current,mlkbool on)
+{
+	LayerItem *pi;
+
+	for (pi = current; pi; pi = _PREV_ITEM(pi))
+	{
+		if(on)
+			pi->flags |= LAYERITEM_F_VISIBLE;
+		else
+			pi->flags &= ~LAYERITEM_F_VISIBLE;
+	}
+
+	for (pi = _NEXT_ITEM(current); pi; pi = _NEXT_ITEM(pi))
+	{
+		if(on)
+			pi->flags |= LAYERITEM_F_VISIBLE;
+		else
+			pi->flags &= ~LAYERITEM_F_VISIBLE;
+	}
 }
 
 /** すべてのレイヤの表示フラグ変更 */

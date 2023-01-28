@@ -495,7 +495,7 @@ static void _event_press(PanelLayerList *p,mEventPointer *ev)
 				{
 					//+Ctrl でカレントレイヤのみ表示
 
-					drawLayer_visibleAll(APPDRAW, 2);
+					drawLayer_visible_currentOnly(APPDRAW);
 				}
 				else
 				{

@@ -70,6 +70,7 @@ TileImage *LayerList_getMaskUnderImage(LayerList *p,LayerItem *current);
 /* フラグなど */
 
 mlkbool LayerList_haveCheckedLayer(LayerList *p);
+void LayerList_setVisible_all_currentLevel(LayerList *p,LayerItem *current,mlkbool on);
 void LayerList_setVisible_all(LayerList *p,mlkbool on);
 void LayerList_setVisible_all_checked_rev(LayerList *p,mRect *rcimg);
 void LayerList_setVisible_all_img_rev(LayerList *p,mRect *rcimg);

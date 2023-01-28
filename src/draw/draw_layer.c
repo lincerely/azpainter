@@ -1095,6 +1095,40 @@ void drawLayer_setLayerMask(AppDraw *p,LayerItem *item,int type)
 // フラグ関連
 //=========================
 
+/** 同じ階層にある他のレイヤーのチェックをすべて非表示 */
+
+void drawLayer_visible_currentOnly(AppDraw *p)
+{
+	mRect rc;
+	LayerItem *pi;
+
+	pi = (LayerItem *)(p->curlayer->i.parent);
+
+	if (pi)
+	{
+		LayerItem_getVisibleImageRect(pi, &rc);
+
+		LayerList_setVisible_all_currentLevel(p->layerlist, p->curlayer, FALSE);
+
+		drawUpdateRect_canvas_canvasview(p, &rc);
+	}
+	else
+	{
+		LayerList_setVisible_all_currentLevel(p->layerlist, p->curlayer, FALSE);
+
+		drawUpdate_all();
+	}
+	
+	// show current
+
+	p->curlayer->flags |= LAYERITEM_F_VISIBLE;
+
+	LayerItem_getVisibleImageRect(p->curlayer, &rc);
+
+	drawUpdateRect_canvas_canvasview(p, &rc);
+
+	PanelLayer_update_all();
+}
 
 /** すべてのレイヤの表示を変更
  *

@@ -49,6 +49,7 @@ void drawLayer_toggle_visible(AppDraw *p,LayerItem *item);
 void drawLayer_toggle_lock(AppDraw *p,LayerItem *item);
 void drawLayer_setLayerMask(AppDraw *p,LayerItem *item,int type);
 
+void drawLayer_visible_currentOnly(AppDraw *p);
 void drawLayer_visibleAll(AppDraw *p,int type);
 void drawLayer_visibleAll_checked_rev(AppDraw *p);
 void drawLayer_visibleAll_img_rev(AppDraw *p);
