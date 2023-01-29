@@ -1106,6 +1106,8 @@ void drawLayer_visible_currentOnly(AppDraw *p)
 
 	if (pi)
 	{
+		// 親がフォルダ
+
 		LayerItem_getVisibleImageRect(pi, &rc);
 
 		LayerList_setVisible_all_currentLevel(p->layerlist, p->curlayer, FALSE);
@@ -1114,6 +1116,8 @@ void drawLayer_visible_currentOnly(AppDraw *p)
 	}
 	else
 	{
+		// 親がルート
+
 		LayerList_setVisible_all_currentLevel(p->layerlist, p->curlayer, FALSE);
 
 		drawUpdate_all();
@@ -1126,6 +1130,8 @@ void drawLayer_visible_currentOnly(AppDraw *p)
 	LayerItem_getVisibleImageRect(p->curlayer, &rc);
 
 	drawUpdateRect_canvas_canvasview(p, &rc);
+
+	//
 
 	PanelLayer_update_all();
 }
