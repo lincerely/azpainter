@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,8 +21,8 @@ $*/
  * キー
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_key.h"
+#include <mlk_gui.h>
+#include <mlk_key.h>
 
 #include "mlk_pv_gui.h"
 

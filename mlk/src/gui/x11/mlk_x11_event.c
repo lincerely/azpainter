@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -29,13 +29,13 @@ $*/
 #include "mlk_x11.h"
 #include "mlk_x11_event.h"
 
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_event.h"
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_event.h>
 
-#include "mlk_pv_gui.h"
-#include "mlk_pv_window.h"
-#include "mlk_pv_event.h"
+#include <mlk_pv_gui.h>
+#include <mlk_pv_window.h>
+#include <mlk_pv_event.h>
 
 //-----------
 
@@ -54,35 +54,8 @@ mlkbool mX11DND_client_message(XClientMessageEvent *ev);
 
 static void _event_focus(_X11_EVENT *p,mlkbool focusin)
 {
-	int mode,detail;
-
-	mode = p->xev->xfocus.mode;
-	detail = p->xev->xfocus.detail;
-
 	_X11_DEBUG("Focus%s: %p mode(%d) detail(%d)\n",
-		(focusin)? "In":"Out", p->win, mode, detail);
-
-	//<ポインタ/キーボードのグラブによるイベントは除外>
-
-	//- Alt+Tab 押し直後に mode=NotifyGrab が来るが、
-	//  実際に他のウィンドウにフォーカスが移った時には mode=NotifyNormal が来るので、
-	//  他のウィンドウにフォーカスが移った時のみ処理。
-    //
-	//- バックグラウンドで動作していて、ホットキーが設定されているアプリでは、
-	//  キー押し/離し時に NotifyGrab/NotifyUngrab が来る。
-	//  ホットキーを処理するアプリ側において、内部でキーの処理だけ行って、
-	//  ウィンドウを表示することがない場合、フォーカスウィンドウは変わらないので、
-	//  これらのフォーカスイベントは処理しない。
-	//
-	//- ウィンドウの移動などが開始/終了した時、
-	//  detail=NotifyNonlinear で、FocusOut/In が来る。
-	//  IM 前編集中などに移動すると、そのまま移動できてしまうので、処理を行う。
-
-	if((mode == NotifyGrab || mode == NotifyUngrab)
-		&& detail != NotifyNonlinear)
-		return;
-
-	//
+		(focusin)? "In":"Out", p->win, p->xev->xfocus.mode, p->xev->xfocus.detail);
 
 	if(focusin)
 		__mEventProcFocusIn(p->win);
@@ -251,8 +224,7 @@ static void _event_key(_X11_EVENT *p,int press)
 		return;
 
 	//キーリピート処理
-	// キーリピートの場合、
-	// 同じ keycode & time で KeyRelease -> KeyPress が連続して来る。
+	// :キーリピートの場合、同じ keycode & time で KeyRelease -> KeyPress が連続して来る。
 
 	key_repeat = FALSE;
 
@@ -275,12 +247,12 @@ static void _event_key(_X11_EVENT *p,int press)
 		}
 	}
 
-	//KeyShm と文字列を取得
+	//KeySym と文字列を取得
 	
 	keysym = 0;
 	str_char = 0;		//ASCII 文字の場合
 	str_utf8 = NULL;	//UTF-8 文字列
-	str_len = 0;		//文字長さ
+	str_len = 0;		//文字長さ (str_char または str_utf8)
 	 
 	if(press && MLKX11_WINDATA(win)->xic)
 	{
@@ -302,7 +274,7 @@ static void _event_key(_X11_EVENT *p,int press)
 	}
 	
 	//イベント処理
-	
+
 	send_wg = __mEventProcKey(win, keysym, xev->keycode,
 		mX11Event_convertState(xev->state), press, key_repeat);
 	
@@ -439,6 +411,39 @@ static void _event_map(_X11_EVENT *p)
 	//イベント待ち時
 
 	if(p->waitev_check && p->waitev_type == MLKX11_WAITEVENT_MAP)
+		p->waitev_flag = TRUE;
+}
+
+/** ウィンドウ非表示 */
+
+static void _event_unmap(_X11_EVENT *p)
+{
+	mWindow *win = p->win;
+
+	_X11_DEBUG("Unmap: %p\n", win);
+
+	//非表示
+
+	win->win.fstate &= ~MWINDOW_STATE_MAP;
+
+	mEventListAdd_base(MLK_WIDGET(win), MEVENT_UNMAP);
+}
+
+/** ウィンドウ破棄 */
+
+static void _event_destroy(_X11_EVENT *p)
+{
+	mWindow *win = p->win;
+
+	_X11_DEBUG("Destroy: %p\n", win);
+
+	//以降、このウィンドウのイベントを処理しないようにする
+
+	MLKX11_WINDATA(win)->fdestroy = TRUE;
+
+	//イベント待ち時
+
+	if(p->waitev_check && p->waitev_type == MLKX11_WAITEVENT_DESTROY)
 		p->waitev_flag = TRUE;
 }
 
@@ -623,11 +628,12 @@ static void _event_translate_sub(_X11_EVENT *p)
 		
 		//ウィンドウ非表示
 		case UnmapNotify:
-			_X11_DEBUG("Unmap: %p\n", p->win);
+			_event_unmap(p);
+			break;
 
-			p->win->win.fstate &= ~MWINDOW_STATE_MAP;
-
-			mEventListAdd_base(MLK_WIDGET(p->win), MEVENT_UNMAP);
+		//ウィンドウ破棄
+		case DestroyNotify:
+			_event_destroy(p);
 			break;
 
 		//キーボードマッピング
@@ -743,6 +749,13 @@ mlkbool mX11EventTranslate(mAppX11 *p,mWindow *wait_win,int wait_evtype,XEvent *
 
 				win = mX11Event_getWindow(p, xev.xany.window);
 				if(!win) continue;
+
+				//削除済みのウィンドウは除外
+				// :DestroyNotify の後、PropertyNotify(_NET_WM_STATE) が来るため、除外。
+
+				if(MLKX11_WINDATA(win)->fdestroy) break;
+
+				//イベント処理
 
 				dat.win = win;
 				dat.waitev_check = (win == wait_win);

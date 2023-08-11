@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,11 +23,11 @@ $*/
 
 #include <string.h>
 
-#include "mlk.h"
-#include "mlk_loadimage.h"
-#include "mlk_io.h"
-#include "mlk_util.h"
-#include "mlk_imageconv.h"
+#include <mlk.h>
+#include <mlk_loadimage.h>
+#include <mlk_io.h>
+#include <mlk_util.h>
+#include <mlk_imageconv.h>
 
 
 //==============================
@@ -152,9 +152,11 @@ mlkerr mLoadImage_setPalette(mLoadImage *p,uint8_t *buf,int size,int palnum)
 
 /**@ mLoadImage の値を元に、mImageConv の値をセット
  *
- * @d:srcbits は 8。dstbits は bits_per_sample から。\
- * convtype は、RGB/RGBA/なしのいずれか。\
- * dstbuf,srcbuf,srcbits,endian,flags は必要に応じでセットする。 */
+ * @d:srcbits は 8。\
+ * dstbits は bits_per_sample から。\
+ * convtype は、convert_type から。\
+ * palbuf, width もセットされる。\
+ * 他の値は、必要に応じてセットすること。 */
 
 void mLoadImage_setImageConv(mLoadImage *p,mImageConv *dst)
 {
@@ -173,6 +175,22 @@ void mLoadImage_setImageConv(mLoadImage *p,mImageConv *dst)
 		dst->convtype = MIMAGECONV_CONVTYPE_RGBA;
 	else
 		dst->convtype = MIMAGECONV_CONVTYPE_NONE;
+}
+
+/** convert_type と src_coltype から、coltype をセットする */
+
+void mLoadImage_setColorType_fromSource(mLoadImage *p)
+{
+	int n;
+
+	if(p->convert_type == MLOADIMAGE_CONVERT_TYPE_RGB)
+		n = MLOADIMAGE_COLTYPE_RGB;
+	else if(p->convert_type == MLOADIMAGE_CONVERT_TYPE_RGBA)
+		n = MLOADIMAGE_COLTYPE_RGBA;
+	else
+		n = p->src_coltype;
+
+	p->coltype = n;
 }
 
 
@@ -360,15 +378,15 @@ int mLoadImage_getLineBytes(mLoadImage *p)
 
 	switch(p->coltype)
 	{
+		case MLOADIMAGE_COLTYPE_GRAY_A:
+			ret *= 2;
+			break;
 		case MLOADIMAGE_COLTYPE_RGB:
 			ret *= 3;
 			break;
-		case MLOADIMAGE_COLTYPE_RGBA:
-		case MLOADIMAGE_COLTYPE_CMYK:
+		//RGBA/CMYK
+		default:
 			ret *= 4;
-			break;
-		case MLOADIMAGE_COLTYPE_GRAY_A:
-			ret *= 2;
 			break;
 	}
 

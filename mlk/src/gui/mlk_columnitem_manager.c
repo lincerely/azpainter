@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,13 +24,13 @@ $*/
 
 #include <string.h>	//strcmp
 
-#include "mlk_gui.h"
-#include "mlk_list.h"
-#include "mlk_font.h"
-#include "mlk_buf.h"
-#include "mlk_str.h"
-#include "mlk_string.h"
-#include "mlk_widget_def.h"
+#include <mlk_gui.h>
+#include <mlk_list.h>
+#include <mlk_font.h>
+#include <mlk_buf.h>
+#include <mlk_str.h>
+#include <mlk_string.h>
+#include <mlk_widget_def.h>
 
 #include "mlk_columnitem_manager.h"
 
@@ -512,15 +512,42 @@ mColumnItem *mCIManagerGetItem_fromParam(mCIManager *p,intptr_t param)
 	return NULL;
 }
 
-/**@ テキストからアイテム検索 */
+/**@ テキストからアイテム検索 (単一列の場合) */
 
 mColumnItem *mCIManagerGetItem_fromText(mCIManager *p,const char *text)
 {
 	mColumnItem *pi;
 
+	if(!text) return NULL;
+
 	for(pi = _ITEM_TOP(p); pi; pi = MLK_COLUMNITEM(pi->i.next))
 	{
-		if(strcmp(pi->text, text) == 0)
+		if(pi->text && strcmp(pi->text, text) == 0)
+			return pi;
+	}
+
+	return NULL;
+}
+
+/**@ テキストからアイテム検索 (複数列の場合)
+ *
+ * @p:col 列の位置 */
+
+mColumnItem *mCIManagerGetItem_fromText_multi(mCIManager *p,const char *text,int col)
+{
+	mColumnItem *pi;
+	char *pc;
+	int len;
+
+	if(!text) return NULL;
+
+	for(pi = _ITEM_TOP(p); pi; pi = MLK_COLUMNITEM(pi->i.next))
+	{
+		if(!pi->text_col) continue;
+
+		len = mColumnItem_getColText(pi, col, &pc);
+	
+		if(pc && strncmp(pc, text, len) == 0 && text[len] == 0)
 			return pi;
 	}
 

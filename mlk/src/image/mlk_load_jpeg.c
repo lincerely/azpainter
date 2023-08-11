@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -28,15 +28,16 @@ $*/
 
 #include <jpeglib.h>
 
-#include "mlk.h"
-#include "mlk_loadimage.h"
-#include "mlk_imageconv.h"
-#include "mlk_stdio.h"
-#include "mlk_util.h"
+#include <mlk.h>
+#include <mlk_loadimage.h>
+#include <mlk_imageconv.h>
+#include <mlk_stdio.h>
+#include <mlk_util.h>
 
 
 //--------------------
 
+//JPEG エラー
 typedef struct
 {
 	struct jpeg_error_mgr jerr;
@@ -52,6 +53,7 @@ typedef struct
 	_myjpeg_err jpgerr;
 
 	FILE *fp;
+	uint8_t *rowbuf;
 	int close_fp;	//終了時に fp を閉じるか
 }jpegdata;
 
@@ -142,7 +144,7 @@ static int _read_info(jpegdata *p,mLoadImage *pli)
 	jpg = &p->jpg;
 
 	//エラー設定
-	/* デフォルトではエラー時にプロセスが終了するので、longjmp を行うようにする */
+	// :デフォルトではエラー時にプロセスが終了するので、longjmp を行うようにする
 
 	jpg->err = jpeg_std_error(&p->jpgerr.jerr);
 
@@ -201,17 +203,15 @@ static int _read_info(jpegdata *p,mLoadImage *pli)
 
 	//CMYK 時
 
+/*
 	if(colspace == JCS_CMYK || colspace == JCS_YCCK)
 	{
 		//対応しない
 
 		if(!(pli->flags & MLOADIMAGE_FLAGS_ALLOW_CMYK))
 			return MLKERR_UNSUPPORTED;
-	
-		//常に生データ
-
-		pli->convert_type = MLOADIMAGE_CONVERT_TYPE_RAW;
 	}
+*/
 
 	//mLoadImage にセット
 
@@ -230,16 +230,9 @@ static int _read_info(jpegdata *p,mLoadImage *pli)
 
 	pli->src_coltype = coltype;
 
-	//カラータイプ
+	//変換カラータイプ
 
-	if(pli->convert_type == MLOADIMAGE_CONVERT_TYPE_RGB)
-		coltype = MLOADIMAGE_COLTYPE_RGB;
-	else if(pli->convert_type == MLOADIMAGE_CONVERT_TYPE_RGBA)
-		coltype = MLOADIMAGE_COLTYPE_RGBA;
-	else
-		coltype = pli->src_coltype;
-
-	pli->coltype = coltype;
+	mLoadImage_setColorType_fromSource(pli);
 
 	//------- 開始
 
@@ -247,7 +240,7 @@ static int _read_info(jpegdata *p,mLoadImage *pli)
 
 	if(colspace == JCS_CMYK || colspace == JCS_YCCK)
 		jpg->out_color_space = JCS_CMYK;
-	else if(coltype == MLOADIMAGE_COLTYPE_GRAY)
+	else if(colspace == JCS_GRAYSCALE)
 		jpg->out_color_space = JCS_GRAYSCALE;
 	else
 		jpg->out_color_space = JCS_RGB;
@@ -291,6 +284,8 @@ static void _jpeg_close(mLoadImage *pli)
 	{
 		jpeg_destroy_decompress(&p->jpg);
 
+		mFree(p->rowbuf);
+
 		if(p->fp && p->close_fp)
 			fclose(p->fp);
 	}
@@ -319,26 +314,57 @@ static mlkerr _jpeg_open(mLoadImage *pli)
 static mlkerr _jpeg_getimage(mLoadImage *pli)
 {
 	jpegdata *p = (jpegdata *)pli->handle;
-	uint8_t **ppbuf;
-	int i,cnt,to_rgba,height,prog,prog_cur;
+	uint8_t **ppdst,*rowbuf;
+	mFuncImageConv convfunc;
+	mImageConv conv;
+	int i,height,prog,prog_cur;
+
+	//バッファ確保
+
+	i = pli->width;
+
+	if(pli->src_coltype == MLOADIMAGE_COLTYPE_CMYK)
+		i *= 4;
+	else if(pli->src_coltype == MLOADIMAGE_COLTYPE_RGB)
+		i *= 3;
+
+	rowbuf = p->rowbuf = (uint8_t *)mMalloc(i);
+	if(!rowbuf) return MLKERR_ALLOC;
+
+	//変換関数
+
+	mLoadImage_setImageConv(pli, &conv);
+
+	conv.srcbuf = rowbuf;
+
+	if(pli->src_coltype == MLOADIMAGE_COLTYPE_CMYK)
+	{
+		//CMYK -> CMYK/RGB/RGBA
+		
+		conv.flags |= MIMAGECONV_FLAGS_REVERSE;
+		convfunc = mImageConv_cmyk8;
+	}
+	else if(pli->src_coltype == MLOADIMAGE_COLTYPE_GRAY)
+		//GRAY -> GRAY/RGB/RGBA
+		convfunc = mImageConv_gray8;
+	else
+		//RGB -> RGB/RGBA
+		convfunc = mImageConv_rgb8;
 
 	//読み込み
 
-	ppbuf = pli->imgbuf;
-	to_rgba = (pli->coltype == MLOADIMAGE_COLTYPE_RGBA);
+	ppdst = pli->imgbuf;
 	height = p->jpg.output_height;
 	prog_cur = 0;
 
 	for(i = 0; i < height; i++)
 	{
-		jpeg_read_scanlines(&p->jpg, (JSAMPARRAY)ppbuf, 1);
+		jpeg_read_scanlines(&p->jpg, (JSAMPARRAY)&rowbuf, 1);
 
-		//RGBA の場合、RGB -> RGBA
+		conv.dstbuf = *ppdst;
+		(convfunc)(&conv);
 
-		if(to_rgba)
-			mImageConv_rgb8_to_rgba8_extend(*ppbuf, pli->width);
-
-		ppbuf++;
+		ppdst++;
 
 		//進捗
 
@@ -354,24 +380,12 @@ static mlkerr _jpeg_getimage(mLoadImage *pli)
 		}
 	}
 	
-	//CMYK の場合、値を反転
-
-	if(pli->coltype == MLOADIMAGE_COLTYPE_CMYK)
-	{
-		ppbuf = pli->imgbuf;
-		cnt = pli->width << 2;
-	
-		for(i = pli->height; i > 0; i--)
-		{
-			mReverseVal_8bit(*ppbuf, cnt);
-
-			ppbuf++;
-		}
-	}
-
 	//終了
 
 	jpeg_finish_decompress(&p->jpg);
+
+	mFree(rowbuf);
+	p->rowbuf = NULL;
 
 	return (p->jpgerr.ferr)? MLKERR_DECODE: MLKERR_OK;
 }

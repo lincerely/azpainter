@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,22 +21,22 @@ $*/
  * mListView [リストビュー]
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_scrollview.h"
-#include "mlk_listview.h"
-#include "mlk_listviewpage.h"
-#include "mlk_listheader.h"
-#include "mlk_scrollbar.h"
-#include "mlk_imagelist.h"
-#include "mlk_event.h"
-#include "mlk_list.h"
-#include "mlk_font.h"
-#include "mlk_str.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_scrollview.h>
+#include <mlk_listview.h>
+#include <mlk_listviewpage.h>
+#include <mlk_listheader.h>
+#include <mlk_scrollbar.h>
+#include <mlk_imagelist.h>
+#include <mlk_event.h>
+#include <mlk_list.h>
+#include <mlk_font.h>
+#include <mlk_str.h>
 
-#include "mlk_pv_widget.h"
-#include "mlk_columnitem_manager.h"
+#include <mlk_pv_widget.h>
+#include <mlk_columnitem_manager.h>
 
 
 //----------------
@@ -587,13 +587,31 @@ mColumnItem *mListViewSetFocusItem_param(mListView *p,intptr_t param)
 	return pi;
 }
 
-/**@ フォーカスアイテム変更 (テキストから検索) */
+/**@ フォーカスアイテム変更 (単一列のテキストから検索) */
 
 mColumnItem *mListViewSetFocusItem_text(mListView *p,const char *text)
 {
 	mColumnItem *pi;
 
 	pi = mCIManagerGetItem_fromText(&p->lv.manager, text);
+	if(pi)
+	{
+		if(mCIManagerSetFocusItem(&p->lv.manager, pi))
+			_redraw(p);
+	}
+
+	return pi;
+}
+
+/**@ フォーカスアイテム変更 (複数列のテキストから検索)
+ *
+ * @p:col 列の位置 */
+
+mColumnItem *mListViewSetFocusItem_text_multi(mListView *p,const char *text,int col)
+{
+	mColumnItem *pi;
+
+	pi = mCIManagerGetItem_fromText_multi(&p->lv.manager, text, col);
 	if(pi)
 	{
 		if(mCIManagerSetFocusItem(&p->lv.manager, pi))
@@ -798,7 +816,8 @@ void mListViewSetColumnWidth_auto(mListView *p,int index)
 /**@ 指定アイテムの位置を基準として、垂直スクロール位置変更
  *
  * @d:レイアウトが行われていない初期状態では、現在のアイテム数からスクロール情報がセットされる。\
- * ※未レイアウト状態では、ページ値が確定していないため、中央位置を正しくセットできない。
+ * ※未レイアウト状態では、ページ値が確定していないため、中央位置を正しくセットできない。\
+ * ※アイテムが増減した直後は情報が更新されていないので、正しく処理できない。
  * 
  * @p:align [0] アイテムが上端に来るように\
  *  [1] アイテムが中央に来るように */

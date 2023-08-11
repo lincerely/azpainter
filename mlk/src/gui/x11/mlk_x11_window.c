@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -27,15 +27,15 @@ $*/
 #define MLKX11_INC_UTIL
 #include "mlk_x11.h"
 
-#include "mlk_rectbox.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_window.h"
-#include "mlk_window_deco.h"
-#include "mlk_imagebuf.h"
+#include <mlk_rectbox.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_window.h>
+#include <mlk_window_deco.h>
+#include <mlk_imagebuf.h>
 
-#include "mlk_pv_gui.h"
-#include "mlk_pv_window.h"
+#include <mlk_pv_gui.h>
+#include <mlk_pv_window.h>
 
 
 //-----------------------------------------
@@ -119,11 +119,14 @@ void __mX11WindowDestroy(mWindow *p)
 		
 		mX11IM_context_destroy(p);
 
-		//
+		//破棄
 	
 		XDestroyWindow(MLKX11_DISPLAY, MLKX11_WINDATA(p)->winid);
 
-		XSync(MLKX11_DISPLAY, False);
+		//ダイアログ時は、実際に削除されるまでイベントを処理
+
+		if(p->wg.ftype & MWIDGET_TYPE_DIALOG)
+			mX11EventTranslate_wait(p, MLKX11_WAITEVENT_DESTROY);
 	}
 }
 
@@ -198,7 +201,7 @@ mlkbool __mX11ToplevelCreate(mToplevel *p)
 
 	attr.bit_gravity = ForgetGravity;
 	attr.override_redirect = 0;
-	attr.do_not_propagate_mask = ButtonPressMask | ButtonReleaseMask | PointerMotionMask| ButtonMotionMask;
+	attr.do_not_propagate_mask = ButtonPressMask | ButtonReleaseMask | PointerMotionMask | ButtonMotionMask;
 
 	attr.event_mask = ExposureMask | EnterWindowMask | LeaveWindowMask
 		| FocusChangeMask | StructureNotifyMask | KeyPressMask | KeyReleaseMask

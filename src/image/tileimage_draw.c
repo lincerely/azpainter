@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -25,8 +25,8 @@ $*/
 #include <stdlib.h>
 #include <math.h>
 
-#include "mlk.h"
-#include "mlk_rectbox.h"
+#include <mlk.h>
+#include <mlk_rectbox.h>
 
 #include "tileimage.h"
 #include "def_tileimage.h"

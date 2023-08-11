@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,10 +23,10 @@ $*/
 
 #include <string.h>
 
-#include "mlk.h"
-#include "mlk_opentype.h"
-#include "mlk_bufio.h"
-#include "mlk_util.h"
+#include <mlk.h>
+#include <mlk_opentype.h>
+#include <mlk_bufio.h>
+#include <mlk_util.h>
 
 
 void __mOpenType_sortData(uint8_t *buf,int datasize);
@@ -124,7 +124,7 @@ mlkerr mOpenType_readVORG(void *buf,uint32_t size,mOT_VORG *dst)
 
 		//コピー
 
-		mCopyBuf_16bit_BEtoHOST(pd + 2, io.cur, num * 2);
+		mCopyBuf_BE_16bit(pd + 2, io.cur, num * 2);
 	}
 
 	return MLKERR_OK;

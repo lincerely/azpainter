@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,16 +23,16 @@ $*/
  * テキストエディタにおけるテキスト処理
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_key.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_font.h"
-#include "mlk_str.h"
-#include "mlk_clipboard.h"
-#include "mlk_unicode.h"
+#include <mlk_gui.h>
+#include <mlk_key.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_font.h>
+#include <mlk_str.h>
+#include <mlk_clipboard.h>
+#include <mlk_unicode.h>
 
-#include "mlk_widgettextedit.h"
+#include <mlk_widgettextedit.h>
 
 /*---------------
 

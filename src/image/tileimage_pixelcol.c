@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,7 +21,7 @@ $*/
  * TileImage: ピクセルカラー処理関数
  *****************************************/
 
-#include "mlk.h"
+#include <mlk.h>
 
 #include "def_tileimage.h"
 #include "tileimage.h"

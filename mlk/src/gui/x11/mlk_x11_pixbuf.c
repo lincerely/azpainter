@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -27,11 +27,11 @@ $*/
 #define MLKX11_INC_XSHM
 #include "mlk_x11.h"
 
-#include "mlk_pixbuf.h"
-#include "mlk_widget_def.h"
+#include <mlk_pixbuf.h>
+#include <mlk_widget_def.h>
 
-#include "mlk_pv_gui.h"
-#include "mlk_pv_pixbuf.h"
+#include <mlk_pv_gui.h>
+#include <mlk_pv_pixbuf.h>
 
 
 //-------------------------
@@ -159,7 +159,7 @@ static XImage *_create_ximage(_pixbuf *p,int w,int h)
 	{
 		//XImage
 		
-		ximg = XShmCreateImage(app->display, CopyFromParent,
+		ximg = XShmCreateImage(app->display, NULL,
 					app->depth, ZPixmap, NULL, &p->xshminfo, w, h);
 
 		//バッファ (共有メモリ)
@@ -194,7 +194,7 @@ static XImage *_create_ximage(_pixbuf *p,int w,int h)
 	{
 		//XImage
 	
-		ximg = XCreateImage(app->display, CopyFromParent,
+		ximg = XCreateImage(app->display, NULL,
 					app->depth, ZPixmap, 0, NULL, w, h, 32, 0);
 		
 		if(!ximg) return NULL;
@@ -246,6 +246,7 @@ void __mX11PixbufDeleteImage(mPixbuf *pixbuf)
 		XDestroyImage(p->ximg);
 	
 		shmdt(p->xshminfo.shmaddr);
+		shmctl(p->xshminfo.shmid, IPC_RMID, 0);
 
 		p->ximg = NULL;
 		p->xshminfo.shmaddr = NULL;

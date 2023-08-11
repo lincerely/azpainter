@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,11 +24,11 @@ $*/
 #include <string.h>
 #include <stdlib.h>
 
-#include "mlk.h"
-#include "mlk_opentype.h"
-#include "mlk_bufio.h"
-#include "mlk_buf.h"
-#include "mlk_util.h"
+#include <mlk.h>
+#include <mlk_opentype.h>
+#include <mlk_bufio.h>
+#include <mlk_buf.h>
+#include <mlk_util.h>
 
 
 //----------------
@@ -331,7 +331,7 @@ static int32_t _set_valuerecord(void *data,int flags,int size,mBuf *buf)
 	int16_t val[4];
 	uint32_t pos;
 
-	mCopyBuf_16bit_BEtoHOST(val, data, size >> 1);
+	mCopyBuf_BE_16bit(val, data, size >> 1);
 
 	pos = buf->cursize;
 

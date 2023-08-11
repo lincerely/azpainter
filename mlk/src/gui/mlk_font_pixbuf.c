@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,9 +21,9 @@ $*/
  * mFont (pixbuf に描画)
  *****************************************/
 
-#include "mlk.h"
-#include "mlk_font.h"
-#include "mlk_pixbuf.h"
+#include <mlk.h>
+#include <mlk_font.h>
+#include <mlk_pixbuf.h>
 
 
 //-------------

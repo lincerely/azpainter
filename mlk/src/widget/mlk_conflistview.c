@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,29 +21,29 @@ $*/
  * mConfListView
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_window.h"
-#include "mlk_conflistview.h"
-#include "mlk_listheader.h"
-#include "mlk_listviewpage.h"
-#include "mlk_columnitem.h"
-#include "mlk_event.h"
-#include "mlk_key.h"
-#include "mlk_sysdlg.h"
-#include "mlk_str.h"
-#include "mlk_string.h"
-#include "mlk_pixbuf.h"
-#include "mlk_accelerator.h"
-#include "mlk_fontinfo.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_window.h>
+#include <mlk_conflistview.h>
+#include <mlk_listheader.h>
+#include <mlk_listviewpage.h>
+#include <mlk_columnitem.h>
+#include <mlk_event.h>
+#include <mlk_key.h>
+#include <mlk_sysdlg.h>
+#include <mlk_str.h>
+#include <mlk_string.h>
+#include <mlk_pixbuf.h>
+#include <mlk_accelerator.h>
+#include <mlk_fontinfo.h>
 
-#include "mlk_lineedit.h"
-#include "mlk_checkbutton.h"
-#include "mlk_menu.h"
-#include "mlk_inputaccel.h"
+#include <mlk_lineedit.h>
+#include <mlk_checkbutton.h>
+#include <mlk_menu.h>
+#include <mlk_inputaccel.h>
 
-#include "mlk_pv_event.h"
+#include <mlk_pv_event.h>
 
 
 //-------------------
@@ -497,7 +497,10 @@ static int _page_event_handle(mWidget *wg,mEvent *ev)
 		//キー (SPACE で入力開始)
 		case MEVENT_KEYDOWN:
 			if(ev->key.key == MKEY_SPACE || ev->key.key == MKEY_KP_SPACE)
+			{
 				_start_input(p, NULL);
+				return 1;
+			}
 			break;
 	
 		//入力中はホイール無効
@@ -566,7 +569,7 @@ mConfListView *mConfListViewNew(mWidget *parent,int size,uint32_t fstyle)
 	
 	p = (mConfListView *)mListViewNew(parent, size,
 			MLISTVIEW_S_MULTI_COLUMN | MLISTVIEW_S_HAVE_HEADER | MLISTVIEW_S_GRID_COL | MLISTVIEW_S_GRID_ROW,
-			MSCROLLVIEW_S_HORZVERT_FRAME);
+			MSCROLLVIEW_S_HORZVERT_FRAME | MSCROLLVIEW_S_ALL_NOTIFY_SELF);
 
 	if(!p) return NULL;
 

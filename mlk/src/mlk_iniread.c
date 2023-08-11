@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -25,16 +25,16 @@ $*/
 #include <string.h>
 #include <ctype.h>
 
-#include "mlk.h"
-#include "mlk_iniread.h"
+#include <mlk.h>
+#include <mlk_iniread.h>
 
-#include "mlk_list.h"
-#include "mlk_str.h"
-#include "mlk_file.h"
-#include "mlk_util.h"
-#include "mlk_string.h"
-#include "mlk_buf.h"
-#include "mlk_unicode.h"
+#include <mlk_list.h>
+#include <mlk_str.h>
+#include <mlk_file.h>
+#include <mlk_util.h>
+#include <mlk_string.h>
+#include <mlk_buf.h>
+#include <mlk_unicode.h>
 
 
 //--------------------
@@ -595,6 +595,18 @@ uint32_t mIniRead_getHex(mIniRead *p,const char *key,uint32_t def)
 		return def;
 }
 
+/**@ double 値取得 */
+
+double mIniRead_getDouble(mIniRead *p,const char *key,double def)
+{
+	char *pc = _search_key(p, key);
+
+	if(pc)
+		return strtod(pc, NULL);
+	else
+		return def;
+}
+
 /**@ 値の文字列を比較
  *
  * @p:comptxt 比較する文字列
@@ -913,37 +925,45 @@ mlkbool mIniRead_getBox(mIniRead *p,const char *key,mBox *box,int defx,int defy,
 	}
 }
 
-/**@ Base64 をデコードして取得
+/**@ Base64 をデコードして取得 (キーの存在判定あり)
  *
- * @p:psize NULL 以外で、データの元サイズが入る
- * @r:確保されたバッファが返る。\
- * NULL でキーがないか、エラー。 */
+ * @d:キーが存在しない場合と、空データの場合を区別したい場合。
+ *
+ * @p:ppdst 確保されたバッファのポインタが入る。空データやエラー時は NULL。
+ * @r:キーが存在すれば 0、キーが存在しない場合 1、エラー時は -1。 */
 
-void *mIniRead_getBase64(mIniRead *p,const char *key,uint32_t *psize)
+int mIniRead_getBase64_check(mIniRead *p,const char *key,void **ppdst,uint32_t *psize)
 {
 	char *pc = _search_key(p, key);
 	int srcsize,ret;
 	uint8_t *buf;
 
-	if(!pc) return NULL;
+	*ppdst = NULL;
+	if(psize) *psize = 0;
+
+	if(!pc) return 1;
+
+	//空データ
+
+	if(!(*pc)) return 0;
 
 	//元データサイズ
 
 	srcsize = atoi(pc);
-	if(srcsize <= 0) return NULL;
+	if(srcsize <= 0) return -1;
 
 	//Base64 コード位置
 
 	for(; *pc && *pc != ':'; pc++);
 
-	if(*pc == 0) return NULL;
+	if(*pc == 0) return -1;
 
 	pc++;
 
 	//確保
 
 	buf = (uint8_t *)mMalloc(srcsize);
-	if(!buf) return NULL;
+	if(!buf) return -1;
 
 	//デコード
 
@@ -952,10 +972,29 @@ void *mIniRead_getBase64(mIniRead *p,const char *key,uint32_t *psize)
 	if(ret < 0)
 	{
 		mFree(buf);
-		return NULL;
+		return -1;
 	}
 
+	//
+
+	*ppdst = buf;
 	if(psize) *psize = ret;
+
+	return 0;
+}
+
+/**@ Base64 をデコードして取得
+ *
+ * @d:"key=" の空データの場合、NULL が返り、サイズは 0 になる。
+ * @p:psize NULL 以外で、データの元サイズが入る
+ * @r:デコードされたデータが入った、確保されたバッファが返る。\
+ * NULL でキーがない or エラー or 空データ。 */
+
+void *mIniRead_getBase64(mIniRead *p,const char *key,uint32_t *psize)
+{
+	void *buf;
+
+	mIniRead_getBase64_check(p, key, &buf, psize);
 
 	return buf;
 }

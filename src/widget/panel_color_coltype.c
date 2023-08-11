@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,17 +21,17 @@ $*/
  * (Panel)カラーの各ページ
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_label.h"
-#include "mlk_button.h"
-#include "mlk_pager.h"
-#include "mlk_hsvpicker.h"
-#include "mlk_sysdlg.h"
-#include "mlk_event.h"
-#include "mlk_str.h"
-#include "mlk_color.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_label.h>
+#include <mlk_button.h>
+#include <mlk_pager.h>
+#include <mlk_hsvpicker.h>
+#include <mlk_sysdlg.h>
+#include <mlk_event.h>
+#include <mlk_str.h>
+#include <mlk_color.h>
 
 #include "def_widget.h"
 #include "def_draw.h"

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -20,7 +20,7 @@ $*/
 #ifndef MLK_CONFLISTVIEW_H
 #define MLK_CONFLISTVIEW_H
 
-#include "mlk_listview.h"
+#include <mlk_listview.h>
 
 #define MLK_CONFLISTVIEW(p)  ((mConfListView *)(p))
 #define MLK_CONFLISTVIEW_DEF MLK_LISTVIEW_DEF mConfListViewData clv;

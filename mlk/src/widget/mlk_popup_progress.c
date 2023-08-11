@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,13 +21,13 @@ $*/
  * mPopupProgress
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_window.h"
-#include "mlk_popup_progress.h"
-#include "mlk_progressbar.h"
-#include "mlk_thread.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_window.h>
+#include <mlk_popup_progress.h>
+#include <mlk_progressbar.h>
+#include <mlk_thread.h>
 
 
 

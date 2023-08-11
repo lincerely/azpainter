@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,10 +23,10 @@ $*/
 
 #include <string.h>
 
-#include "mlk.h"
-#include "mlk_loadimage.h"
-#include "mlk_imageconv.h"
-#include "mlk_psd.h"
+#include <mlk.h>
+#include <mlk_loadimage.h>
+#include <mlk_imageconv.h>
+#include <mlk_psd.h>
 
 
 //--------------------
@@ -44,7 +44,7 @@ typedef struct
 
 
 
-/** 開く処理 */
+/* 開く処理 */
 
 static mlkerr _proc_open(psdload *p,mLoadImage *pli)
 {
@@ -105,25 +105,12 @@ static mlkerr _proc_open(psdload *p,mLoadImage *pli)
 
 	//カラータイプ
 
-	if(hd.colmode == MPSD_COLMODE_CMYK)
-	{
-		//CMYK
-		
-		if(!(pli->flags & MLOADIMAGE_FLAGS_ALLOW_CMYK))
-			return MLKERR_UNSUPPORTED;
+	mLoadImage_setColorType_fromSource(pli);
 
-		pli->coltype = MLOADIMAGE_COLTYPE_CMYK;
-		pli->convert_type = MLOADIMAGE_CONVERT_TYPE_RAW;
-		p->chnum = 4; //アルファ値は除く
-	}
-	else if(pli->convert_type == MLOADIMAGE_CONVERT_TYPE_RGB)
-		//変換:RGB
-		pli->coltype = MLOADIMAGE_COLTYPE_RGB;
-	else if(pli->convert_type == MLOADIMAGE_CONVERT_TYPE_RGBA)
-		//変換:RGBA
-		pli->coltype = MLOADIMAGE_COLTYPE_RGBA;
-	else
-		pli->coltype = pli->src_coltype;
+	//CMYK の場合、アルファチャンネルは除く
+	
+	if(hd.colmode == MPSD_COLMODE_CMYK)
+		p->chnum = 4;
 
 	//リソース
 
@@ -215,7 +202,7 @@ static mlkerr _psd_getimage(mLoadImage *pli)
 		if(p->bits == 16)
 			func = (chnum == 2)? mImageConv_sepch_gray_a_16: mImageConv_gray16;
 		else
-			func = (chnum == 2)? mImageConv_sepch_gray_a_8: mImageConv_gray_1_2_4_8;
+			func = (chnum == 2)? mImageConv_sepch_gray_a_8: mImageConv_gray8;
 	}
 	else if(p->colmode == MPSD_COLMODE_MONO)
 	{

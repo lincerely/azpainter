@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,10 +24,10 @@ $*/
 #include <png.h>
 //[!] setjmp.h はインクルードしない。コンパイルエラーが出る場合がある
 
-#include "mlk.h"
-#include "mlk_loadimage.h"
-#include "mlk_io.h"
-#include "mlk_util.h"
+#include <mlk.h>
+#include <mlk_loadimage.h>
+#include <mlk_io.h>
+#include <mlk_util.h>
 
 
 //--------------------

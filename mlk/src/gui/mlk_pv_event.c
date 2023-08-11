@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,15 +23,15 @@ $*/
 
 #include <math.h>
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_window.h"
-#include "mlk_event.h"
-#include "mlk_key.h"
-#include "mlk_str.h"
-#include "mlk_string.h"
-#include "mlk_window_deco.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_window.h>
+#include <mlk_event.h>
+#include <mlk_key.h>
+#include <mlk_str.h>
+#include <mlk_string.h>
+#include <mlk_window_deco.h>
 
 #include "mlk_pv_gui.h"
 #include "mlk_pv_widget.h"
@@ -855,8 +855,8 @@ void __mEventReEnter(void)
  * - KEYDOWN/KEYUP イベントを追加。
  * - CHAR/STRING イベントを送る場合は、戻り値のウィジェットに送る。
  *
- * key: XKB のキーコード
- * rawcode: 生のキーコード
+ * key: XKB のキーコード (0 でなし)
+ * rawcode: 生のキーコード (0 で、入力メソッドによる文字列取得)
  * key_repeat: キーリピートによる押しイベントか
  * return: イベントの送り先ウィジェット。
  *  NULL の場合、イベントは送らない。
@@ -958,8 +958,9 @@ mWidget *__mEventProcKey(mWindow *win,
 		return NULL;
 	
 	//KEYDOWN/UP イベント
+	// :rawcode = 0 の場合、入力メソッドによる文字列取得のためのイベントなので、除外
 
-	if(send_wg->fevent & MWIDGET_EVENT_KEY)
+	if((send_wg->fevent & MWIDGET_EVENT_KEY) && rawcode)
 	{
 		ev = (mEventKey *)mEventListAdd(send_wg,
 			(press)? MEVENT_KEYDOWN: MEVENT_KEYUP, sizeof(mEventKey));

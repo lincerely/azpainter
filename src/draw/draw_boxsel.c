@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -22,10 +22,10 @@ $*/
  * 矩形選択関連
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_rectbox.h"
-#include "mlk_str.h"
-#include "mlk_sysdlg.h"
+#include <mlk_gui.h>
+#include <mlk_rectbox.h>
+#include <mlk_str.h>
+#include <mlk_sysdlg.h>
 
 #include "def_widget.h"
 #include "def_draw.h"

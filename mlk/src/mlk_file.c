@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -31,10 +31,10 @@ $*/
 #include <unistd.h>
 #include <errno.h>
 
-#include "mlk.h"
-#include "mlk_file.h"
-#include "mlk_charset.h"
-#include "mlk_filestat.h"
+#include <mlk.h>
+#include <mlk_file.h>
+#include <mlk_charset.h>
+#include <mlk_filestat.h>
 
 
 
@@ -375,7 +375,9 @@ mlkbool mIsExistDir(const char *path)
 		return ((st.st_mode & S_IFDIR) != 0);
 }
 
-/**@ 指定パスの情報取得 */
+/**@ 指定パスの情報取得
+ *
+ * @d:シンボリックリンク先のファイルが読み込まれる。 */
 
 mlkbool mGetFileStat(const char *path,mFileStat *dst)
 {

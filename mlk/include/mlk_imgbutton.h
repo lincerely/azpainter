@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -20,7 +20,7 @@ $*/
 #ifndef MLK_IMGBUTTON_H
 #define MLK_IMGBUTTON_H
 
-#include "mlk_button.h"
+#include <mlk_button.h>
 
 #define MLK_IMGBUTTON(p)  ((mImgButton *)(p))
 #define MLK_IMGBUTTON_DEF MLK_BUTTON_DEF mImgButtonData bib;

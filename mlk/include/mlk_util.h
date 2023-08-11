@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -57,10 +57,10 @@ void mSetBufLE32(uint8_t *buf,uint32_t val);
 int mSetBuf_format(void *buf,const char *format,...);
 int mGetBuf_format(const void *buf,const char *format,...);
 
-void mCopyBuf_16bit_BEtoHOST(void *dst,const void *src,uint32_t cnt);
-void mCopyBuf_32bit_BEtoHOST(void *dst,const void *src,uint32_t cnt);
-void mConvBuf_16bit_BEtoHOST(void *buf,uint32_t cnt);
-void mConvBuf_32bit_BEtoHOST(void *buf,uint32_t cnt);
+void mCopyBuf_BE_16bit(void *dst,const void *src,uint32_t cnt);
+void mCopyBuf_BE_32bit(void *dst,const void *src,uint32_t cnt);
+void mConvertBuf_BE_16bit(void *buf,uint32_t cnt);
+void mConvertBuf_BE_32bit(void *buf,uint32_t cnt);
 void mReverseBit(uint8_t *buf,uint32_t bytes);
 void mReverseVal_8bit(uint8_t *buf,uint32_t cnt);
 void mReverseVal_16bit(void *buf,uint32_t cnt);

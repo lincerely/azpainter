@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -20,7 +20,7 @@ $*/
 #ifndef MLK_H
 #define MLK_H
 
-#include "mlk_config.h"
+#include <mlk_config.h>
 #include <stdint.h>
 
 typedef int       mlkerr;

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -20,7 +20,7 @@ $*/
 #ifndef MLK_LISTVIEW_H
 #define MLK_LISTVIEW_H
 
-#include "mlk_scrollview.h"
+#include <mlk_scrollview.h>
 
 #define MLK_LISTVIEW(p)  ((mListView *)(p))
 #define MLK_LISTVIEW_DEF MLK_SCROLLVIEW_DEF mListViewData lv;
@@ -56,7 +56,7 @@ enum MLISTVIEW_STYLE
 
 enum MLISTVIEW_NOTIFY
 {
-	MLISTVIEW_N_CHANGE_FOCUS,
+	MLISTVIEW_N_CHANGE_FOCUS = MSCROLLVIEW_NOTIFY_NEXT_VALUE,
 	MLISTVIEW_N_CLICK_ON_FOCUS,
 	MLISTVIEW_N_CHANGE_CHECK,
 	MLISTVIEW_N_ITEM_L_DBLCLK,
@@ -110,6 +110,7 @@ void mListViewSetFocusItem_scroll(mListView *p,mColumnItem *item);
 mColumnItem *mListViewSetFocusItem_index(mListView *p,int index);
 mColumnItem *mListViewSetFocusItem_param(mListView *p,intptr_t param);
 mColumnItem *mListViewSetFocusItem_text(mListView *p,const char *text);
+mColumnItem *mListViewSetFocusItem_text_multi(mListView *p,const char *text,int col);
 
 int mListViewGetItemIndex(mListView *p,mColumnItem *item);
 intptr_t mListViewGetItemParam(mListView *p,int index);

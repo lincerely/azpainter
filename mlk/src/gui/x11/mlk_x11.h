@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -197,7 +197,8 @@ typedef struct
 
 	int norm_x, norm_y,		//通常ウィンドウ時のウィンドウ位置
 		move_x, move_y;		//MAP 時に移動する位置
-	uint8_t fmap_request;	//ウィンドウ表示時に実行する処理のフラグ
+	uint8_t fmap_request,	//ウィンドウ表示時に実行する処理のフラグ
+		fdestroy;			//DestroyNotify が来た時 TRUE
 }mWindowDataX11;
 
 
@@ -230,6 +231,7 @@ enum
 {
 	MLKX11_WAITEVENT_NONE,
 	MLKX11_WAITEVENT_MAP,
+	MLKX11_WAITEVENT_DESTROY,
 	MLKX11_WAITEVENT_MAXIMIZE,
 	MLKX11_WAITEVENT_FULLSCREEN,
 	MLKX11_WAITEVENT_SELECTION_NOTIFY

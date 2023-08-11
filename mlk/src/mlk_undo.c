@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,9 +21,9 @@ $*/
  * mUndo
  *****************************************/
 
-#include "mlk.h"
-#include "mlk_undo.h"
-#include "mlk_list.h"
+#include <mlk.h>
+#include <mlk_undo.h>
+#include <mlk_list.h>
 
 
 /*-------------------

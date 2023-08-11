@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -67,6 +67,7 @@ void mImageConv_rgbx8_to_rgb8(uint8_t *dst,const uint8_t *src,uint32_t width);
 void mImageConv_rgbx8_to_gray8(uint8_t *dst,const uint8_t *src,uint32_t width);
 void mImageConv_rgbx8_to_gray1(uint8_t *dst,const uint8_t *src,uint32_t width);
 
+void mImageConv_gray8(mImageConv *p);
 void mImageConv_gray_1_2_4_8(mImageConv *p);
 void mImageConv_gray16(mImageConv *p);
 void mImageConv_palette_1_2_4_8(mImageConv *p);
@@ -74,6 +75,7 @@ void mImageConv_rgb555(mImageConv *p);
 void mImageConv_rgb8(mImageConv *p);
 void mImageConv_rgba8(mImageConv *p);
 void mImageConv_rgb_rgba_16(mImageConv *p);
+void mImageConv_cmyk8(mImageConv *p);
 void mImageConv_cmyk16(mImageConv *p);
 
 void mImageConv_sepch_gray_a_8(mImageConv *p);

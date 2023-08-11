@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,8 +23,8 @@ $*/
 
 #include <pthread.h>
 
-#include "mlk.h"
-#include "mlk_thread.h"
+#include <mlk.h>
+#include <mlk_thread.h>
 
 
 #define _MUTEX(p)  ((pthread_mutex_t *)(p))

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -20,7 +20,7 @@ $*/
 #ifndef MLK_LISTVIEWPAGE_H
 #define MLK_LISTVIEWPAGE_H
 
-#include "mlk_scrollview.h"
+#include <mlk_scrollview.h>
 
 #define MLK_LISTVIEWPAGE(p)  ((mListViewPage *)(p))
 #define MLK_LISTVIEWPAGE_DEF MLK_SCROLLVIEWPAGE_DEF mListViewPageData lvp;

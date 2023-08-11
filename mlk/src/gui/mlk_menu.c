@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,12 +21,12 @@ $*/
  * mMenu [メニュー]
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_menu.h"
-#include "mlk_str.h"
-#include "mlk_list.h"
-#include "mlk_util.h"
-#include "mlk_widget_def.h"
+#include <mlk_gui.h>
+#include <mlk_menu.h>
+#include <mlk_str.h>
+#include <mlk_list.h>
+#include <mlk_util.h>
+#include <mlk_widget_def.h>
 
 #include "mlk_pv_menu.h"
 #include "mlk_pv_window.h"
@@ -414,7 +414,7 @@ mMenuItemInfo *mMenuAppendText_copy(mMenu *p,int id,const char *text,int len)
 	return ret;
 }
 
-/**@ アイテム追加 (パラメータ値 param1 指定) */
+/**@ アイテム追加 (静的文字列、param1 指定) */
 
 mMenuItemInfo *mMenuAppendText_param(mMenu *p,int id,const char *text,intptr_t param)
 {
@@ -426,6 +426,22 @@ mMenuItemInfo *mMenuAppendText_param(mMenu *p,int id,const char *text,intptr_t p
 	info.text = text;
 	info.param1 = param;
 	
+	return mMenuAppendInfo(p, &info);
+}
+
+/**@ アイテム追加 (複製文字列、param1 指定) */
+
+mMenuItemInfo *mMenuAppendText_copy_param(mMenu *p,int id,const char *text,intptr_t param)
+{
+	mMenuItemInfo info;
+	
+	mMemset0(&info, sizeof(mMenuItemInfo));
+	
+	info.id = id;
+	info.text = text;
+	info.flags = MMENUITEM_F_COPYTEXT;
+	info.param1 = param;
+
 	return mMenuAppendInfo(p, &info);
 }
 

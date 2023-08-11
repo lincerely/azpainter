@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -27,12 +27,12 @@ $*/
 #include "mlk_x11.h"
 #include "mlk_x11_event.h"
 
-#include "mlk_widget_def.h"
-#include "mlk_event.h"
-#include "mlk_charset.h"
+#include <mlk_widget_def.h>
+#include <mlk_event.h>
+#include <mlk_charset.h>
 
-#include "mlk_pv_gui.h"
-#include "mlk_pv_event.h"
+#include <mlk_pv_gui.h>
+#include <mlk_pv_event.h>
 
 
 
@@ -322,7 +322,7 @@ void mX11Event_clientmessage_wmprotocols(_X11_EVENT *p)
 
 /** PropertyNotify : _NET_WM_STATE
  *
- * ウィンドウの状態変更時 */
+ * ウィンドウの状態変更時。 */
 
 void mX11Event_property_netwmstate(_X11_EVENT *p)
 {

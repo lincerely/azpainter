@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,14 +21,14 @@ $*/
  * ツールバー設定ダイアログ
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_window.h"
-#include "mlk_arrowbutton.h"
-#include "mlk_listview.h"
-#include "mlk_columnitem.h"
-#include "mlk_event.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_window.h>
+#include <mlk_arrowbutton.h>
+#include <mlk_listview.h>
+#include <mlk_columnitem.h>
+#include <mlk_event.h>
 
 #include "def_toolbar_btt.h"
 #include "appresource.h"

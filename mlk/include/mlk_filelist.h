@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -20,7 +20,7 @@ $*/
 #ifndef MLK_FILELIST_H
 #define MLK_FILELIST_H
 
-#include "mlk_filestat.h"
+#include <mlk_filestat.h>
 
 #define MLK_FILELISTITEM(p)  ((mFileListItem *)(p))
 

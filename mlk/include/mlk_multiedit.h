@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -20,7 +20,7 @@ $*/
 #ifndef MLK_MULTIEDIT_H
 #define MLK_MULTIEDIT_H
 
-#include "mlk_scrollview.h"
+#include <mlk_scrollview.h>
 
 #define MLK_MULTIEDIT(p)  ((mMultiEdit *)(p))
 #define MLK_MULTIEDIT_DEF MLK_SCROLLVIEW_DEF mMultiEditData me;

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -29,8 +29,8 @@ $*/
 #include <iconv.h>
 #include <errno.h>
 
-#include "mlk.h"
-#include "mlk_charset.h"
+#include <mlk.h>
+#include <mlk_charset.h>
 
 
 //----------------

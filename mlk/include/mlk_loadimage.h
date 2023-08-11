@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -75,9 +75,8 @@ enum MLOADIMAGE_RESOUNIT
 enum MLOADIMAGE_FLAGS
 {
 	MLOADIMAGE_FLAGS_ALLOW_16BIT = 1<<0,
-	MLOADIMAGE_FLAGS_ALLOW_CMYK = 1<<1,
-	MLOADIMAGE_FLAGS_TRANSPARENT_TO_ALPHA = 1<<2,
-	MLOADIMAGE_FLAGS_COPY_PALETTE = 1<<3
+	MLOADIMAGE_FLAGS_TRANSPARENT_TO_ALPHA = 1<<1,
+	MLOADIMAGE_FLAGS_COPY_PALETTE = 1<<2
 };
 
 enum MLOADIMAGE_CONVERT_TYPE
@@ -155,6 +154,7 @@ mlkerr mLoadImage_createHandle(mLoadImage *p,int size,int endian);
 void mLoadImage_closeHandle(mLoadImage *p);
 mlkerr mLoadImage_setPalette(mLoadImage *p,uint8_t *buf,int size,int palnum);
 void mLoadImage_setImageConv(mLoadImage *p,mImageConv *dst);
+void mLoadImage_setColorType_fromSource(mLoadImage *p);
 
 void mLoadImage_init(mLoadImage *p);
 mlkerr mLoadImage_checkFormat(mLoadImageType *dst,mLoadImageOpen *open,mFuncLoadImageCheck *checks,int headsize);

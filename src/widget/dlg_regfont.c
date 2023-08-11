@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,23 +23,23 @@ $*/
 
 #include <string.h>
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_window.h"
-#include "mlk_label.h"
-#include "mlk_groupbox.h"
-#include "mlk_checkbutton.h"
-#include "mlk_lineedit.h"
-#include "mlk_listview.h"
-#include "mlk_button.h"
-#include "mlk_combobox.h"
-#include "mlk_sysdlg.h"
-#include "mlk_event.h"
-#include "mlk_columnitem.h"
-#include "mlk_str.h"
-#include "mlk_buf.h"
-#include "mlk_unicode.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_window.h>
+#include <mlk_label.h>
+#include <mlk_groupbox.h>
+#include <mlk_checkbutton.h>
+#include <mlk_lineedit.h>
+#include <mlk_listview.h>
+#include <mlk_button.h>
+#include <mlk_combobox.h>
+#include <mlk_sysdlg.h>
+#include <mlk_event.h>
+#include <mlk_columnitem.h>
+#include <mlk_str.h>
+#include <mlk_buf.h>
+#include <mlk_unicode.h>
 
 #include "def_config.h"
 

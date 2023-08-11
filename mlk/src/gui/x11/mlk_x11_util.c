@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -31,9 +31,9 @@ $*/
 #define MLKX11_INC_UTIL
 #include "mlk_x11.h"
 
-#include "mlk_nanotime.h"
-#include "mlk_charset.h"
-#include "mlk_str.h"
+#include <mlk_nanotime.h>
+#include <mlk_charset.h>
+#include <mlk_str.h>
 
 
 

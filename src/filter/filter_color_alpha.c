@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,8 +23,8 @@ $*/
 
 #include <math.h>
 
-#include "mlk_gui.h"
-#include "mlk_rand.h"
+#include <mlk_gui.h>
+#include <mlk_rand.h>
 
 #include "def_draw.h"
 

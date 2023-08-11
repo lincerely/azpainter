@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -59,10 +59,19 @@ enum MSCROLLVIEW_STYLE
 	MSCROLLVIEW_S_FIX_VERT = 1<<3,
 	MSCROLLVIEW_S_FRAME    = 1<<4,
 	MSCROLLVIEW_S_SCROLL_NOTIFY_SELF = 1<<5,
+	MSCROLLVIEW_S_NOTIFY_CHANGE_SCROLL_VISIBLE = 1<<6,
+	MSCROLLVIEW_S_ALL_NOTIFY_SELF = 1<<7,
 	
 	MSCROLLVIEW_S_HORZVERT = MSCROLLVIEW_S_HORZ | MSCROLLVIEW_S_VERT,
 	MSCROLLVIEW_S_FIX_HORZVERT = MSCROLLVIEW_S_HORZVERT | MSCROLLVIEW_S_FIX_HORZ | MSCROLLVIEW_S_FIX_VERT,
 	MSCROLLVIEW_S_HORZVERT_FRAME = MSCROLLVIEW_S_HORZVERT | MSCROLLVIEW_S_FRAME
+};
+
+enum MSCROLLVIEW_NOTIFY
+{
+	MSCROLLVIEW_N_CHANGE_SCROLL_VISIBLE,
+
+	MSCROLLVIEW_NOTIFY_NEXT_VALUE = 100
 };
 
 enum MSCROLLVIEWPAGE_NOTIFY
@@ -92,6 +101,7 @@ void mScrollViewSetScrollStatus_horz(mScrollView *p,int min,int max,int page);
 void mScrollViewSetScrollStatus_vert(mScrollView *p,int min,int max,int page);
 int mScrollViewGetScrollShowStatus(mScrollView *p);
 void mScrollViewEnableScrollBar(mScrollView *p,int type);
+void mScrollViewGetMaxPageSize(mScrollView *p,mSize *size);
 
 /* mScrollViewPage */
 

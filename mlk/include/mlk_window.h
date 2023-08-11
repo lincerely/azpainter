@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -71,6 +71,8 @@ mlkbool mWindowIsToplevel(mWindow *p);
 mlkbool mWindowIsActivate(mWindow *p);
 mlkbool mWindowIsOtherThanModal(mWindow *p);
 void mWindowResizeShow_initSize(mWindow *p);
+void mWindowResizeShow_initSize_min(mWindow *p,int minw,int minh);
+void mWindowResizeShow_initSize_min_fonth(mWindow *p,int minw,int minh);
 void mWindowSetCursor(mWindow *p,mCursor cursor);
 void mWindowResetCursor(mWindow *p);
 

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -31,13 +31,13 @@ $*/
 
 #define MLK_FONT_FREETYPE_DEFINE
 
-#include "mlk_gui.h"
-#include "mlk_font.h"
-#include "mlk_fontinfo.h"
-#include "mlk_font_freetype.h"
-#include "mlk_opentype.h"
-#include "mlk_pixbuf.h"
-#include "mlk_str.h"
+#include <mlk_gui.h>
+#include <mlk_font.h>
+#include <mlk_fontinfo.h>
+#include <mlk_font_freetype.h>
+#include <mlk_opentype.h>
+#include <mlk_pixbuf.h>
+#include <mlk_str.h>
 
 #include "def_drawtext.h"
 #include "regfont.h"

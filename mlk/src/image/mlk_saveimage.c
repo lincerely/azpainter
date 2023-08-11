@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,11 +24,11 @@ $*/
 #include <string.h>
 #include <stdio.h>
 
-#include "mlk.h"
-#include "mlk_saveimage.h"
-#include "mlk_stdio.h"
-#include "mlk_util.h"
-#include "mlk_bufio.h"
+#include <mlk.h>
+#include <mlk_saveimage.h>
+#include <mlk_stdio.h>
+#include <mlk_util.h>
+#include <mlk_bufio.h>
 
 
 

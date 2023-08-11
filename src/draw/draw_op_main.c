@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -22,10 +22,10 @@ $*/
  * 操作 - メイン
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_event.h"
-#include "mlk_key.h"
-#include "mlk_rectbox.h"
+#include <mlk_gui.h>
+#include <mlk_event.h>
+#include <mlk_key.h>
+#include <mlk_rectbox.h>
 
 #include "def_draw.h"
 #include "def_draw_toollist.h"

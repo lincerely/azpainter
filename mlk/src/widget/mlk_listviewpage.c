@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -22,23 +22,23 @@ $*/
  * (mListView の内容)
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_scrollview.h"
-#include "mlk_listview.h"
-#include "mlk_listviewpage.h"
-#include "mlk_scrollbar.h"
-#include "mlk_listheader.h"
-#include "mlk_imagelist.h"
-#include "mlk_list.h"
-#include "mlk_pixbuf.h"
-#include "mlk_font.h"
-#include "mlk_event.h"
-#include "mlk_guicol.h"
-#include "mlk_key.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_scrollview.h>
+#include <mlk_listview.h>
+#include <mlk_listviewpage.h>
+#include <mlk_scrollbar.h>
+#include <mlk_listheader.h>
+#include <mlk_imagelist.h>
+#include <mlk_list.h>
+#include <mlk_pixbuf.h>
+#include <mlk_font.h>
+#include <mlk_event.h>
+#include <mlk_guicol.h>
+#include <mlk_key.h>
 
-#include "mlk_columnitem_manager.h"
+#include <mlk_columnitem_manager.h>
 
 
 //--------------------
@@ -419,7 +419,7 @@ static void _event_btt_press(mListViewPage *p,mEventPointer *ev)
 
 	if(p->lvp.fstyle & MLISTVIEWPAGE_S_POPUP)
 	{
-		//to: mListView の通知先
+		//to: mListView (親) の通知先
 		//from: mListViewPage
 	
 		mWidgetEventAdd_notify(MLK_WIDGET(p), mWidgetGetNotifyWidget(p->wg.parent),

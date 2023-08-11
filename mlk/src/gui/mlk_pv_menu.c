@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,11 +21,11 @@ $*/
  * mMenu 内部処理
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_menu.h"
-#include "mlk_font.h"
-#include "mlk_accelerator.h"
-#include "mlk_str.h"
+#include <mlk_gui.h>
+#include <mlk_menu.h>
+#include <mlk_font.h>
+#include <mlk_accelerator.h>
+#include <mlk_str.h>
 
 #include "mlk_pv_menu.h"
 

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -26,13 +26,13 @@ $*/
 #include <sys/types.h>
 #include <dirent.h>
 
-#include "mlk.h"
-#include "mlk_dir.h"
+#include <mlk.h>
+#include <mlk_dir.h>
 
-#include "mlk_str.h"
-#include "mlk_file.h"
-#include "mlk_filestat.h"
-#include "mlk_charset.h"
+#include <mlk_str.h>
+#include <mlk_file.h>
+#include <mlk_filestat.h>
+#include <mlk_charset.h>
 
 
 //-----------------

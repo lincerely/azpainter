@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,7 +24,7 @@ $*/
 /* [Linux]
  * glibc 2.17 以前では、clock_gettime() を使う場合、librt のリンクが必要 */
 
-#include "mlk_platform.h"
+#include <mlk_platform.h>
 
 //----------
 
@@ -54,8 +54,8 @@ $*/
 
 //----------
 
-#include "mlk.h"
-#include "mlk_nanotime.h"
+#include <mlk.h>
+#include <mlk_nanotime.h>
 
 
 /**@ 現在のナノ時間を取得 */
@@ -160,7 +160,7 @@ mlkbool mNanoTimeSub(mNanoTime *dst,const mNanoTime *nt1,const mNanoTime *nt2)
 		else
 		{
 			dst->sec--;
-			dst->ns = (int64_t)(nt1->ns - nt2->ns) + 1000 * 1000 * 1000;
+			dst->ns = 1000 * 1000 * 1000 - nt2->ns + nt1->ns;
 		}
 		
 		return TRUE;
