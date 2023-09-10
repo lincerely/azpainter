@@ -179,7 +179,7 @@ if test "$cf_os" = mac;then
 	CFLAGS_ADD=`fc_add_string "$CFLAGS_ADD" "-DMLK_NO_SIMD"`
 	CFLAGS_ADD=`fc_add_string "$CFLAGS_ADD" "-I/opt/X11/include"`
 	LDFLAGS_ADD=`fc_add_string "$LDFLAGS_ADD" "-L/opt/X11/lib"`
-	LIBS_ADD=`fc_add_string "$LIBS_ADD" "-lX11 -lXext -lXcursor"`
+	LIBS_ADD=`fc_add_string "$LIBS_ADD" "-lX11 -lXext -lXcursor -lXi"`
 fi
 
 #-------------
