@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -26,7 +26,7 @@ $*/
 #include <string.h>
 #include <unistd.h>
 
-#include "mlk_platform.h"
+#include <mlk_platform.h>
 
 //-----------
 
@@ -43,8 +43,8 @@ $*/
 
 //-----------
 
-#include "mlk.h"
-#include "mlk_charset.h"
+#include <mlk.h>
+#include <mlk_charset.h>
 
 
 /**@ プロセスごとに異なる名前を取得

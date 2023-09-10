@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,13 +21,13 @@ $*/
  * [panel] レイヤで使うウィジェット
  *********************************************/
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_combobox.h"
-#include "mlk_iconbar.h"
-#include "mlk_event.h"
-#include "mlk_str.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_combobox.h>
+#include <mlk_iconbar.h>
+#include <mlk_event.h>
+#include <mlk_str.h>
 
 #include "def_draw.h"
 

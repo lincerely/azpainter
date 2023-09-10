@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,15 +23,15 @@ $*/
 
 #include "mlk_x11.h"
 
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_window.h"
-#include "mlk_pixbuf.h"
-#include "mlk_font.h"
-#include "mlk_guicol.h"
-#include "mlk_charset.h"
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_window.h>
+#include <mlk_pixbuf.h>
+#include <mlk_font.h>
+#include <mlk_guicol.h>
+#include <mlk_charset.h>
 
-#include "mlk_pv_window.h"
+#include <mlk_pv_window.h>
 
 
 /*--------------
@@ -542,7 +542,7 @@ void mX11IM_context_create(mWindow *win)
 	mAppX11 *app = MLKAPPX11;
 	mWindowDataX11 *winx11;
 	XIC xic;
-	long mask;
+	unsigned long mask;
 	
 	//IM 無効時
 

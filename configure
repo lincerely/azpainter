@@ -179,7 +179,7 @@ if test "$cf_os" = mac;then
 	CFLAGS_ADD=`fc_add_string "$CFLAGS_ADD" "-DMLK_NO_SIMD"`
 	CFLAGS_ADD=`fc_add_string "$CFLAGS_ADD" "-I/opt/X11/include"`
 	LDFLAGS_ADD=`fc_add_string "$LDFLAGS_ADD" "-L/opt/X11/lib"`
-	LIBS_ADD=`fc_add_string "$LIBS_ADD" "-lX11 -lXext -lXcursor -lXi"`
+	LIBS_ADD=`fc_add_string "$LIBS_ADD" "-lX11 -lXext -lXcursor"`
 fi
 
 #-------------
@@ -258,10 +258,14 @@ if test ! -d build;then mkdir build; fi
 touch conftmp
 
 if test $cf_bigendian = yes;then
-	echo "s|\\#undef MLK_BIG_ENDIAN|\\#define MLK_BIG_ENDIAN|" >> conftmp
+	cat - <<_ZYXW_ >> conftmp
+s|\\#undef MLK_BIG_ENDIAN|\\#define MLK_BIG_ENDIAN|
+_ZYXW_
 fi
 if ! fc_check_func FT_Done_MM_Var "-lfreetype";then
-	echo "s|\\#undef MLK_NO_FREETYPE_VARIABLE|\\#define MLK_NO_FREETYPE_VARIABLE|" >> conftmp
+	cat - <<_ZYXW_ >> conftmp
+s|\\#undef MLK_NO_FREETYPE_VARIABLE|\\#define MLK_NO_FREETYPE_VARIABLE|
+_ZYXW_
 fi
 
 if test -s conftmp;then
@@ -290,9 +294,9 @@ LDFLAGS = $LDFLAGS
 LIBS = $LIBS
 
 please run...
- $ cd build
- $ ninja
- # ninja install
+$ cd build
+$ ninja
+# ninja install
 ---------------
 _ZYXW_
 

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,7 +21,7 @@ $*/
  * AppDraw: キャンバス関連
  *****************************************/
 
-#include "mlk_gui.h"
+#include <mlk_gui.h>
 
 #include "def_macro.h"
 #include "def_config.h"

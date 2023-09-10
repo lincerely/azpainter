@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,26 +21,26 @@ $*/
  * ウィンドウ
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_window.h"
-#include "mlk_event.h"
-#include "mlk_key.h"
-#include "mlk_guicol.h"
-#include "mlk_window_deco.h"
-#include "mlk_menubar.h"
-#include "mlk_accelerator.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_window.h>
+#include <mlk_event.h>
+#include <mlk_key.h>
+#include <mlk_guicol.h>
+#include <mlk_window_deco.h>
+#include <mlk_menubar.h>
+#include <mlk_accelerator.h>
 
-#include "mlk_str.h"
-#include "mlk_pixbuf.h"
-#include "mlk_imagebuf.h"
-#include "mlk_loadimage.h"
-#include "mlk_util.h"
+#include <mlk_str.h>
+#include <mlk_pixbuf.h>
+#include <mlk_imagebuf.h>
+#include <mlk_loadimage.h>
+#include <mlk_util.h>
 
-#include "mlk_pv_gui.h"
-#include "mlk_pv_widget.h"
-#include "mlk_pv_window.h"
+#include <mlk_pv_gui.h>
+#include <mlk_pv_widget.h>
+#include <mlk_pv_window.h>
 
 
 
@@ -86,7 +86,9 @@ mlkbool mWindowIsOtherThanModal(mWindow *p)
 	return (run && run->type == MAPPRUN_TYPE_MODAL && run->window != p);
 }
 
-/**@ レイアウトの初期サイズでウィンドウサイズを変更し、ウィンドウ表示 */
+/**@ レイアウトの初期サイズでウィンドウサイズを変更し、ウィンドウ表示
+ *
+ * @d:サイズを調整したいなら、mGuiCalcHintSize() 後、mWidgetResize()、mWidgetShow() を行う。 */
 
 void mWindowResizeShow_initSize(mWindow *p)
 {
@@ -96,11 +98,43 @@ void mWindowResizeShow_initSize(mWindow *p)
 	mWidgetShow(MLK_WIDGET(p), 1);
 }
 
+/**@ ウィンドウサイズ変更 & ウィンドウ表示 (初期サイズと最小サイズを比較)
+ *
+ * @d:初期サイズが指定サイズより小さけば、指定サイズを使う。
+ * @p:minw,minh 0 以下の場合、初期サイズを使う */
+
+void mWindowResizeShow_initSize_min(mWindow *p,int minw,int minh)
+{
+	mGuiCalcHintSize();
+
+	if(minw <= 0 || minw < p->wg.initW) minw = p->wg.initW;
+	if(minh <= 0 || minh < p->wg.initH) minh = p->wg.initH;
+
+	mWidgetResize(MLK_WIDGET(p), minw, minh);
+	mWidgetShow(MLK_WIDGET(p), 1);
+}
+
+/**@ ウィンドウサイズ変更 & ウィンドウ表示 (フォント高さを元に最小サイズ指定)
+ *
+ * @d:初期サイズが指定サイズより小さけば、指定サイズを使う。
+ * @p:minw,minh フォント高さの倍数で指定。0 以下で初期サイズを使う。 */
+
+void mWindowResizeShow_initSize_min_fonth(mWindow *p,int minw,int minh)
+{
+	int h = mWidgetGetFontHeight(MLK_WIDGET(p));
+
+	if(minw > 0) minw *= h;
+	if(minh > 0) minh *= h;
+
+	mWindowResizeShow_initSize_min(p, minw, minh);
+}
+
 /**@ ウィンドウにおけるカーソルの変更を行う
  *
- * @d:通常はウィジェット単位でカーソルが管理されるため、
- *  カーソルがウィンドウ下にある時、ウィジェットに関係なく、
- *  一時的にカーソルを変更したいときに使う。 */
+ * @d:処理をしている間、一時的にカーソルを変更したいときなどに使う。\
+ * マウスポインタがこのウィンドウ上にある場合、どのウィジェット上にあるかに関わらず、カーソルを変更する。\
+ * ウィジェット上のカーソルを永続的に変更したい場合は、mWidgetSetCursor() を使う。
+ * @p:cursor 0 でデフォルトのカーソル */
 
 void mWindowSetCursor(mWindow *p,mCursor cursor)
 {
@@ -109,7 +143,8 @@ void mWindowSetCursor(mWindow *p,mCursor cursor)
 
 /**@ カーソルをウィジェットの状態からリセット
  *
- * @d:カーソルが指定ウィンドウ下にある場合、ENTER 状態のウィジェットのカーソルを適用する。 */
+ * @d:マウスポインタがこのウィンドウ上にある場合、現在ポインタ下にある、ENTER 状態のウィジェットのカーソルに変更する。\
+ * mWindowSetCursor() で変更したカーソルを元の状態に戻したい時に使う。 */
 
 void mWindowResetCursor(mWindow *p)
 {

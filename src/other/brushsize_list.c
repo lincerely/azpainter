@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,10 +24,10 @@ $*/
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "mlk_gui.h"
-#include "mlk_buf.h"
-#include "mlk_str.h"
-#include "mlk_stdio.h"
+#include <mlk_gui.h>
+#include <mlk_buf.h>
+#include <mlk_str.h>
+#include <mlk_stdio.h>
 
 
 /* - 1つのデータは 2byte。

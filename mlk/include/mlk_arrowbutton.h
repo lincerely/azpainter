@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -20,7 +20,7 @@ $*/
 #ifndef MLK_ARROWBUTTON_H
 #define MLK_ARROWBUTTON_H
 
-#include "mlk_button.h"
+#include <mlk_button.h>
 
 #define MLK_ARROWBUTTON(p)  ((mArrowButton *)(p))
 #define MLK_ARROWBUTTON_DEF MLK_BUTTON_DEF mArrowButtonData arrbtt;

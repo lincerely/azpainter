@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -26,10 +26,10 @@ $*/
 #include <stdarg.h>
 #include <sys/stat.h>
 
-#include "mlk.h"
-#include "mlk_stdio.h"
-#include "mlk_charset.h"
-#include "mlk_util.h"
+#include <mlk.h>
+#include <mlk_stdio.h>
+#include <mlk_charset.h>
+#include <mlk_util.h>
 
 
 /**@ ファイルを開く

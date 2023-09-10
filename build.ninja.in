@@ -42,34 +42,34 @@ build install: phony inst_install
 build uninstall: phony inst_uninstall
 build dist: phony inst_dist
 
-build azpainter: link apphelp.o configfile.o appconfig.o appcursor.o main.o appresource.o draw_op_func2.o draw_toollist.o draw_image.o $
- draw_calc.o draw_op_sub.o draw_select.o draw_load_apd_v1v2.o draw_save_image.o draw_load_apd_v3.o draw_loadfile.o $
- draw_op_main.o draw_canvas.o draw_op_text.o draw_loadsave_psd.o draw_op_brush_dot.o draw_loadsave_apd_v4.o $
- draw_rule.o draw_update.o draw_load_adw.o draw_boxsel.o draw_op_func1.o draw_layer.o draw_op_xor.o draw_main.o $
- filter_transform.o filter_draw.o filter_antialiasing.o filter_edge.o perlin_noise.o filter_sub_proc.o $
- filter_other.o filter_sub.o filter_pixelate.o filter_blur.o filter_comic_draw.o filter_sub_color.o filter_color_alpha.o $
- filter_effect.o filter_comic_tone.o blendcolor_16bit.o imagecanvas_resize.o imagecanvas_8bit.o imagecanvas.o $
- tileimage_edit.o tileimage_brush.o tileimage_bitfunc.o tileimage_col_alpha1bit.o drawpixbuf.o imagecanvas_16bit.o $
- tileimage_col_gray.o imagematerial.o tileimage_col_rgba.o tileimage_pv.o tileimage.o tileimage_imagefile.o $
- blendcolor_8bit.o tileimage_col_alpha.o tileimage_select.o tileimage_pixel.o image32.o tileimage_draw.o $
- tileimage_pixelcol.o load_thumbnail.o undo_compress.o undoitem_dat.o table_data.o regfont.o undoitem_sub.o $
- changecol.o layerlist.o brushsize_list.o apd_v4_format.o toollist.o filter_save_param.o undoitem_run.o $
- curve_spline.o undoitem_tileimg.o undo.o drawfill.o pointbuf.o colorvalue.o palettelist.o materiallist.o $
- layer_template.o conv_ver2to3.o textword_list.o dotshape.o font.o fillpolygon.o font_str.o gradation_list.o $
- layeritem.o fontcache.o undoitem_base.o panel_canvview.o dlg_text.o dlg_gradedit_wg.o panel_toollist_list.o $
- dlg_saveopt.o maincanvas.o panel_option_other.o dlg_layercolor.o dlg_gradedit.o filterbar.o panel_filterlist.o $
- panel_colorpalette.o panel_toollist.o panel_color_coltype.o panel_colorpalette_gradbar.o dlg_transform_sub.o $
- dlg_textword.o dlg_gridopt.o dlg_toollist_edit.o filedialog.o panel_colorpalette_dlg.o mainwin_cmd.o $
- statusbar.o panel_imgviewer_page.o panel_layer_subwg.o panel_brushopt.o panel_layer.o panel_color.o $
- dlg_other.o sel_material.o dlg_layer.o canvas_slider.o dlg_imagepos.o panel_colorpalette_hls.o mainwin_file.o $
- mainwin_menu.o panel_imgviewer.o panel_option_tool.o mainwin_layer.o panel_canvasctrl.o rotate_widget.o $
- panel_colorpalette_page.o mainwindow.o dlg_opt_canvaskey.o panel_option.o filterdlg.o dlg_opt_menukey.o $
- panel_colorwheel.o dlg_sel_material.o dlg_canvas.o widget_func.o imgmatprev.o panel_layer_list.o panel_toollist_size.o $
- popup_thread.o panel_colorpalette_paledit.o dlg_gradlist.o panel_colorpalette_palview.o dlg_regfont.o $
- panel_tool.o dlg_vieweropt.o panel_canvview_page.o dlg_transform_view.o dlg_panel_layout.o dlg_envopt_page.o $
- prev_tileimg.o filterprev.o dlg_toollist.o panel_color_widget.o popup_zoomslider.o colorwheel.o dlg_opt_toolbar.o $
- filter_wg_level.o dlg_layer_newopt.o filter_wg_repcol.o panel.o dlg_transform.o valuebar.o panel_toollist_list_menu.o $
- dlg_envopt_btt.o dlg_pressure.o mainwin_filter.o dlg_envopt.o dlg_newcanvas.o libmlk.a
+build azpainter: link appconfig.o appcursor.o apphelp.o appresource.o configfile.o main.o draw_boxsel.o draw_calc.o draw_canvas.o $
+ draw_image.o draw_layer.o draw_load_adw.o draw_load_apd_v1v2.o draw_load_apd_v3.o draw_loadfile.o draw_loadsave_apd_v4.o $
+ draw_loadsave_psd.o draw_main.o draw_op_brush_dot.o draw_op_func1.o draw_op_func2.o draw_op_main.o draw_op_sub.o $
+ draw_op_text.o draw_op_xor.o draw_rule.o draw_save_image.o draw_select.o draw_toollist.o draw_update.o $
+ filter_antialiasing.o filter_blur.o filter_color_alpha.o filter_comic_draw.o filter_comic_tone.o filter_draw.o $
+ filter_edge.o filter_effect.o filter_other.o filter_pixelate.o filter_sub.o filter_sub_color.o filter_sub_proc.o $
+ filter_transform.o perlin_noise.o blendcolor_16bit.o blendcolor_8bit.o drawpixbuf.o image32.o imagecanvas.o $
+ imagecanvas_16bit.o imagecanvas_8bit.o imagecanvas_resize.o imagematerial.o load_thumbnail.o tileimage.o $
+ tileimage_bitfunc.o tileimage_brush.o tileimage_col_alpha.o tileimage_col_alpha1bit.o tileimage_col_gray.o $
+ tileimage_col_rgba.o tileimage_draw.o tileimage_edit.o tileimage_imagefile.o tileimage_pixel.o tileimage_pixelcol.o $
+ tileimage_pv.o tileimage_select.o apd_v4_format.o brushsize_list.o changecol.o colorvalue.o conv_ver2to3.o $
+ curve_spline.o dotshape.o drawfill.o fillpolygon.o filter_save_param.o font.o font_str.o fontcache.o $
+ gradation_list.o layer_template.o layeritem.o layerlist.o materiallist.o palettelist.o pointbuf.o regfont.o $
+ table_data.o textword_list.o toollist.o undo.o undo_compress.o undoitem_base.o undoitem_dat.o undoitem_run.o $
+ undoitem_sub.o undoitem_tileimg.o canvas_slider.o colorwheel.o dlg_canvas.o dlg_envopt.o dlg_envopt_btt.o $
+ dlg_envopt_page.o dlg_gradedit.o dlg_gradedit_wg.o dlg_gradlist.o dlg_gridopt.o dlg_imagepos.o dlg_layer.o $
+ dlg_layer_newopt.o dlg_layercolor.o dlg_newcanvas.o dlg_opt_canvaskey.o dlg_opt_menukey.o dlg_opt_toolbar.o $
+ dlg_other.o dlg_panel_layout.o dlg_pressure.o dlg_regfont.o dlg_saveopt.o dlg_sel_material.o dlg_text.o $
+ dlg_textword.o dlg_toollist.o dlg_toollist_edit.o dlg_transform.o dlg_transform_sub.o dlg_transform_view.o $
+ dlg_vieweropt.o filedialog.o filter_wg_level.o filter_wg_repcol.o filterbar.o filterdlg.o filterprev.o $
+ imgmatprev.o maincanvas.o mainwin_cmd.o mainwin_file.o mainwin_filter.o mainwin_layer.o mainwin_menu.o $
+ mainwindow.o panel.o panel_brushopt.o panel_canvasctrl.o panel_canvview.o panel_canvview_page.o panel_color.o $
+ panel_color_coltype.o panel_color_widget.o panel_colorpalette.o panel_colorpalette_dlg.o panel_colorpalette_gradbar.o $
+ panel_colorpalette_hls.o panel_colorpalette_page.o panel_colorpalette_paledit.o panel_colorpalette_palview.o $
+ panel_colorwheel.o panel_filterlist.o panel_imgviewer.o panel_imgviewer_page.o panel_layer.o panel_layer_list.o $
+ panel_layer_subwg.o panel_option.o panel_option_other.o panel_option_tool.o panel_tool.o panel_toollist.o $
+ panel_toollist_list.o panel_toollist_list_menu.o panel_toollist_size.o popup_thread.o popup_zoomslider.o $
+ prev_tileimg.o rotate_widget.o sel_material.o statusbar.o valuebar.o widget_func.o libmlk.a
 default azpainter
 
 build libmlk.a: ar mlk.o mlk_argparse.o mlk_buf.o mlk_bufio.o mlk_charset.o mlk_color.o mlk_dir.o mlk_file.o mlk_file_util.o $
@@ -93,190 +93,190 @@ build libmlk.a: ar mlk.o mlk_argparse.o mlk_buf.o mlk_bufio.o mlk_charset.o mlk_
  mlk_progressbar.o mlk_pv_widget.o mlk_pv_window.o mlk_scrollbar.o mlk_scrollview.o mlk_sliderbar.o mlk_splitter.o $
  mlk_tab.o mlk_widget.o mlk_widgettextedit.o mlk_window.o $
 
-build apphelp.o: cc ../src/apphelp.c
-build configfile.o: cc ../src/configfile.c
 build appconfig.o: cc ../src/appconfig.c
 build appcursor.o: cc ../src/appcursor.c
-build main.o: cc ../src/main.c
+build apphelp.o: cc ../src/apphelp.c
 build appresource.o: cc ../src/appresource.c
-build draw_op_func2.o: cc ../src/draw/draw_op_func2.c
-build draw_toollist.o: cc ../src/draw/draw_toollist.c
-build draw_image.o: cc ../src/draw/draw_image.c
+build configfile.o: cc ../src/configfile.c
+build main.o: cc ../src/main.c
+build draw_boxsel.o: cc ../src/draw/draw_boxsel.c
 build draw_calc.o: cc ../src/draw/draw_calc.c
-build draw_op_sub.o: cc ../src/draw/draw_op_sub.c
-build draw_select.o: cc ../src/draw/draw_select.c
+build draw_canvas.o: cc ../src/draw/draw_canvas.c
+build draw_image.o: cc ../src/draw/draw_image.c
+build draw_layer.o: cc ../src/draw/draw_layer.c
+build draw_load_adw.o: cc ../src/draw/draw_load_adw.c
 build draw_load_apd_v1v2.o: cc ../src/draw/draw_load_apd_v1v2.c
-build draw_save_image.o: cc ../src/draw/draw_save_image.c
 build draw_load_apd_v3.o: cc ../src/draw/draw_load_apd_v3.c
 build draw_loadfile.o: cc ../src/draw/draw_loadfile.c
-build draw_op_main.o: cc ../src/draw/draw_op_main.c
-build draw_canvas.o: cc ../src/draw/draw_canvas.c
-build draw_op_text.o: cc ../src/draw/draw_op_text.c
-build draw_loadsave_psd.o: cc ../src/draw/draw_loadsave_psd.c
-build draw_op_brush_dot.o: cc ../src/draw/draw_op_brush_dot.c
 build draw_loadsave_apd_v4.o: cc ../src/draw/draw_loadsave_apd_v4.c
-build draw_rule.o: cc ../src/draw/draw_rule.c
-build draw_update.o: cc ../src/draw/draw_update.c
-build draw_load_adw.o: cc ../src/draw/draw_load_adw.c
-build draw_boxsel.o: cc ../src/draw/draw_boxsel.c
-build draw_op_func1.o: cc ../src/draw/draw_op_func1.c
-build draw_layer.o: cc ../src/draw/draw_layer.c
-build draw_op_xor.o: cc ../src/draw/draw_op_xor.c
+build draw_loadsave_psd.o: cc ../src/draw/draw_loadsave_psd.c
 build draw_main.o: cc ../src/draw/draw_main.c
-build filter_transform.o: cc ../src/filter/filter_transform.c
-build filter_draw.o: cc ../src/filter/filter_draw.c
+build draw_op_brush_dot.o: cc ../src/draw/draw_op_brush_dot.c
+build draw_op_func1.o: cc ../src/draw/draw_op_func1.c
+build draw_op_func2.o: cc ../src/draw/draw_op_func2.c
+build draw_op_main.o: cc ../src/draw/draw_op_main.c
+build draw_op_sub.o: cc ../src/draw/draw_op_sub.c
+build draw_op_text.o: cc ../src/draw/draw_op_text.c
+build draw_op_xor.o: cc ../src/draw/draw_op_xor.c
+build draw_rule.o: cc ../src/draw/draw_rule.c
+build draw_save_image.o: cc ../src/draw/draw_save_image.c
+build draw_select.o: cc ../src/draw/draw_select.c
+build draw_toollist.o: cc ../src/draw/draw_toollist.c
+build draw_update.o: cc ../src/draw/draw_update.c
 build filter_antialiasing.o: cc ../src/filter/filter_antialiasing.c
-build filter_edge.o: cc ../src/filter/filter_edge.c
-build perlin_noise.o: cc ../src/filter/perlin_noise.c
-build filter_sub_proc.o: cc ../src/filter/filter_sub_proc.c
-build filter_other.o: cc ../src/filter/filter_other.c
-build filter_sub.o: cc ../src/filter/filter_sub.c
-build filter_pixelate.o: cc ../src/filter/filter_pixelate.c
 build filter_blur.o: cc ../src/filter/filter_blur.c
-build filter_comic_draw.o: cc ../src/filter/filter_comic_draw.c
-build filter_sub_color.o: cc ../src/filter/filter_sub_color.c
 build filter_color_alpha.o: cc ../src/filter/filter_color_alpha.c
-build filter_effect.o: cc ../src/filter/filter_effect.c
+build filter_comic_draw.o: cc ../src/filter/filter_comic_draw.c
 build filter_comic_tone.o: cc ../src/filter/filter_comic_tone.c
+build filter_draw.o: cc ../src/filter/filter_draw.c
+build filter_edge.o: cc ../src/filter/filter_edge.c
+build filter_effect.o: cc ../src/filter/filter_effect.c
+build filter_other.o: cc ../src/filter/filter_other.c
+build filter_pixelate.o: cc ../src/filter/filter_pixelate.c
+build filter_sub.o: cc ../src/filter/filter_sub.c
+build filter_sub_color.o: cc ../src/filter/filter_sub_color.c
+build filter_sub_proc.o: cc ../src/filter/filter_sub_proc.c
+build filter_transform.o: cc ../src/filter/filter_transform.c
+build perlin_noise.o: cc ../src/filter/perlin_noise.c
 build blendcolor_16bit.o: cc ../src/image/blendcolor_16bit.c
-build imagecanvas_resize.o: cc ../src/image/imagecanvas_resize.c
-build imagecanvas_8bit.o: cc ../src/image/imagecanvas_8bit.c
-build imagecanvas.o: cc ../src/image/imagecanvas.c
-build tileimage_edit.o: cc ../src/image/tileimage_edit.c
-build tileimage_brush.o: cc ../src/image/tileimage_brush.c
-build tileimage_bitfunc.o: cc ../src/image/tileimage_bitfunc.c
-build tileimage_col_alpha1bit.o: cc ../src/image/tileimage_col_alpha1bit.c
-build drawpixbuf.o: cc ../src/image/drawpixbuf.c
-build imagecanvas_16bit.o: cc ../src/image/imagecanvas_16bit.c
-build tileimage_col_gray.o: cc ../src/image/tileimage_col_gray.c
-build imagematerial.o: cc ../src/image/imagematerial.c
-build tileimage_col_rgba.o: cc ../src/image/tileimage_col_rgba.c
-build tileimage_pv.o: cc ../src/image/tileimage_pv.c
-build tileimage.o: cc ../src/image/tileimage.c
-build tileimage_imagefile.o: cc ../src/image/tileimage_imagefile.c
 build blendcolor_8bit.o: cc ../src/image/blendcolor_8bit.c
-build tileimage_col_alpha.o: cc ../src/image/tileimage_col_alpha.c
-build tileimage_select.o: cc ../src/image/tileimage_select.c
-build tileimage_pixel.o: cc ../src/image/tileimage_pixel.c
+build drawpixbuf.o: cc ../src/image/drawpixbuf.c
 build image32.o: cc ../src/image/image32.c
-build tileimage_draw.o: cc ../src/image/tileimage_draw.c
-build tileimage_pixelcol.o: cc ../src/image/tileimage_pixelcol.c
+build imagecanvas.o: cc ../src/image/imagecanvas.c
+build imagecanvas_16bit.o: cc ../src/image/imagecanvas_16bit.c
+build imagecanvas_8bit.o: cc ../src/image/imagecanvas_8bit.c
+build imagecanvas_resize.o: cc ../src/image/imagecanvas_resize.c
+build imagematerial.o: cc ../src/image/imagematerial.c
 build load_thumbnail.o: cc ../src/image/load_thumbnail.c
-build undo_compress.o: cc ../src/other/undo_compress.c
-build undoitem_dat.o: cc ../src/other/undoitem_dat.c
-build table_data.o: cc ../src/other/table_data.c
-build regfont.o: cc ../src/other/regfont.c
-build undoitem_sub.o: cc ../src/other/undoitem_sub.c
-build changecol.o: cc ../src/other/changecol.c
-build layerlist.o: cc ../src/other/layerlist.c
-build brushsize_list.o: cc ../src/other/brushsize_list.c
+build tileimage.o: cc ../src/image/tileimage.c
+build tileimage_bitfunc.o: cc ../src/image/tileimage_bitfunc.c
+build tileimage_brush.o: cc ../src/image/tileimage_brush.c
+build tileimage_col_alpha.o: cc ../src/image/tileimage_col_alpha.c
+build tileimage_col_alpha1bit.o: cc ../src/image/tileimage_col_alpha1bit.c
+build tileimage_col_gray.o: cc ../src/image/tileimage_col_gray.c
+build tileimage_col_rgba.o: cc ../src/image/tileimage_col_rgba.c
+build tileimage_draw.o: cc ../src/image/tileimage_draw.c
+build tileimage_edit.o: cc ../src/image/tileimage_edit.c
+build tileimage_imagefile.o: cc ../src/image/tileimage_imagefile.c
+build tileimage_pixel.o: cc ../src/image/tileimage_pixel.c
+build tileimage_pixelcol.o: cc ../src/image/tileimage_pixelcol.c
+build tileimage_pv.o: cc ../src/image/tileimage_pv.c
+build tileimage_select.o: cc ../src/image/tileimage_select.c
 build apd_v4_format.o: cc ../src/other/apd_v4_format.c
-build toollist.o: cc ../src/other/toollist.c
-build filter_save_param.o: cc ../src/other/filter_save_param.c
-build undoitem_run.o: cc ../src/other/undoitem_run.c
-build curve_spline.o: cc ../src/other/curve_spline.c
-build undoitem_tileimg.o: cc ../src/other/undoitem_tileimg.c
-build undo.o: cc ../src/other/undo.c
-build drawfill.o: cc ../src/other/drawfill.c
-build pointbuf.o: cc ../src/other/pointbuf.c
+build brushsize_list.o: cc ../src/other/brushsize_list.c
+build changecol.o: cc ../src/other/changecol.c
 build colorvalue.o: cc ../src/other/colorvalue.c
-build palettelist.o: cc ../src/other/palettelist.c
-build materiallist.o: cc ../src/other/materiallist.c
-build layer_template.o: cc ../src/other/layer_template.c
 build conv_ver2to3.o: cc ../src/other/conv_ver2to3.c
-build textword_list.o: cc ../src/other/textword_list.c
+build curve_spline.o: cc ../src/other/curve_spline.c
 build dotshape.o: cc ../src/other/dotshape.c
-build font.o: cc ../src/other/font.c
+build drawfill.o: cc ../src/other/drawfill.c
 build fillpolygon.o: cc ../src/other/fillpolygon.c
+build filter_save_param.o: cc ../src/other/filter_save_param.c
+build font.o: cc ../src/other/font.c
 build font_str.o: cc ../src/other/font_str.c
-build gradation_list.o: cc ../src/other/gradation_list.c
-build layeritem.o: cc ../src/other/layeritem.c
 build fontcache.o: cc ../src/other/fontcache.c
+build gradation_list.o: cc ../src/other/gradation_list.c
+build layer_template.o: cc ../src/other/layer_template.c
+build layeritem.o: cc ../src/other/layeritem.c
+build layerlist.o: cc ../src/other/layerlist.c
+build materiallist.o: cc ../src/other/materiallist.c
+build palettelist.o: cc ../src/other/palettelist.c
+build pointbuf.o: cc ../src/other/pointbuf.c
+build regfont.o: cc ../src/other/regfont.c
+build table_data.o: cc ../src/other/table_data.c
+build textword_list.o: cc ../src/other/textword_list.c
+build toollist.o: cc ../src/other/toollist.c
+build undo.o: cc ../src/other/undo.c
+build undo_compress.o: cc ../src/other/undo_compress.c
 build undoitem_base.o: cc ../src/other/undoitem_base.c
-build panel_canvview.o: cc ../src/widget/panel_canvview.c
-build dlg_text.o: cc ../src/widget/dlg_text.c
-build dlg_gradedit_wg.o: cc ../src/widget/dlg_gradedit_wg.c
-build panel_toollist_list.o: cc ../src/widget/panel_toollist_list.c
-build dlg_saveopt.o: cc ../src/widget/dlg_saveopt.c
-build maincanvas.o: cc ../src/widget/maincanvas.c
-build panel_option_other.o: cc ../src/widget/panel_option_other.c
-build dlg_layercolor.o: cc ../src/widget/dlg_layercolor.c
-build dlg_gradedit.o: cc ../src/widget/dlg_gradedit.c
-build filterbar.o: cc ../src/widget/filterbar.c
-build panel_filterlist.o: cc ../src/widget/panel_filterlist.c
-build panel_colorpalette.o: cc ../src/widget/panel_colorpalette.c
-build panel_toollist.o: cc ../src/widget/panel_toollist.c
-build panel_color_coltype.o: cc ../src/widget/panel_color_coltype.c
-build panel_colorpalette_gradbar.o: cc ../src/widget/panel_colorpalette_gradbar.c
-build dlg_transform_sub.o: cc ../src/widget/dlg_transform_sub.c
-build dlg_textword.o: cc ../src/widget/dlg_textword.c
-build dlg_gridopt.o: cc ../src/widget/dlg_gridopt.c
-build dlg_toollist_edit.o: cc ../src/widget/dlg_toollist_edit.c
-build filedialog.o: cc ../src/widget/filedialog.c
-build panel_colorpalette_dlg.o: cc ../src/widget/panel_colorpalette_dlg.c
-build mainwin_cmd.o: cc ../src/widget/mainwin_cmd.c
-build statusbar.o: cc ../src/widget/statusbar.c
-build panel_imgviewer_page.o: cc ../src/widget/panel_imgviewer_page.c
-build panel_layer_subwg.o: cc ../src/widget/panel_layer_subwg.c
-build panel_brushopt.o: cc ../src/widget/panel_brushopt.c
-build panel_layer.o: cc ../src/widget/panel_layer.c
-build panel_color.o: cc ../src/widget/panel_color.c
-build dlg_other.o: cc ../src/widget/dlg_other.c
-build sel_material.o: cc ../src/widget/sel_material.c
-build dlg_layer.o: cc ../src/widget/dlg_layer.c
+build undoitem_dat.o: cc ../src/other/undoitem_dat.c
+build undoitem_run.o: cc ../src/other/undoitem_run.c
+build undoitem_sub.o: cc ../src/other/undoitem_sub.c
+build undoitem_tileimg.o: cc ../src/other/undoitem_tileimg.c
 build canvas_slider.o: cc ../src/widget/canvas_slider.c
-build dlg_imagepos.o: cc ../src/widget/dlg_imagepos.c
-build panel_colorpalette_hls.o: cc ../src/widget/panel_colorpalette_hls.c
-build mainwin_file.o: cc ../src/widget/mainwin_file.c
-build mainwin_menu.o: cc ../src/widget/mainwin_menu.c
-build panel_imgviewer.o: cc ../src/widget/panel_imgviewer.c
-build panel_option_tool.o: cc ../src/widget/panel_option_tool.c
-build mainwin_layer.o: cc ../src/widget/mainwin_layer.c
-build panel_canvasctrl.o: cc ../src/widget/panel_canvasctrl.c
-build rotate_widget.o: cc ../src/widget/rotate_widget.c
-build panel_colorpalette_page.o: cc ../src/widget/panel_colorpalette_page.c
-build mainwindow.o: cc ../src/widget/mainwindow.c
-build dlg_opt_canvaskey.o: cc ../src/widget/dlg_opt_canvaskey.c
-build panel_option.o: cc ../src/widget/panel_option.c
-build filterdlg.o: cc ../src/widget/filterdlg.c
-build dlg_opt_menukey.o: cc ../src/widget/dlg_opt_menukey.c
-build panel_colorwheel.o: cc ../src/widget/panel_colorwheel.c
-build dlg_sel_material.o: cc ../src/widget/dlg_sel_material.c
+build colorwheel.o: cc ../src/widget/colorwheel.c
 build dlg_canvas.o: cc ../src/widget/dlg_canvas.c
-build widget_func.o: cc ../src/widget/widget_func.c
+build dlg_envopt.o: cc ../src/widget/dlg_envopt.c
+build dlg_envopt_btt.o: cc ../src/widget/dlg_envopt_btt.c
+build dlg_envopt_page.o: cc ../src/widget/dlg_envopt_page.c
+build dlg_gradedit.o: cc ../src/widget/dlg_gradedit.c
+build dlg_gradedit_wg.o: cc ../src/widget/dlg_gradedit_wg.c
+build dlg_gradlist.o: cc ../src/widget/dlg_gradlist.c
+build dlg_gridopt.o: cc ../src/widget/dlg_gridopt.c
+build dlg_imagepos.o: cc ../src/widget/dlg_imagepos.c
+build dlg_layer.o: cc ../src/widget/dlg_layer.c
+build dlg_layer_newopt.o: cc ../src/widget/dlg_layer_newopt.c
+build dlg_layercolor.o: cc ../src/widget/dlg_layercolor.c
+build dlg_newcanvas.o: cc ../src/widget/dlg_newcanvas.c
+build dlg_opt_canvaskey.o: cc ../src/widget/dlg_opt_canvaskey.c
+build dlg_opt_menukey.o: cc ../src/widget/dlg_opt_menukey.c
+build dlg_opt_toolbar.o: cc ../src/widget/dlg_opt_toolbar.c
+build dlg_other.o: cc ../src/widget/dlg_other.c
+build dlg_panel_layout.o: cc ../src/widget/dlg_panel_layout.c
+build dlg_pressure.o: cc ../src/widget/dlg_pressure.c
+build dlg_regfont.o: cc ../src/widget/dlg_regfont.c
+build dlg_saveopt.o: cc ../src/widget/dlg_saveopt.c
+build dlg_sel_material.o: cc ../src/widget/dlg_sel_material.c
+build dlg_text.o: cc ../src/widget/dlg_text.c
+build dlg_textword.o: cc ../src/widget/dlg_textword.c
+build dlg_toollist.o: cc ../src/widget/dlg_toollist.c
+build dlg_toollist_edit.o: cc ../src/widget/dlg_toollist_edit.c
+build dlg_transform.o: cc ../src/widget/dlg_transform.c
+build dlg_transform_sub.o: cc ../src/widget/dlg_transform_sub.c
+build dlg_transform_view.o: cc ../src/widget/dlg_transform_view.c
+build dlg_vieweropt.o: cc ../src/widget/dlg_vieweropt.c
+build filedialog.o: cc ../src/widget/filedialog.c
+build filter_wg_level.o: cc ../src/widget/filter_wg_level.c
+build filter_wg_repcol.o: cc ../src/widget/filter_wg_repcol.c
+build filterbar.o: cc ../src/widget/filterbar.c
+build filterdlg.o: cc ../src/widget/filterdlg.c
+build filterprev.o: cc ../src/widget/filterprev.c
 build imgmatprev.o: cc ../src/widget/imgmatprev.c
+build maincanvas.o: cc ../src/widget/maincanvas.c
+build mainwin_cmd.o: cc ../src/widget/mainwin_cmd.c
+build mainwin_file.o: cc ../src/widget/mainwin_file.c
+build mainwin_filter.o: cc ../src/widget/mainwin_filter.c
+build mainwin_layer.o: cc ../src/widget/mainwin_layer.c
+build mainwin_menu.o: cc ../src/widget/mainwin_menu.c
+build mainwindow.o: cc ../src/widget/mainwindow.c
+build panel.o: cc ../src/widget/panel.c
+build panel_brushopt.o: cc ../src/widget/panel_brushopt.c
+build panel_canvasctrl.o: cc ../src/widget/panel_canvasctrl.c
+build panel_canvview.o: cc ../src/widget/panel_canvview.c
+build panel_canvview_page.o: cc ../src/widget/panel_canvview_page.c
+build panel_color.o: cc ../src/widget/panel_color.c
+build panel_color_coltype.o: cc ../src/widget/panel_color_coltype.c
+build panel_color_widget.o: cc ../src/widget/panel_color_widget.c
+build panel_colorpalette.o: cc ../src/widget/panel_colorpalette.c
+build panel_colorpalette_dlg.o: cc ../src/widget/panel_colorpalette_dlg.c
+build panel_colorpalette_gradbar.o: cc ../src/widget/panel_colorpalette_gradbar.c
+build panel_colorpalette_hls.o: cc ../src/widget/panel_colorpalette_hls.c
+build panel_colorpalette_page.o: cc ../src/widget/panel_colorpalette_page.c
+build panel_colorpalette_paledit.o: cc ../src/widget/panel_colorpalette_paledit.c
+build panel_colorpalette_palview.o: cc ../src/widget/panel_colorpalette_palview.c
+build panel_colorwheel.o: cc ../src/widget/panel_colorwheel.c
+build panel_filterlist.o: cc ../src/widget/panel_filterlist.c
+build panel_imgviewer.o: cc ../src/widget/panel_imgviewer.c
+build panel_imgviewer_page.o: cc ../src/widget/panel_imgviewer_page.c
+build panel_layer.o: cc ../src/widget/panel_layer.c
 build panel_layer_list.o: cc ../src/widget/panel_layer_list.c
+build panel_layer_subwg.o: cc ../src/widget/panel_layer_subwg.c
+build panel_option.o: cc ../src/widget/panel_option.c
+build panel_option_other.o: cc ../src/widget/panel_option_other.c
+build panel_option_tool.o: cc ../src/widget/panel_option_tool.c
+build panel_tool.o: cc ../src/widget/panel_tool.c
+build panel_toollist.o: cc ../src/widget/panel_toollist.c
+build panel_toollist_list.o: cc ../src/widget/panel_toollist_list.c
+build panel_toollist_list_menu.o: cc ../src/widget/panel_toollist_list_menu.c
 build panel_toollist_size.o: cc ../src/widget/panel_toollist_size.c
 build popup_thread.o: cc ../src/widget/popup_thread.c
-build panel_colorpalette_paledit.o: cc ../src/widget/panel_colorpalette_paledit.c
-build dlg_gradlist.o: cc ../src/widget/dlg_gradlist.c
-build panel_colorpalette_palview.o: cc ../src/widget/panel_colorpalette_palview.c
-build dlg_regfont.o: cc ../src/widget/dlg_regfont.c
-build panel_tool.o: cc ../src/widget/panel_tool.c
-build dlg_vieweropt.o: cc ../src/widget/dlg_vieweropt.c
-build panel_canvview_page.o: cc ../src/widget/panel_canvview_page.c
-build dlg_transform_view.o: cc ../src/widget/dlg_transform_view.c
-build dlg_panel_layout.o: cc ../src/widget/dlg_panel_layout.c
-build dlg_envopt_page.o: cc ../src/widget/dlg_envopt_page.c
-build prev_tileimg.o: cc ../src/widget/prev_tileimg.c
-build filterprev.o: cc ../src/widget/filterprev.c
-build dlg_toollist.o: cc ../src/widget/dlg_toollist.c
-build panel_color_widget.o: cc ../src/widget/panel_color_widget.c
 build popup_zoomslider.o: cc ../src/widget/popup_zoomslider.c
-build colorwheel.o: cc ../src/widget/colorwheel.c
-build dlg_opt_toolbar.o: cc ../src/widget/dlg_opt_toolbar.c
-build filter_wg_level.o: cc ../src/widget/filter_wg_level.c
-build dlg_layer_newopt.o: cc ../src/widget/dlg_layer_newopt.c
-build filter_wg_repcol.o: cc ../src/widget/filter_wg_repcol.c
-build panel.o: cc ../src/widget/panel.c
-build dlg_transform.o: cc ../src/widget/dlg_transform.c
+build prev_tileimg.o: cc ../src/widget/prev_tileimg.c
+build rotate_widget.o: cc ../src/widget/rotate_widget.c
+build sel_material.o: cc ../src/widget/sel_material.c
+build statusbar.o: cc ../src/widget/statusbar.c
 build valuebar.o: cc ../src/widget/valuebar.c
-build panel_toollist_list_menu.o: cc ../src/widget/panel_toollist_list_menu.c
-build dlg_envopt_btt.o: cc ../src/widget/dlg_envopt_btt.c
-build dlg_pressure.o: cc ../src/widget/dlg_pressure.c
-build mainwin_filter.o: cc ../src/widget/mainwin_filter.c
-build dlg_envopt.o: cc ../src/widget/dlg_envopt.c
-build dlg_newcanvas.o: cc ../src/widget/dlg_newcanvas.c
+build widget_func.o: cc ../src/widget/widget_func.c
 
 build mlk.o: ccmlk ../mlk/src/mlk.c
 build mlk_argparse.o: ccmlk ../mlk/src/mlk_argparse.c

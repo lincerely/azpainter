@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -25,11 +25,11 @@ $*/
 
 #include <webp/decode.h>
 
-#include "mlk.h"
-#include "mlk_loadimage.h"
-#include "mlk_io.h"
-#include "mlk_util.h"
-#include "mlk_imageconv.h"
+#include <mlk.h>
+#include <mlk_loadimage.h>
+#include <mlk_io.h>
+#include <mlk_util.h>
+#include <mlk_imageconv.h>
 
 
 //---------------
@@ -137,12 +137,7 @@ static int _proc_open(webpdata *p,mLoadImage *pli)
 
 	//カラータイプ
 
-	if(pli->convert_type == MLOADIMAGE_CONVERT_TYPE_RGB)
-		pli->coltype = MLOADIMAGE_COLTYPE_RGB;
-	else if(pli->convert_type == MLOADIMAGE_CONVERT_TYPE_RGBA)
-		pli->coltype = MLOADIMAGE_COLTYPE_RGBA;
-	else
-		pli->coltype = pli->src_coltype;
+	mLoadImage_setColorType_fromSource(pli);
 
 	return MLKERR_OK;
 }

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,10 +23,10 @@ $*/
 
 #include <math.h>
 
-#include "mlk_gui.h"
-#include "mlk_pixbuf.h"
-#include "mlk_guicol.h"
-#include "mlk_rectbox.h"
+#include <mlk_gui.h>
+#include <mlk_pixbuf.h>
+#include <mlk_guicol.h>
+#include <mlk_rectbox.h>
 
 #include "canvasinfo.h"
 

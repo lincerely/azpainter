@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,7 +24,7 @@ $*/
 #define MLKX11_INC_XCURSOR
 #include "mlk_x11.h"
 
-#include "mlk_cursor.h"
+#include <mlk_cursor.h>
 
 
 /** カーソル解放 */

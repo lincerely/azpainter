@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,14 +24,14 @@ $*/
 #include <stdlib.h>
 #include <string.h>
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_window.h"
-#include "mlk_button.h"
-#include "mlk_event.h"
-#include "mlk_pixbuf.h"
-#include "mlk_guicol.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_window.h>
+#include <mlk_button.h>
+#include <mlk_event.h>
+#include <mlk_pixbuf.h>
+#include <mlk_guicol.h>
 
 #include "def_draw.h"
 #include "def_draw_toollist.h"

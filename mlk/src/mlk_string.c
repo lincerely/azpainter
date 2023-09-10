@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,11 +24,11 @@ $*/
 #include <string.h>
 #include <stdlib.h>
 
-#include "mlk.h"
-#include "mlk_string.h"
+#include <mlk.h>
+#include <mlk_string.h>
 
 #if !defined(MLK_NO_UNICODE)
-#include "mlk_unicode.h"
+#include <mlk_unicode.h>
 #endif
 
 

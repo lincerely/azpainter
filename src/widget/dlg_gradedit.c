@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,20 +21,20 @@ $*/
  * グラデーション編集ダイアログ
  ***************************************/
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_window.h"
-#include "mlk_label.h"
-#include "mlk_groupbox.h"
-#include "mlk_checkbutton.h"
-#include "mlk_colorbutton.h"
-#include "mlk_arrowbutton.h"
-#include "mlk_lineedit.h"
-#include "mlk_sliderbar.h"
-#include "mlk_menu.h"
-#include "mlk_event.h"
-#include "mlk_string.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_window.h>
+#include <mlk_label.h>
+#include <mlk_groupbox.h>
+#include <mlk_checkbutton.h>
+#include <mlk_colorbutton.h>
+#include <mlk_arrowbutton.h>
+#include <mlk_lineedit.h>
+#include <mlk_sliderbar.h>
+#include <mlk_menu.h>
+#include <mlk_event.h>
+#include <mlk_string.h>
 
 #include "gradation_list.h"
 #include "widget_func.h"

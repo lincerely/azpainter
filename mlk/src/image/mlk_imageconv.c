@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,13 +23,13 @@ $*/
 
 #include <string.h>
 
-#include "mlk.h"
-#include "mlk_imageconv.h"
+#include <mlk.h>
+#include <mlk_imageconv.h>
 
 
-/**@ RGB[A] 8bit の R と B を入れ替える
+/**@ RGB/RGBA(8bit) の R と B を入れ替える
  *
- * @d:RGB[A] <-> BGR[A] 変換を行う。
+ * @d:RGB <-> BGR 変換を行う。
  * @p:bytes 1px のバイト数 (3 or 4) */
 
 void mImageConv_swap_rb_8(uint8_t *buf,uint32_t width,int bytes)
@@ -43,9 +43,9 @@ void mImageConv_swap_rb_8(uint8_t *buf,uint32_t width,int bytes)
 	}
 }
 
-/**@ RGB 8bit から RGBA 8bit への拡張
+/**@ RGB(8bit) -> RGBA(8bit) へ拡張
  *
- * @d:同じバッファ上でアルファ値を追加して拡張する。\
+ * @d:同じバッファ上でアルファ値を追加して、拡張する。\
  * アルファ値は 255 となる。 */
 
 void mImageConv_rgb8_to_rgba8_extend(uint8_t *buf,uint32_t width)
@@ -72,7 +72,7 @@ void mImageConv_rgb8_to_rgba8_extend(uint8_t *buf,uint32_t width)
 //====================================
 
 
-/**@ RGBX 8bit から RGB 8bit へ変換 */
+/**@ RGBX(8bit) -> RGB(8bit) */
 
 void mImageConv_rgbx8_to_rgb8(uint8_t *dst,const uint8_t *src,uint32_t width)
 {
@@ -84,9 +84,9 @@ void mImageConv_rgbx8_to_rgb8(uint8_t *dst,const uint8_t *src,uint32_t width)
 	}
 }
 
-/**@ RGBX 8bit から GRAY 8bit へ変換
+/**@ RGBX(8bit) -> GRAY(8bit)
  *
- * @d:R の値を使う。 */
+ * @d:グレイスケール化。R の値を使う。 */
 
 void mImageConv_rgbx8_to_gray8(uint8_t *dst,const uint8_t *src,uint32_t width)
 {
@@ -94,9 +94,10 @@ void mImageConv_rgbx8_to_gray8(uint8_t *dst,const uint8_t *src,uint32_t width)
 		*(dst++) = *src;
 }
 
-/**@ RGBX 8bit から GRAY 1bit へ変換
+/**@ RGBX(8bit) -> GRAY(1bit)
  *
- * @d:ビットは上位から順にセット。\
+ * @d:白黒化。\
+ * ビットは上位から順にセット。\
  * R の最上位ビットが ON かどうかで判定する。 */
 
 void mImageConv_rgbx8_to_gray1(uint8_t *dst,const uint8_t *src,uint32_t width)
@@ -128,9 +129,56 @@ void mImageConv_rgbx8_to_gray1(uint8_t *dst,const uint8_t *src,uint32_t width)
 //====================================
 
 
-/**@ グレイスケール 1,2,4,8 bit からの変換
+/**@ Gray (8bit) -> Gray/RGB/RGBA (8bit)
  *
- * @d:8bit GRAY/RGB/RGBA への変換に対応 */
+ * @d:値反転有効。 */
+
+void mImageConv_gray8(mImageConv *p)
+{
+	const uint8_t *ps;
+	uint8_t *pd,c;
+	int type,frev;
+	uint32_t i;
+
+	ps = (const uint8_t *)p->srcbuf;
+	pd = (uint8_t *)p->dstbuf;
+
+	type = p->convtype;
+	frev = p->flags & MIMAGECONV_FLAGS_REVERSE;
+
+	//コピー
+
+	if(type == MIMAGECONV_CONVTYPE_NONE && !frev)
+	{
+		memcpy(pd, ps, p->width);
+		return;
+	}
+
+	//
+
+	for(i = p->width; i; i--)
+	{
+		c = *(ps++);
+		if(frev) c = 255 - c;
+
+		if(type == MIMAGECONV_CONVTYPE_NONE)
+			//Gray
+			*(pd++) = c;
+		else
+		{
+			//RGB/RGBA
+			
+			pd[0] = pd[1] = pd[2] = c;
+
+			if(type == MIMAGECONV_CONVTYPE_RGBA)
+				pd[3] = 255, pd += 4;
+			else
+				pd += 3;
+		}
+	}
+}
+
+/**@ Gray (1/2/4/8 bit) -> Gray/RGB/RGBA (8bit) */
 
 void mImageConv_gray_1_2_4_8(mImageConv *p)
 {
@@ -196,10 +244,9 @@ void mImageConv_gray_1_2_4_8(mImageConv *p)
 	}
 }
 
-/**@ グレイスケール 16bit からの変換
+/**@ Gray (16bit) -> GRAY/RGB/RGBA (8/16bit)
  *
- * @d:8/16bit GRAY/RGB/RGBA への変換に対応。\
- * ソースはホストのバイト順。 */
+ * @d:ソースはホストのバイト順。 */
 
 void mImageConv_gray16(mImageConv *p)
 {
@@ -273,10 +320,9 @@ void mImageConv_gray16(mImageConv *p)
 	}
 }
 
-/**@ パレットカラー 1,2,4,8 bit からの変換
+/**@ PAL (1/2/4/8bit) -> PAL/RGB/RGBA (8bit)
  *
- * @d:8bit PAL/RGB/RGBA への変換に対応。\
- * RGBA 変換の場合、パレットのアルファ値をセットする。 */
+ * @d:RGBA 変換の場合、パレットのアルファ値をセットする。 */
 
 void mImageConv_palette_1_2_4_8(mImageConv *p)
 {
@@ -337,9 +383,10 @@ void mImageConv_palette_1_2_4_8(mImageConv *p)
 	}
 }
 
-/**@ RGB 各 5bit (16bit パック) から RGB[A] 8bit への変換
+/**@ RGB (16bit:各5bit) -> RGB/RGBA (8bit)
  *
- * @d:SRC_ALPHA が ON で、最上位ビットをアルファ値として扱う。 */
+ * @d:ソースはホストエンディアン。\
+ * SRC_ALPHA が ON の場合、最上位ビットをアルファ値として扱う。 */
 
 void mImageConv_rgb555(mImageConv *p)
 {
@@ -386,10 +433,10 @@ void mImageConv_rgb555(mImageConv *p)
 	}
 }
 
-/**@ RGB 8bit から R-G-B-[A] への変換
+/**@ RGB/BGR (8bit) -> RGB/RGBA (8bit)
  *
- * @d:RGB → RGB(raw,conv), RGBA(conv,A=255)\
- * B-G-R 順なら入れ替え。*/
+ * @d:BGR 順なら入れ替え。\
+ * RGBA 変換の場合、A = 255 になる。 */
 
 void mImageConv_rgb8(mImageConv *p)
 {
@@ -404,7 +451,7 @@ void mImageConv_rgb8(mImageConv *p)
 	is_bgr = ((p->flags & MIMAGECONV_FLAGS_SRC_BGRA) != 0);
 	dst_alpha = (p->convtype == MIMAGECONV_CONVTYPE_RGBA);
 
-	//コピー
+	//RGB -> RGB
 
 	if(!dst_alpha && !is_bgr)
 	{
@@ -412,7 +459,7 @@ void mImageConv_rgb8(mImageConv *p)
 		return;
 	}
 
-	//
+	//RGB/BGR -> RGB/RGBA
 
 	for(i = p->width; i; i--)
 	{
@@ -438,11 +485,10 @@ void mImageConv_rgb8(mImageConv *p)
 	}
 }
 
-/**@ RGBA 8bit から R-G-B-[A] への変換
+/**@ RGBA/BGRA (8bit) -> RGB/RGBA (8bit)
  *
- * @d:RGBA → RGB(conv), RGBA(raw,conv)\
- * B-G-R 順なら入れ替え。\
- * INVALID_ALPHA 時: RGBA への変換なら、A は常に 255。生での出力は RGB とする。 */
+ * @d:B-G-R 順なら入れ替え。INVALID_ALPHA 有効。\
+ *  変換が NONE (RGBA) でアルファ値が無効の場合は、RGB として出力する。 */
 
 void mImageConv_rgba8(mImageConv *p)
 {
@@ -458,11 +504,12 @@ void mImageConv_rgba8(mImageConv *p)
 	invalid_alpha = ((p->flags & MIMAGECONV_FLAGS_INVALID_ALPHA) != 0);
 
 	//出力が RGBA か
+	// :NONE でアルファ値無効なら、RGB 出力
 
 	dst_alpha = (p->convtype == MIMAGECONV_CONVTYPE_RGBA
 		|| (p->convtype == MIMAGECONV_CONVTYPE_NONE && !invalid_alpha));
 
-	//コピー
+	//RGBA -> RGBA (アルファ値無効でない時)
 
 	if(dst_alpha && !is_bgr && !invalid_alpha)
 	{
@@ -470,7 +517,7 @@ void mImageConv_rgba8(mImageConv *p)
 		return;
 	}
 
-	//
+	//RGBA(BGRA) -> RGB/RGBA
 
 	for(i = p->width; i; i--)
 	{
@@ -499,10 +546,11 @@ void mImageConv_rgba8(mImageConv *p)
 	}
 }
 
-/**@ RGB[A] 16bit を R-G-B-[A] 8/16bit に変換
+/**@ RGB/RGBA (16bit) -> RGB/RGBA (8/16bit)
  *
- * @d:SRC_ALPHA が ON で、ソースは RGBA。\
- * ソースはホストのバイト順。 */
+ * @d:16bit から、8/16bit への変換。\
+ * ソースが RGBA かどうかは、SRC_ALPHA で判定。\
+ * ソースはホストエンディアン。 */
 
 void mImageConv_rgb_rgba_16(mImageConv *p)
 {
@@ -566,49 +614,111 @@ void mImageConv_rgb_rgba_16(mImageConv *p)
 	}
 }
 
-/**@ CMYK 16bit から 8/16bit への変換
+/**@ CMYK (8bit) -> CMYK/RGB/RGBA (8bit)
  *
- * @d:ソースは、ホストのバイト順。 */
+ * @d:CMYK にはアルファ値はない。値の反転可。 */
 
-void mImageConv_cmyk16(mImageConv *p)
+void mImageConv_cmyk8(mImageConv *p)
 {
-	const uint16_t *ps;
-	uint8_t *pd8;
-	uint16_t *pd16,c,m,y,k;
+	uint8_t *pd;
+	const uint8_t *ps;
+	int frev,falpha,c,m,y,k;
 	uint32_t i;
-	int to8bit,reverse;
+	double d;
 
-	ps   = (const uint16_t *)p->srcbuf;
-	pd8  = (uint8_t *)p->dstbuf;
-	pd16 = (uint16_t *)pd8;
+	ps = (const uint8_t *)p->srcbuf;
+	pd = (uint8_t *)p->dstbuf;
 
-	to8bit = (p->dstbits == 8);
-	reverse = ((p->flags & MIMAGECONV_FLAGS_REVERSE) != 0);
+	frev = (p->flags & MIMAGECONV_FLAGS_REVERSE);
 
-	//コピー
-
-	if(!to8bit && !reverse)
+	//CMYK のまま
+	
+	if(p->convtype == MIMAGECONV_CONVTYPE_NONE)
 	{
-		memcpy(pd8, ps, p->width * 8);
+		if(frev)
+		{
+			//反転
+			for(i = p->width * 4; i; i--, ps++, pd++)
+				*pd = 255 - *ps;
+		}
+		else
+			memcpy(pd, ps, p->width * 4);
+
 		return;
 	}
 
-	//
+	//CMYK -> RGB/RGBA 変換
+
+	falpha = (p->convtype == MIMAGECONV_CONVTYPE_RGBA);
 
 	for(i = p->width; i; i--)
 	{
-		//16bit src
-
 		c = ps[0];
 		m = ps[1];
 		y = ps[2];
 		k = ps[3];
-		
 		ps += 4;
 
-		//反転
+		if(frev)
+		{
+			c = 255 - c;
+			m = 255 - m;
+			y = 255 - y;
+			k = 255 - k;
+		}
 
-		if(reverse)
+		//RGB
+	
+		d = (255 - k) / 255.0;
+		
+		pd[0] = 255 - (uint8_t)(c * d + k + 0.5);
+		pd[1] = 255 - (uint8_t)(m * d + k + 0.5);
+		pd[2] = 255 - (uint8_t)(y * d + k + 0.5);
+
+		if(falpha)
+		{
+			pd[3] = 255;
+			pd += 4;
+		}
+		else
+			pd += 3;
+	}
+}
+
+/**@ CMYK (16bit) -> CMYK/RGB/RGBA (8/16bit)
+ *
+ * @d:CMYK にはアルファ値はない。値の反転可。\
+ * ソースはホストエンディアン。 */
+
+void mImageConv_cmyk16(mImageConv *p)
+{
+	const uint16_t *ps;
+	uint16_t *pd16;
+	uint8_t *pd8;
+	int frev,falpha,fcmyk,to8bit,c,m,y,k;
+	uint32_t i;
+	double d;
+
+	ps = (const uint16_t *)p->srcbuf;
+	pd16 = (uint16_t *)p->dstbuf;
+	pd8 = (uint8_t *)pd16;
+
+	frev = (p->flags & MIMAGECONV_FLAGS_REVERSE);
+	fcmyk = (p->convtype == MIMAGECONV_CONVTYPE_NONE);
+	falpha = (p->convtype == MIMAGECONV_CONVTYPE_RGBA);
+	to8bit = (p->dstbits == 8);
+
+	for(i = p->width; i; i--)
+	{
+		//CMYK 16bit
+		
+		c = ps[0];
+		m = ps[1];
+		y = ps[2];
+		k = ps[3];
+		ps += 4;
+
+		if(frev)
 		{
 			c = 0xffff - c;
 			m = 0xffff - m;
@@ -616,29 +726,67 @@ void mImageConv_cmyk16(mImageConv *p)
 			k = 0xffff - k;
 		}
 
-		//セット
+		//dst
 
-		if(to8bit)
+		if(fcmyk)
 		{
-			//8bit
-			
-			pd8[0] = c >> 8;
-			pd8[1] = m >> 8;
-			pd8[2] = y >> 8;
-			pd8[3] = k >> 8;
+			//CMYK
 
-			pd8 += 4;
+			if(to8bit)
+			{
+				//8bit
+
+				pd8[0] = c >> 8;
+				pd8[1] = m >> 8;
+				pd8[2] = y >> 8;
+				pd8[3] = k >> 8;
+				pd8 += 4;
+			}
+			else
+			{
+				pd16[0] = c;
+				pd16[1] = m;
+				pd16[2] = y;
+				pd16[3] = k;
+				pd16 += 4;
+			}
 		}
 		else
 		{
-			//16bit
+			//RGB
 			
-			pd16[0] = c;
-			pd16[1] = m;
-			pd16[2] = y;
-			pd16[3] = k;
+			d = (double)(0xffff - k) / 0xffff;
+			
+			c = 0xffff - (uint16_t)(c * d + k + 0.5);
+			m = 0xffff - (uint16_t)(m * d + k + 0.5);
+			y = 0xffff - (uint16_t)(y * d + k + 0.5);
 
-			pd16 += 4;
+			if(to8bit)
+			{
+				//8bit
+
+				pd8[0] = c >> 8;
+				pd8[1] = m >> 8;
+				pd8[2] = y >> 8;
+
+				if(falpha)
+					pd8[3] = 255, pd8 += 4;
+				else
+					pd8 += 3;
+			}
+			else
+			{
+				//16bit
+
+				pd16[0] = c;
+				pd16[1] = m;
+				pd16[2] = y;
+
+				if(falpha)
+					pd16[3] = 0xffff, pd16 += 4;
+				else
+					pd16 += 3;
+			}
 		}
 	}
 }
@@ -649,11 +797,13 @@ void mImageConv_cmyk16(mImageConv *p)
 //===============================
 
 
-/**@ GRAY+A 8bit のチャンネル分離データから GRAY+A/RGB/RGBA へ
+/**@ [チャンネル] GRAY+A (8bit) -> GRAY+A/RGB/RGBA
  *
- * @g:チャンネル分離データ
+ * @g:チャンネルデータ
  *
- * @d:chno == 1 のソースがアルファ値となる */
+ * @d:PSD など、チャンネルごとにデータが分かれている場合に使う。\
+ * 各チャンネルを結合した位置に出力。\
+ * chno: [0] gray [1] alpha */
 
 void mImageConv_sepch_gray_a_8(mImageConv *p)
 {
@@ -710,7 +860,7 @@ void mImageConv_sepch_gray_a_8(mImageConv *p)
 	}
 }
 
-/**@ GRAY+A 16bit のチャンネル分離データから GRAY+A/RGB/RGBA:8/16bit へ
+/**@ [チャンネル] GRAY+A (16bit) -> GRAY+A/RGB/RGBA (8/16bit)
  *
  * @d:chno == 1 のソースがアルファ値となる。\
  * ソースのエンディアンはホスト順。 */
@@ -790,10 +940,10 @@ void mImageConv_sepch_gray_a_16(mImageConv *p)
 	}
 }
 
-/**@ RGB[A] 8bit のチャンネル分離データから RGB/RGBA へ
+/**@ [チャンネル] RGB/RGBA (8bit) -> RGB/RGBA (8bit)
  *
- * @d:SRC_ALPHA が ON で、変換元にアルファ値がある。\
- * chno は、0=R, 1=G, 2=B, 3=A。 */
+ * @d:SRC_ALPHA が ON で、ソースは RGBA。\
+ * chno: 0=R, 1=G, 2=B, 3=A。 */
 
 void mImageConv_sepch_rgb_rgba_8(mImageConv *p)
 {
@@ -846,11 +996,11 @@ void mImageConv_sepch_rgb_rgba_8(mImageConv *p)
 	}
 }
 
-/**@ RGB[A] 16bit のチャンネル分離データから RGB/RGBA:8/16bit へ
+/**@ [チャンネル] RGB/RGBA (16bit) -> RGB/RGBA (8/16bit)
  *
- * @d:SRC_ALPHA が ON で、変換元にアルファ値がある。\
+ * @d:SRC_ALPHA が ON で、ソースは RGBA。\
  * ソースのエンディアンはホスト順。\
- * chno は、0=R, 1=G, 2=B, 3=A。 */
+ * chno: 0=R, 1=G, 2=B, 3=A。 */
 
 void mImageConv_sepch_rgb_rgba_16(mImageConv *p)
 {
@@ -931,32 +1081,56 @@ void mImageConv_sepch_rgb_rgba_16(mImageConv *p)
 	}
 }
 
-/**@ CMYK 8bit のチャンネル分離データから CMYK へ
+/**@ [チャンネル] CMYK (8bit) -> CMYK/RGB/RGBA (8bit)
  *
- * @d:chno は、0=C, 1=M, 2=Y, 3=K。 */
+ * @d:chno: 0=C, 1=M, 2=Y, 3=K。\
+ * RGB/RGBA 変換の場合、chno = 3 が来た時、CMY の色を元に変換する。\
+ * (出力先は最低でも 3byte あるので、CMY をセットしてから、最後に RGB 変換) */
 
 void mImageConv_sepch_cmyk8(mImageConv *p)
 {
 	const uint8_t *ps;
 	uint8_t *pd,c;
-	uint32_t i,reverse;
+	uint32_t i;
+	int frev,chno,type,dstbytes;
+	double d;
 
-	pd = (uint8_t *)p->dstbuf + p->chno;
+	type = p->convtype;
+	chno = p->chno;
+	dstbytes = (type == MIMAGECONV_CONVTYPE_RGB)? 3: 4;
+	
+	pd = (uint8_t *)p->dstbuf;
 	ps = (const uint8_t *)p->srcbuf;
-	reverse = ((p->flags & MIMAGECONV_FLAGS_REVERSE) != 0);
 
-	for(i = p->width; i; i--, pd += 4)
+	frev = p->flags & MIMAGECONV_FLAGS_REVERSE;
+
+	for(i = p->width; i; i--, pd += dstbytes)
 	{
 		c = *(ps++);
-		if(reverse) c = 255 - c;
-		
-		*pd = c;
+		if(frev) c = 255 - c;
+
+		if(type == MIMAGECONV_CONVTYPE_NONE || chno < 3)
+			//無変換 or CMY をセット
+			pd[chno] = c;
+		else
+		{
+			//ch = K の場合、RGB 変換
+
+			d = (255 - c) / 255.0;
+
+			pd[0] = 255 - (int)(pd[0] * d + c + 0.5);
+			pd[1] = 255 - (int)(pd[1] * d + c + 0.5);
+			pd[2] = 255 - (int)(pd[2] * d + c + 0.5);
+
+			if(type == MIMAGECONV_CONVTYPE_RGBA)
+				pd[3] = 255;
+		}
 	}
 }
 
-/**@ CMYK 16bit のチャンネル分離データから CMYK 8/16bit へ
+/**@ [チャンネル] CMYK (16bit) -> CMYK/RGB/RGBA (8/16bit)
  *
- * @d:chno は、0=C, 1=M, 2=Y, 3=K。\
+ * @d:chno: 0=C, 1=M, 2=Y, 3=K。\
  * ソースのエンディアンはホスト順。 */
 
 void mImageConv_sepch_cmyk16(mImageConv *p)
@@ -964,39 +1138,65 @@ void mImageConv_sepch_cmyk16(mImageConv *p)
 	const uint16_t *ps;
 	uint8_t *pd8;
 	uint16_t *pd16,c;
-	uint32_t i,reverse;
+	uint32_t i;
+	int frev,type,chno,dstbytes,bits;
+	double d;
 
 	ps = (const uint16_t *)p->srcbuf;
-	i = p->width;
-	reverse = ((p->flags & MIMAGECONV_FLAGS_REVERSE) != 0);
+	pd16 = (uint16_t *)p->dstbuf;
+	pd8 = (uint8_t *)pd16;
+	
+	type = p->convtype;
+	chno = p->chno;
+	bits = p->dstbits;
+	dstbytes = (type == MIMAGECONV_CONVTYPE_RGB)? 3: 4;
+	frev = p->flags & MIMAGECONV_FLAGS_REVERSE;
 
-	if(p->dstbits == 8)
+	for(i = p->width; i; i--)
 	{
-		//8bit
-		
-		pd8 = (uint8_t *)p->dstbuf + p->chno;
+		c = *(ps++);
+		if(frev) c = 0xffff - c;
 
-		for(; i; i--, pd8 += 4)
+		if(type == MIMAGECONV_CONVTYPE_NONE || chno < 3)
 		{
-			c = *(ps++);
-			if(reverse) c = 0xffff - c;
+			//無変換 or CMY をセット
 
-			*pd8 = c >> 8;
+			if(bits == 16)
+				pd16[chno] = c;
+			else
+				pd8[chno] = c >> 8;
 		}
-	}
-	else
-	{
-		//16bit
-		
-		pd16 = (uint16_t *)p->dstbuf + p->chno;
-
-		for(; i; i--, pd16 += 4)
+		else
 		{
-			c = *(ps++);
-			if(reverse) c = 0xffff - c;
+			//ch = K の場合、RGB 変換
 
-			*pd16 = c;
+			if(bits == 16)
+			{
+				d = (double)(0xffff - c) / 0xffff;
+
+				pd16[0] = 0xffff - (int)(pd16[0] * d + c + 0.5);
+				pd16[1] = 0xffff - (int)(pd16[1] * d + c + 0.5);
+				pd16[2] = 0xffff - (int)(pd16[2] * d + c + 0.5);
+
+				if(type == MIMAGECONV_CONVTYPE_RGBA) pd16[3] = 0xffff;
+			}
+			else
+			{
+				//8bit (CMYK は 8bit 変換後の値を使う)
+				
+				c >>= 8;
+				d = (255 - c) / 255.0;
+			
+				pd8[0] = 255 - (int)(pd8[0] * d + c + 0.5);
+				pd8[1] = 255 - (int)(pd8[1] * d + c + 0.5);
+				pd8[2] = 255 - (int)(pd8[2] * d + c + 0.5);
+
+				if(type == MIMAGECONV_CONVTYPE_RGBA) pd8[3] = 255;
+			}
 		}
+
+		pd16 += dstbytes;
+		pd8 += dstbytes;
 	}
 }
 

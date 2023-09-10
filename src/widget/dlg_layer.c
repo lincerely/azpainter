@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,16 +23,16 @@ $*/
  * [線数一括変換] [レイヤタイプ変更] [複数レイヤ結合]
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_window.h"
-#include "mlk_label.h"
-#include "mlk_groupbox.h"
-#include "mlk_checkbutton.h"
-#include "mlk_lineedit.h"
-#include "mlk_combobox.h"
-#include "mlk_event.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_window.h>
+#include <mlk_label.h>
+#include <mlk_groupbox.h>
+#include <mlk_checkbutton.h>
+#include <mlk_lineedit.h>
+#include <mlk_combobox.h>
+#include <mlk_event.h>
 
 #include "widget_func.h"
 

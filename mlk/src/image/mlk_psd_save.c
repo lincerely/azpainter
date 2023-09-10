@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,15 +24,15 @@ $*/
 #include <stdio.h>
 #include <string.h>
 
-#include "mlk.h"
-#include "mlk_rectbox.h"
-#include "mlk_list.h"
-#include "mlk_stdio.h"
-#include "mlk_util.h"
-#include "mlk_packbits.h"
-#include "mlk_unicode.h"
+#include <mlk.h>
+#include <mlk_rectbox.h>
+#include <mlk_list.h>
+#include <mlk_stdio.h>
+#include <mlk_util.h>
+#include <mlk_packbits.h>
+#include <mlk_unicode.h>
 
-#include "mlk_psd.h"
+#include <mlk_psd.h>
 
 
 //-------------------

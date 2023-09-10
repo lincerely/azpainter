@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -20,7 +20,7 @@ $*/
 #ifndef MLK_COLORBUTTON_H
 #define MLK_COLORBUTTON_H
 
-#include "mlk_button.h"
+#include <mlk_button.h>
 
 #define MLK_COLORBUTTON(p)  ((mColorButton *)(p))
 #define MLK_COLORBUTTON_DEF MLK_BUTTON_DEF mColorButtonData colbtt;

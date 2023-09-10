@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,15 +24,15 @@ $*/
 
 #include <stdio.h>
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_window.h"
-#include "mlk_rectbox.h"
-#include "mlk_str.h"
-#include "mlk_font.h"
-#include "mlk_list.h"
-#include "mlk_sysdlg.h"
-#include "mlk_menu.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_window.h>
+#include <mlk_rectbox.h>
+#include <mlk_str.h>
+#include <mlk_font.h>
+#include <mlk_list.h>
+#include <mlk_sysdlg.h>
+#include <mlk_menu.h>
 
 #include "def_widget.h"
 #include "def_draw.h"
@@ -562,7 +562,10 @@ static mlkbool _textsel_release(AppDraw *p)
 	return TRUE;
 }
 
-/* 押し時 */
+/* 押し時
+ *
+ * ※テキストレイヤ時のダブルクリックは、常にグラブしないので、
+ *  ダイアログなどの表示をしないキャンバス上の操作処理では、ダブルクリックを除外すること。 */
 
 static mlkbool _press_textlayer(AppDraw *p,mlkbool dblclk)
 {
@@ -582,9 +585,9 @@ static mlkbool _press_textlayer(AppDraw *p,mlkbool dblclk)
 	}
 	else if(p->w.press_state & MLK_STATE_CTRL)
 	{
-		//+Ctrl: 位置移動
+		//+Ctrl: 位置移動 (ダブルクリックは除外)
 
-		if(!pi)
+		if(!pi || dblclk)
 			return FALSE;
 		else
 			return _press_start_move(p, pi);

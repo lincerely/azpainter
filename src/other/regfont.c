@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,12 +24,12 @@ $*/
 #include <stdio.h>
 #include <string.h>
 
-#include "mlk_gui.h"
-#include "mlk_list.h"
-#include "mlk_str.h"
-#include "mlk_buf.h"
-#include "mlk_util.h"
-#include "mlk_stdio.h"
+#include <mlk_gui.h>
+#include <mlk_list.h>
+#include <mlk_str.h>
+#include <mlk_buf.h>
+#include <mlk_util.h>
+#include <mlk_stdio.h>
 
 #include "regfont.h"
 
@@ -218,7 +218,7 @@ mListItem *RegFont_addDat(RegFontDat *p)
 	//文字データ (Host -> BE)
 
 	if(p->charbuf)
-		mCopyBuf_32bit_BEtoHOST(pd, p->charbuf, (p->charsize[0] + p->charsize[1]) / 4);
+		mCopyBuf_BE_32bit(pd, p->charbuf, (p->charsize[0] + p->charsize[1]) / 4);
 
 	return (mListItem *)pi;
 }
@@ -478,7 +478,7 @@ RegFontDat *RegFontDat_make(mListItem *item)
 		p->charbuf = (uint8_t *)mMalloc(size);
 
 		if(p->charbuf)
-			mCopyBuf_32bit_BEtoHOST(p->charbuf, ps, size / 4);
+			mCopyBuf_BE_32bit(p->charbuf, ps, size / 4);
 	}
 
 	return p;

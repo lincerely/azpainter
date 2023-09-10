@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -22,14 +22,18 @@ $*/
  * スクロールビュー
  *************************************************/
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_scrollview.h"
-#include "mlk_scrollbar.h"
-#include "mlk_pixbuf.h"
-#include "mlk_guicol.h"
-#include "mlk_util.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_scrollview.h>
+#include <mlk_scrollbar.h>
+#include <mlk_pixbuf.h>
+#include <mlk_guicol.h>
+#include <mlk_util.h>
+
+
+/* mScrollView の通知イベントを送る時は、通知先を _get_notify_widget() で取得すること。
+ * MSCROLLVIEW_S_ALL_NOTIFY_SELF が ON なら、常に自身に送る。 */
 
 
 //=============================
@@ -55,6 +59,13 @@ static void _get_layout_page(mScrollView *p,mBox *box)
 		box->w = p->wg.w;
 		box->h = p->wg.h;
 	}
+}
+
+/* 通知先ウィジェット取得 */
+
+static mWidget *_get_notify_widget(mScrollView *p)
+{
+	return (p->sv.fstyle & MSCROLLVIEW_S_ALL_NOTIFY_SELF)? MLK_WIDGET(p): NULL;
 }
 
 /* スクロールバーの操作ハンドラ
@@ -214,6 +225,15 @@ static mlkbool _scrollbar_show(mScrollView *p)
 
 	if(scrv && mWidgetShow(MLK_WIDGET(scrv), vert))
 		ret = TRUE;
+
+	//バーの表示が変わった場合、通知
+
+	if(ret
+		&& (p->sv.fstyle & MSCROLLVIEW_S_NOTIFY_CHANGE_SCROLL_VISIBLE))
+	{
+		mWidgetEventAdd_notify(MLK_WIDGET(p), _get_notify_widget(p),
+			MSCROLLVIEW_N_CHANGE_SCROLL_VISIBLE, horz | (vert << 1), 0);
+	}
 
 	return ret;
 }
@@ -383,9 +403,9 @@ void mScrollViewSetFixBar(mScrollView *p,int type)
 
 /**@ レイアウト構成を行う
  *
- * @d:中身の状態が変わった時に手動で行う。\
+ * @d:中身の状態などが変わった時に、手動で行う。\
  * スクロールバーを表示するかどうかを再判定し、レイアウトし直す。\
- * (mScrollView のサイズ変更時は自動で行われる) */
+ * (mScrollView のウィジェットサイズ変更時は、自動で行われる) */
 
 void mScrollViewLayout(mScrollView *p)
 {
@@ -393,7 +413,9 @@ void mScrollViewLayout(mScrollView *p)
 		mWidgetLayout(MLK_WIDGET(p));
 }
 
-/**@ 水平スクロールの情報セット */
+/**@ 水平スクロールの情報セット
+ *
+ * @d:スクロールバーの表示状態は変更されないので、手動で行うこと。 */
 
 void mScrollViewSetScrollStatus_horz(mScrollView *p,int min,int max,int page)
 {
@@ -429,6 +451,8 @@ int mScrollViewGetScrollShowStatus(mScrollView *p)
 
 /**@ スクロールバーの有効状態を変更
  *
+ * @d:ウィジェットの有効/無効を設定する。\
+ *  バーを表示した状態で、有効/無効を変更したい時。
  * @p:type [0] 無効 [正] 有効 [負] 反転 */
 
 void mScrollViewEnableScrollBar(mScrollView *p,int type)
@@ -438,6 +462,18 @@ void mScrollViewEnableScrollBar(mScrollView *p,int type)
 
 	if(p->sv.scrv)
 		mWidgetEnable(MLK_WIDGET(p->sv.scrv), type);
+}
+
+/**@ スクロールバーがない時の、ページウィジェットのサイズを取得 */
+
+void mScrollViewGetMaxPageSize(mScrollView *p,mSize *size)
+{
+	mBox box;
+	
+	_get_layout_page(p, &box);
+
+	size->w = box.w;
+	size->h = box.h;
 }
 
 

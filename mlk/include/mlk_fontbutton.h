@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -20,9 +20,9 @@ $*/
 #ifndef MLK_FONTBUTTON_H
 #define MLK_FONTBUTTON_H
 
-#include "mlk_button.h"
-#include "mlk_fontinfo.h"
-#include "mlk_sysdlg.h"
+#include <mlk_button.h>
+#include <mlk_fontinfo.h>
+#include <mlk_sysdlg.h>
 
 #define MLK_FONTBUTTON(p)  ((mFontButton *)(p))
 #define MLK_FONTBUTTON_DEF MLK_BUTTON_DEF mFontButtonData fbt;

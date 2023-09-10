@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,7 +23,7 @@ $*/
 
 #include <stdint.h>
 
-#include "mlk_color.h"
+#include <mlk_color.h>
 
 
 /* RGB から色相計算

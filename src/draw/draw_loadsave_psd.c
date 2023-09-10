@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,14 +23,14 @@ $*/
 
 #include <string.h>
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_popup_progress.h"
-#include "mlk_psd.h"
-#include "mlk_file.h"
-#include "mlk_list.h"
-#include "mlk_rectbox.h"
-#include "mlk_imagebuf.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_popup_progress.h>
+#include <mlk_psd.h>
+#include <mlk_file.h>
+#include <mlk_list.h>
+#include <mlk_rectbox.h>
+#include <mlk_imagebuf.h>
 
 #include "def_macro.h"
 #include "def_config.h"

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -55,6 +55,7 @@ int mCIManagerGetItemIndex(mCIManager *p,mColumnItem *item);
 mColumnItem *mCIManagerGetItem_atIndex(mCIManager *p,int index);
 mColumnItem *mCIManagerGetItem_fromParam(mCIManager *p,intptr_t param);
 mColumnItem *mCIManagerGetItem_fromText(mCIManager *p,const char *text);
+mColumnItem *mCIManagerGetItem_fromText_multi(mCIManager *p,const char *text,int col);
 
 mlkbool mCIManagerSetFocusItem(mCIManager *p,mColumnItem *item);
 mlkbool mCIManagerSetFocusItem_atIndex(mCIManager *p,int index);

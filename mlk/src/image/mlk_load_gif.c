@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,9 +21,9 @@ $*/
  * GIF 読み込み
  *****************************************/
 
-#include "mlk.h"
-#include "mlk_loadimage.h"
-#include "mlk_gifdec.h"
+#include <mlk.h>
+#include <mlk_loadimage.h>
+#include <mlk_gifdec.h>
 
 
 
@@ -81,12 +81,7 @@ static int _read_info(mGIFDec *gif,mLoadImage *pli)
 
 	//カラータイプ
 
-	if(pli->convert_type == MLOADIMAGE_CONVERT_TYPE_RGB)
-		pli->coltype = MLOADIMAGE_COLTYPE_RGB;
-	else if(pli->convert_type == MLOADIMAGE_CONVERT_TYPE_RGBA)
-		pli->coltype = MLOADIMAGE_COLTYPE_RGBA;
-	else
-		pli->coltype = MLOADIMAGE_COLTYPE_PALETTE;
+	mLoadImage_setColorType_fromSource(pli);
 
 	//透過色
 

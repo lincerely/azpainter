@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -44,6 +44,7 @@ mlkbool mIniRead_getNextItem_keyno_int32(mIniRead *p,int *keyno,void *buf,mlkboo
 
 int mIniRead_getInt(mIniRead *p,const char *key,int def);
 uint32_t mIniRead_getHex(mIniRead *p,const char *key,uint32_t def);
+double mIniRead_getDouble(mIniRead *p,const char *key,double def);
 mlkbool mIniRead_compareText(mIniRead *p,const char *key,const char *comptxt,mlkbool iscase);
 
 const char *mIniRead_getText(mIniRead *p,const char *key,const char *def);
@@ -58,6 +59,7 @@ void *mIniRead_getNumbers_alloc(mIniRead *p,const char *key,int bytes,mlkbool he
 mlkbool mIniRead_getPoint(mIniRead *p,const char *key,mPoint *pt,int defx,int defy);
 mlkbool mIniRead_getSize(mIniRead *p,const char *key,mSize *size,int defw,int defh);
 mlkbool mIniRead_getBox(mIniRead *p,const char *key,mBox *box,int defx,int defy,int defw,int defh);
+int mIniRead_getBase64_check(mIniRead *p,const char *key,void **ppdst,uint32_t *psize);
 void *mIniRead_getBase64(mIniRead *p,const char *key,uint32_t *psize);
 
 #ifdef __cplusplus

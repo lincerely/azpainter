@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,10 +24,10 @@ $*/
 #include <string.h>
 #include <fontconfig/fontconfig.h>
 
-#include "mlk.h"
-#include "mlk_list.h"
-#include "mlk_fontlist.h"
-#include "mlk_fontconfig.h"
+#include <mlk.h>
+#include <mlk_list.h>
+#include <mlk_fontlist.h>
+#include <mlk_fontconfig.h>
 
 
 //----------------

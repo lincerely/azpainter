@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,15 +21,15 @@ $*/
  * mLabel [ラベル]
  *****************************************/
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_label.h"
-#include "mlk_pixbuf.h"
-#include "mlk_guicol.h"
-#include "mlk_string.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_label.h>
+#include <mlk_pixbuf.h>
+#include <mlk_guicol.h>
+#include <mlk_string.h>
 
-#include "mlk_pv_widget.h"
+#include <mlk_pv_widget.h>
 
 
 //--------------------

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -20,8 +20,8 @@ $*/
 #ifndef MLK_GUISTYLE_H
 #define MLK_GUISTYLE_H
 
-#include "mlk_guicol.h"
-#include "mlk_fontinfo.h"
+#include <mlk_guicol.h>
+#include <mlk_fontinfo.h>
 
 typedef struct _mGuiStyleInfo
 {

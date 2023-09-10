@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -20,7 +20,7 @@ $*/
 #ifndef MLK_GUI_H
 #define MLK_GUI_H
 
-#include "mlk.h"
+#include <mlk.h>
 
 typedef uintptr_t mCursor;
 typedef struct _mToplevelSaveState mToplevelSaveState;

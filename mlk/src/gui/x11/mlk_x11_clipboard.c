@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -25,11 +25,11 @@ $*/
 
 #include "mlk_x11.h"
 
-#include "mlk_str.h"
-#include "mlk_clipboard.h"
+#include <mlk_str.h>
+#include <mlk_clipboard.h>
 
-#include "mlk_pv_gui.h"
-#include "mlk_pv_mimelist.h"
+#include <mlk_pv_gui.h>
+#include <mlk_pv_mimelist.h>
 
 
 //-------------------
@@ -201,19 +201,13 @@ static void _bkend_addMimeType(mList *list,const char *name)
 static mlkbool _bkend_setSelection(void)
 {
 	mAppX11 *p = MLKAPPX11;
-	Atom selection;
 
-	if(!(p->flags & MLKX11_FLAGS_HAVE_SELECTION))
-	{
-		selection = p->atoms[MLKX11_ATOM_CLIPBOARD];
+	XSetSelectionOwner(p->display, p->atoms[MLKX11_ATOM_CLIPBOARD], p->leader_window, CurrentTime);
 
-		XSetSelectionOwner(p->display, selection, p->leader_window, CurrentTime);
+//	if(XGetSelectionOwner(p->display, selection) != p->leader_window)
+//		return FALSE;
 
-		if(XGetSelectionOwner(p->display, selection) != p->leader_window)
-			return FALSE;
-
-		p->flags |= MLKX11_FLAGS_HAVE_SELECTION;
-	}
+	p->flags |= MLKX11_FLAGS_HAVE_SELECTION;
 
 	return TRUE;
 }

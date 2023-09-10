@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,11 +23,11 @@ $*/
 
 #include <string.h>
 
-#include "mlk.h"
-#include "mlk_loadimage.h"
-#include "mlk_io.h"
-#include "mlk_util.h"
-#include "mlk_imageconv.h"
+#include <mlk.h>
+#include <mlk_loadimage.h>
+#include <mlk_io.h>
+#include <mlk_util.h>
+#include <mlk_imageconv.h>
 
 
 //--------------------
@@ -312,14 +312,7 @@ static int _read_infoheader(bmpdata *p,mLoadImage *pli)
 
 	//カラータイプ
 
-	if(pli->convert_type == MLOADIMAGE_CONVERT_TYPE_RGB)
-		n = MLOADIMAGE_COLTYPE_RGB;
-	else if(pli->convert_type == MLOADIMAGE_CONVERT_TYPE_RGBA)
-		n = MLOADIMAGE_COLTYPE_RGBA;
-	else
-		n = pli->src_coltype;
-
-	pli->coltype = n;
+	mLoadImage_setColorType_fromSource(pli);
 
 	return MLKERR_OK;
 }

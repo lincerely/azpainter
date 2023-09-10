@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,10 +23,10 @@ $*/
 
 #include <stdio.h>
 
-#include "mlk.h"
-#include "mlk_str.h"
-#include "mlk_stdio.h"
-#include "mlk_util.h"
+#include <mlk.h>
+#include <mlk_str.h>
+#include <mlk_stdio.h>
+#include <mlk_util.h>
 
 
 
@@ -149,6 +149,14 @@ void mIniWrite_putStrArray(FILE *fp,int keytop,mStr *array,int num)
 	}
 }
 
+/**@ double を出力 (0x 形式) */
+
+void mIniWrite_putDouble(FILE *fp,const char *key,double d)
+{
+	fprintf(fp, "%s=%a\n", key, d);
+}
+
+
 /**@ mPoint をカンマで区切って出力 */
 
 void mIniWrite_putPoint(FILE *fp,const char *key,mPoint *pt)
@@ -222,7 +230,9 @@ void mIniWrite_putNumbers(FILE *fp,const char *key,const void *buf,int num,int b
 
 /**@ Base64 にエンコードして出力
  *
- * @d:"key=size:encode_text" として出力される。(size はエンコード前のサイズ)
+ * @d:"key=size:encode_text" として出力される。(size はエンコード前のサイズ)\
+ * buf == NULL または size == 0 の場合、空データとして、"key=" となる。\
+ * ※複数バイトの値の配列の場合、OS によってバイトオーダーが異なってしまうので注意。
  * @p:buf データのバッファ
  * @p:size データのサイズ */
 
@@ -231,7 +241,11 @@ void mIniWrite_putBase64(FILE *fp,const char *key,const void *buf,uint32_t size)
 	int encsize;
 	char *encbuf;
 
-	if(!buf || size == 0) return;
+	if(!buf || size == 0)
+	{
+		fprintf(fp, "%s=\n", key);
+		return;
+	}
 
 	encsize = mGetBase64EncodeSize(size);
 

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,17 +23,17 @@ $*/
 
 #include <string.h>
 
-#include "mlk_gui.h"
-#include "mlk_imagelist.h"
-#include "mlk_imagebuf.h"
-#include "mlk_loadimage.h"
-#include "mlk_pixbuf.h"
-#include "mlk_string.h"
-#include "mlk_guicol.h"
-#include "mlk_util.h"
+#include <mlk_gui.h>
+#include <mlk_imagelist.h>
+#include <mlk_imagebuf.h>
+#include <mlk_loadimage.h>
+#include <mlk_pixbuf.h>
+#include <mlk_string.h>
+#include <mlk_guicol.h>
+#include <mlk_util.h>
 
 #if !defined(MLK_NO_ICONTHEME)
-#include "mlk_icontheme.h"
+#include <mlk_icontheme.h>
 #endif
 
 

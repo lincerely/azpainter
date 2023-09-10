@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,12 +24,12 @@ $*/
 #include <string.h>
 #include <tiffio.h>
 
-#include "mlk.h"
-#include "mlk_loadimage.h"
-#include "mlk_io.h"
-#include "mlk_file.h"
-#include "mlk_util.h"
-#include "mlk_imageconv.h"
+#include <mlk.h>
+#include <mlk_loadimage.h>
+#include <mlk_io.h>
+#include <mlk_file.h>
+#include <mlk_util.h>
+#include <mlk_imageconv.h>
 
 
 //---------------
@@ -71,14 +71,14 @@ enum
 //=================================
 
 
-/** 読み込み */
+/* 読み込み */
 
 static tsize_t _proc_read(thandle_t handle,tdata_t buf,tsize_t size)
 {
 	return mIO_read(((tiffdata *)handle)->io, buf, size);
 }
 
-/** シーク */
+/* シーク */
 
 static toff_t _proc_seek(thandle_t handle,toff_t off,int seek)
 {
@@ -102,14 +102,14 @@ static toff_t _proc_seek(thandle_t handle,toff_t off,int seek)
 	return mIO_getPos(p->io);
 }
 
-/** 閉じる */
+/* 閉じる */
 
 static int _proc_close(thandle_t handle)
 {
 	return 0;
 }
 
-/** サイズ取得 */
+/* サイズ取得 */
 
 static toff_t _proc_size(thandle_t handle)
 {
@@ -132,7 +132,7 @@ static void _proc_unmapfile(thandle_t handle,tdata_t p,toff_t size)
 //=================================
 
 
-/** 解像度取得 */
+/* 解像度取得 */
 
 static void _get_resolution(TIFF *tiff,mLoadImage *pli)
 {
@@ -154,7 +154,7 @@ static void _get_resolution(TIFF *tiff,mLoadImage *pli)
 	}
 }
 
-/** カラータイプごとの判定
+/* カラータイプごとの判定
  *
  * return: エラーコード */
 
@@ -210,8 +210,8 @@ static int _check_coltype(tiffdata *p,mLoadImage *pli,uint16_t pm)
 		//CMYK (8,16 bit)
 		default:
 			//対応しない
-			if(!(pli->flags & MLOADIMAGE_FLAGS_ALLOW_CMYK))
-				return MLKERR_UNSUPPORTED;
+			//if(!(pli->flags & MLOADIMAGE_FLAGS_ALLOW_CMYK))
+			//	return MLKERR_UNSUPPORTED;
 		
 			if((bits != 8 && bits != 16) || samples != 4)
 				return MLKERR_UNSUPPORTED;
@@ -220,9 +220,6 @@ static int _check_coltype(tiffdata *p,mLoadImage *pli,uint16_t pm)
 			if(u16 != INKSET_CMYK) return MLKERR_UNSUPPORTED;
 
 			coltype = COLTYPE_CMYK;
-
-			//常に生データ
-			pli->convert_type = MLOADIMAGE_CONVERT_TYPE_RAW;
 			break;
 	}
 
@@ -241,7 +238,7 @@ static int _check_coltype(tiffdata *p,mLoadImage *pli,uint16_t pm)
 	return MLKERR_OK;
 }
 
-/** 開いた時の処理 */
+/* 開いた時の処理 */
 
 static int _proc_open(tiffdata *p,mLoadImage *pli)
 {
@@ -323,21 +320,14 @@ static int _proc_open(tiffdata *p,mLoadImage *pli)
 
 	pli->src_coltype = n;
 
-	//カラータイプ
+	//変換後のカラータイプ
 
-	if(pli->convert_type == MLOADIMAGE_CONVERT_TYPE_RGB)
-		n = MLOADIMAGE_COLTYPE_RGB;
-	else if(pli->convert_type == MLOADIMAGE_CONVERT_TYPE_RGBA)
-		n = MLOADIMAGE_COLTYPE_RGBA;
-	else
-		n = pli->src_coltype;
-
-	pli->coltype = n;
+	mLoadImage_setColorType_fromSource(pli);
 
 	return MLKERR_OK;
 }
 
-/** パレット読み込み */
+/* パレット読み込み */
 
 static int _read_palette(tiffdata *p,mLoadImage *pli)
 {
@@ -376,7 +366,7 @@ static int _read_palette(tiffdata *p,mLoadImage *pli)
 	return mLoadImage_setPalette(pli, p->palbuf, num * 4, num);
 }
 
-/** イメージ用バッファ確保 */
+/* イメージ用バッファ確保 */
 
 static int _alloc_buf(tiffdata *p)
 {
@@ -394,7 +384,7 @@ static int _alloc_buf(tiffdata *p)
 	return MLKERR_OK;
 }
 
-/** 変換情報取得 */
+/* 変換情報取得 */
 
 static void _get_convert_info(tiffdata *p,mLoadImage *pli,mImageConv *conv,mFuncImageConv *func)
 {
@@ -402,6 +392,8 @@ static void _get_convert_info(tiffdata *p,mLoadImage *pli,mImageConv *conv,mFunc
 
 	conv->srcbuf = p->rowbuf;
 	conv->srcbits = p->bits;
+
+	//変換元タイプから
 
 	switch(p->coltype)
 	{
@@ -429,12 +421,7 @@ static void _get_convert_info(tiffdata *p,mLoadImage *pli,mImageConv *conv,mFunc
 			break;
 		//CMYK
 		case COLTYPE_CMYK:
-			if(p->bits == 16 && pli->bits_per_sample == 8)
-				//16bit => 8bit
-				*func = mImageConv_cmyk16;
-			else
-				//8,16bit copy
-				*func = NULL;
+			*func = (p->bits == 16)? mImageConv_cmyk16: mImageConv_cmyk8;
 			break;
 
 		default:
@@ -443,7 +430,7 @@ static void _get_convert_info(tiffdata *p,mLoadImage *pli,mImageConv *conv,mFunc
 	}
 }
 
-/** プレーンイメージを rowbuf にセット */
+/* プレーンイメージを rowbuf にセット */
 
 static void _set_plane_image(tiffdata *p,int no)
 {
@@ -475,7 +462,7 @@ static void _set_plane_image(tiffdata *p,int no)
 	}
 }
 
-/** ラインイメージを取得 */
+/* ラインイメージを取得 */
 
 static int _get_row_image(tiffdata *p,int y)
 {
@@ -585,7 +572,6 @@ static mlkerr _tiff_getimage(mLoadImage *pli)
 		if(ret) return ret;
 
 		if(!funcconv)
-			//CMYK 8,16bit raw
 			memcpy(*ppbuf, rowbuf, pitch);
 		else
 		{
@@ -650,7 +636,7 @@ mlkbool mLoadImage_checkTIFF(mLoadImageType *p,uint8_t *buf,int size)
 	return TRUE;
 }
 
-/**@ TIFF、ICC プロファイルを取得
+/**@ (TIFF) ICC プロファイルを取得
  *
  * @r:確保されたバッファのポインタ。NULL でデータがないか、エラー。 */
 

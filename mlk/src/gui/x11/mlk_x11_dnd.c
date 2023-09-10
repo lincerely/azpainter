@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -25,14 +25,14 @@ $*/
 #include "mlk_x11.h"
 #include "mlk_x11_event.h"
 
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_event.h"
-#include "mlk_string.h"
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_event.h>
+#include <mlk_string.h>
 
-#include "mlk_pv_gui.h"
-#include "mlk_pv_window.h"
-#include "mlk_pv_event.h"
+#include <mlk_pv_gui.h>
+#include <mlk_pv_window.h>
+#include <mlk_pv_event.h>
 
 
 //デバッグ用、Atom 名表示
@@ -120,13 +120,11 @@ static void _send_status(mAppX11 *p,Window srcid,int flags)
 	mX11SetEventClientMessage(&ev, srcid, p->atoms[MLKX11_ATOM_XdndStatus]);
 
 	ev.xclient.data.l[0] = MLKX11_WINDATA(p->dnd.win_enter)->winid;
+	//受け付けない場合、フラグはすべて 0 にしないと、受け付けられるとして扱われる
 	ev.xclient.data.l[1] = flags;
 	//[2][3] は矩形範囲。0 = 移動するたびに XdndPosition を送信させる
 	//[4] 受け付けるアクション (0 で受け付けない)
-	ev.xclient.data.l[4] = (flags & 1)? p->atoms[MLKX11_ATOM_XdndActionCopy]: 0;
-
-	//[!] 受け付けない場合、フラグは 0 にしないと、
-	//    bit0 が OFF でも、受け付けるという状態になる。
+	ev.xclient.data.l[4] = (flags & 1)? p->atoms[MLKX11_ATOM_XdndActionCopy]: None;
 
 	XSendEvent(p->display, srcid, True, NoEventMask, &ev);
 }

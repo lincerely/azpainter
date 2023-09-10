@@ -50,31 +50,31 @@ th{ background-color:#ddd; text-align:left; }
 <div id="scroll_button" onclick="window.scrollTo(0,0);"></div>
 <a name="menu"></a>
 <div class="menu"><ul>
-<li><a href="#link1">画像形式</a></li>
-<li><a href="#link2">ブラシ/テクスチャ画像について</a></li>
-<li><a href="#link3">ウィジェット操作</a></li>
-<li><a href="#link4">操作一覧</a></li>
-<li><a href="#link5">ツール</a></li>
-<li><a href="#link6">ツール補足</a></li>
-<li><a href="#link7">パネルについて</a></li>
-<li><a href="#link8">[パネル] ツールリスト</a></li>
-<li><a href="#link9">[パネル] ブラシ設定</a></li>
-<li><a href="#link10">[パネル] オプション</a></li>
-<li><a href="#link11">[パネル] レイヤ</a></li>
-<li><a href="#link12">[パネル] カラー</a></li>
-<li><a href="#link13">[パネル] カラーパレット</a></li>
-<li><a href="#link14">[パネル] キャンバスビュー</a></li>
-<li><a href="#link15">[パネル] イメージビューア</a></li>
-<li><a href="#link16">テキスト</a></li>
-<li><a href="#link17">グラデーション編集</a></li>
-<li><a href="#link18">メインメニュー</a></li>
-<li><a href="#link19">フィルタ</a></li>
-<li><a href="#link20">環境設定</a></li>
-<li><a href="#link21">キー設定</a></li>
-<li><a href="#link22">FAQ</a></li>
+<li><a href="#link0">画像形式</a></li>
+<li><a href="#link1">ブラシ/テクスチャ画像について</a></li>
+<li><a href="#link2">ウィジェット操作</a></li>
+<li><a href="#link3">操作一覧</a></li>
+<li><a href="#link4">ツール</a></li>
+<li><a href="#link5">ツール補足</a></li>
+<li><a href="#link6">パネルについて</a></li>
+<li><a href="#link7">[パネル] ツールリスト</a></li>
+<li><a href="#link8">[パネル] ブラシ設定</a></li>
+<li><a href="#link9">[パネル] オプション</a></li>
+<li><a href="#link10">[パネル] レイヤ</a></li>
+<li><a href="#link11">[パネル] カラー</a></li>
+<li><a href="#link12">[パネル] カラーパレット</a></li>
+<li><a href="#link13">[パネル] キャンバスビュー</a></li>
+<li><a href="#link14">[パネル] イメージビューア</a></li>
+<li><a href="#link15">テキスト</a></li>
+<li><a href="#link16">グラデーション編集</a></li>
+<li><a href="#link17">メインメニュー</a></li>
+<li><a href="#link18">フィルタ</a></li>
+<li><a href="#link19">環境設定</a></li>
+<li><a href="#link20">キー設定</a></li>
+<li><a href="#link21">FAQ</a></li>
 </ul></div>
 
-<a name="link1"></a><div class="ct_main">
+<a name="link0"></a><div class="ct_main">
 <div class="ct_h">画像形式</div>
 <div class="ct_txt"><b>APD (v1-v4)/ADW (v1-v2)/PSD/BMP/PNG/JPEG/GIF/TIFF/WebP</b> に対応しています。<br>
 <br>
@@ -96,46 +96,43 @@ th{ background-color:#ddd; text-align:left; }
 <tr><th>WebP<td>画像サイズは 16383 px までに制限されているため、このサイズを超えている場合は、保存できません。</td>
 </table></div>
 </div>
-
-<a name="link2"></a><div class="ct_main">
+<a name="link1"></a><div class="ct_main">
 <div class="ct_h">ブラシ/テクスチャ画像について</div>
 <div class="ct_txt">ブラシの形状やテクスチャの画像は、デフォルトでいくつかファイルが用意されていますが、自分で画像を用意して使うことも出来ます。<br>
 <br>
 <ul>
 <li>自分で画像を用意する場合は、ユーザー用の画像ディレクトリにファイルを置いてください。<br>
-各ディレクトリは、環境設定で指定できます。
-<li>指定されたディレクトリ下にあるファイルは、サブディレクトリ下にあるものも含めて、すべて使用できます。
+各ディレクトリは、環境設定で指定できます。</li>
+<li>指定されたディレクトリ下にあるファイルは、サブディレクトリ下にあるものも含めて、すべて使用できます。</li>
 <li>読み込み可能な画像形式は、<b>BMP/PNG/JPEG/GIF</b> です。<br>
-画像サイズは 20000 px まで読み込み可能です。
+画像サイズは 20000 px まで読み込み可能です。</li>
 <li>ブラシ画像の場合は、カラー画像として扱うこともできますが、基本的には、白〜黒のグレイスケール画像として作成してください。<br>
 （画像自体のカラータイプは自由です）<br>
 グレイスケール画像の場合は、白 (R 255 G 255 B 255) が透明、黒 (R 0 G 0 B 0) が完全不透明として扱われます。<br>
 背景を白にして、色を付けたい部分を黒で塗ってください。<br>
-灰色の色は、黒から白に行くほど、不透明から透明になります。
+灰色の色は、黒から白に行くほど、不透明から透明になります。</li>
 <li>ブラシ画像は、基本的に正方形のサイズで作成してください。<br>
 （正方形でない場合は、幅・高さの大きい方のサイズで、自動的に正方形サイズに変換されます）<br>
-画像の中心位置が、描画時の中心位置となります。
+画像の中心位置が、描画時の中心位置となります。</li>
 <li>テクスチャ画像においては、画像の縦・横のサイズは自由です。<br>
-原寸のサイズのままで、タイル状に並ぶような形となります。
+原寸のサイズのままで、タイル状に並ぶような形となります。</li>
 <li>ブラシ画像において、画像の色をそのまま描画させたい場合は、アルファ付きのカラー画像で作成してください（基本的に PNG を使用します）。<br>
 その場合は、<em>画像のファイル名の先頭を、"<b>_c_</b>" にしてください。</em><br>
 (例) _c_brush.png<br>
-先頭に "_c_" がない場合は、通常のグレイスケール画像として読み込まれます。</ul>
+先頭に "_c_" がない場合は、通常のグレイスケール画像として読み込まれます。</li></ul>
 </div>
 </div>
-
-<a name="link3"></a><div class="ct_main">
+<a name="link2"></a><div class="ct_main">
 <div class="ct_h">ウィジェット操作</div>
 <div class="ct_txt">
 <ul>
 <li>数値表示とスピンが付いたバー上では、<span class="ctl">Ctrl＋左ボタンの左右ドラッグ</span>で、現在位置を基準にして、-1/+1 ずつ移動できます。<br>
-また、バーの上でホイールを上下に操作すると、+1/-1 できます。
+また、バーの上でホイールを上下に操作すると、+1/-1 できます。</li>
 <li>ブラシ/テクスチャ画像の選択ウィジェットでは、パス名部分を左クリックで、画像選択ダイアログを開きます。<br>
-また、<span class="ctl">右クリック</span>または<span class="ctl">Ctrl＋左クリック</span>で、ブラシ画像の場合は「通常円形」、テクスチャ画像の場合は「なし」または「なし(強制)」にセットします。</ul>
+また、<span class="ctl">右クリック</span>または<span class="ctl">Ctrl＋左クリック</span>で、ブラシ画像の場合は「通常円形」、テクスチャ画像の場合は「なし」または「なし(強制)」にセットします。</li></ul>
 </div>
 </div>
-
-<a name="link4"></a><div class="ct_main">
+<a name="link3"></a><div class="ct_main">
 <div class="ct_h">操作一覧</div>
 <div class="ct_txt">
 <table class="tbl1">
@@ -185,12 +182,10 @@ th{ background-color:#ddd; text-align:left; }
 <span class="ctl">ESC</span> : キャンセル</td>
 </table></div>
 </div>
-
-<a name="link5"></a><div class="ct_main">
+<a name="link4"></a><div class="ct_main">
 <div class="ct_h">ツール</div>
 <div class="ct_txt">
-<div class="subb_main" style="margin-top:0">
-<div class="subb_h">ツールリスト</div>
+<div class="subb_main" style="margin-top:0"><div class="subb_h">ツールリスト</div>
 <div class="subb_txt">パネル [ツールリスト] で選択されているアイテムの動作を行います。<br>
 <br>
 選択アイテムが [ツール] の場合は、各ツールの操作となります。<br>
@@ -200,20 +195,16 @@ th{ background-color:#ddd; text-align:left; }
 ツールリストで現在選択されている描画タイプによって、描画されます。<br>
 <br>
 ただし、<em>現在の選択レイヤが [テキストレイヤ] の場合は、常にテキストツールの操作となります。</em></div></div>
-<div class="subb_main">
-<div class="subb_h">ドット線/ドット線消しゴム</div>
+<div class="subb_main"><div class="subb_h">ドット線/ドット線消しゴム</div>
 <div class="subb_txt">ドットの線、またはドットの消しゴムの線を描画します。<br>
 <br>
 <span class="c1">細線</span>: 細い線になるように、描画を調整します。</div></div>
-<div class="subb_main">
-<div class="subb_h">指先</div>
+<div class="subb_main"><div class="subb_h">指先</div>
 <div class="subb_txt">なぞった位置の色を伸ばすように描画します。</div></div>
-<div class="subb_main">
-<div class="subb_h">図形塗りつぶし/図形消しゴム</div>
+<div class="subb_main"><div class="subb_h">図形塗りつぶし/図形消しゴム</div>
 <div class="subb_txt">塗りつぶされた図形の描画を行います。<br>
 ツールリストに登録した場合は、現在の図形タイプも記録されます。</div></div>
-<div class="subb_main">
-<div class="subb_h">塗りつぶし</div>
+<div class="subb_main"><div class="subb_h">塗りつぶし</div>
 <div class="subb_txt">クリックした位置を開始点として、その位置の色と同じ色の範囲を塗りつぶします。<br>
 <br>
 <table class="tbl1">
@@ -259,14 +250,12 @@ th{ background-color:#ddd; text-align:left; }
 <span class="c1">[すべての表示レイヤ]</span><br>
 現在表示されているすべてのレイヤを対象にします。</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">不透明範囲消去</div>
+<div class="subb_main"><div class="subb_h">不透明範囲消去</div>
 <div class="subb_txt">クリックした位置を開始点として、不透明な (透明ではない) 範囲を、塗りつぶしと同じ要領で判定して、消去します。<br>
 繋がっている線や図形などをまとめて消去するのに使えます。<br>
 <br>
 参照レイヤは無効となり、常に現在のレイヤを対象にして判定します。</div></div>
-<div class="subb_main">
-<div class="subb_h">グラデーション</div>
+<div class="subb_main"><div class="subb_h">グラデーション</div>
 <div class="subb_txt">グラデーションを描画します。<br>
 左ドラッグで、始点と終点を指定すると、描画されます。<br>
 <br>
@@ -276,8 +265,7 @@ th{ background-color:#ddd; text-align:left; }
 <tr><th>反転<td>グラデーションのパターンを左右反転します</td>
 <tr><th>繰り返す<td>範囲外の部分では、色が繰り返されるようにして、描画します</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">テキスト</div>
+<div class="subb_main"><div class="subb_h">テキスト</div>
 <div class="subb_txt">テキストを描画します。<br>
 <br>
 現在のレイヤが [テキストレイヤ] でない場合は、直接イメージを描画します。<br>
@@ -299,8 +287,7 @@ th{ background-color:#ddd; text-align:left; }
 <span class="ctl">Ctrl＋左ドラッグ</span>: 押した位置にあるテキストの位置を移動。<br>
 <span class="ctl">Alt＋左クリック</span>: 押した位置にあるテキストを編集。その位置にテキストがなければ、何もしない。</table><br>
 テキストの設定項目の詳細については、「テキスト」の項目をご覧ください。</div></div>
-<div class="subb_main">
-<div class="subb_h">移動</div>
+<div class="subb_main"><div class="subb_h">移動</div>
 <div class="subb_txt">レイヤのイメージ位置を移動します。<br>
 ※レイヤがロック状態の場合、対象外となります。<br>
 <br>
@@ -313,11 +300,9 @@ th{ background-color:#ddd; text-align:left; }
 <tr><th>チェックレイヤ<td>各レイヤでチェックが ON になっているものを対象とします。</td>
 <tr><th>すべてのレイヤ<td>非表示レイヤも含む、すべてのレイヤを対象にします</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">自動選択</div>
+<div class="subb_main"><div class="subb_h">自動選択</div>
 <div class="subb_txt">塗りつぶしと同じ要領で、クリックした位置を開始点として、同じ色の範囲を、選択範囲として追加選択します。</div></div>
-<div class="subb_main">
-<div class="subb_h">選択範囲</div>
+<div class="subb_main"><div class="subb_h">選択範囲</div>
 <div class="subb_txt">選択範囲の選択などを行います。<br>
 <br>
 選択範囲を選択すると、選択されていない部分には描画できなくなります。<br>
@@ -341,8 +326,7 @@ th{ background-color:#ddd; text-align:left; }
 左ドラッグで移動できます。<br>
 移動中、<span class="ctl">+Shift</span>で水平移動、<span class="ctl">+Ctrl</span>で垂直移動できます。</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">切り貼り</div>
+<div class="subb_main"><div class="subb_h">切り貼り</div>
 <div class="subb_txt">四角形の範囲で、イメージをコピーして貼り付けたりできます。<br>
 <br>
 選択範囲ツールでも、イメージの移動/コピーはできますが、貼り付け位置の微調整や、上書きでの貼り付けは行えないため、主に画像編集としての切り貼りを行いたい時に使います。<br>
@@ -376,8 +360,7 @@ th{ background-color:#ddd; text-align:left; }
 ※貼り付け移動中については、イメージは常に合成された状態で表示されます。</td>
 <tr><th>貼り付け時、マスク類を適用<td>貼り付け時、選択範囲や色マスク、レイヤのアルファマスクなどの処理を有効にします</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">矩形編集</div>
+<div class="subb_main"><div class="subb_h">矩形編集</div>
 <div class="subb_txt">四角形の範囲を選択し、その範囲内のイメージを編集します。<br>
 左ドラッグで範囲を選択した後、ツールのボタン、またはオプションの項目から、実行したい処理を選択してください。<br>
 <br>
@@ -401,8 +384,7 @@ th{ background-color:#ddd; text-align:left; }
 タイル状に並べる(横一列)<br>
 タイル状に並べる(縦一列)<td>範囲内のイメージを、レイヤ全体にタイル状に並べます</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">スタンプ</div>
+<div class="subb_main"><div class="subb_h">スタンプ</div>
 <div class="subb_txt">レイヤ上で選択したイメージを、左クリックで、連続して複数回貼り付けることができます。<br>
 <br>
 スタンプ用のイメージが選択されていない場合は、指定された図形で範囲を選択すると、現在のレイヤ上の範囲内のイメージが、スタンプ用のイメージとしてコピーされます。<br>
@@ -422,11 +404,9 @@ th{ background-color:#ddd; text-align:left; }
 <tr><th>クリア<td>現在のイメージをクリアして、空の状態にします。</td>
 <tr><th>変形<td>貼り付け時に、画像を選択した形に変形できます。</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">キャンバス移動/キャンバス回転</div>
+<div class="subb_main"><div class="subb_h">キャンバス移動/キャンバス回転</div>
 <div class="subb_txt">左ドラッグで、キャンバスのスクロール位置の移動や、キャンバスの回転を行います。</div></div>
-<div class="subb_main">
-<div class="subb_h">スポイト</div>
+<div class="subb_main"><div class="subb_h">スポイト</div>
 <div class="subb_txt">左クリックで、キャンバスやレイヤから色を取得したり、取得した色で処理を行います。<br>
 <br>
 <table class="tbl1">
@@ -442,12 +422,10 @@ th{ background-color:#ddd; text-align:left; }
 </table></div></div>
 </div>
 </div>
-
-<a name="link6"></a><div class="ct_main">
+<a name="link5"></a><div class="ct_main">
 <div class="ct_h">ツール補足</div>
 <div class="ct_txt">
-<div class="subb_main" style="margin-top:0">
-<div class="subb_h">描画タイプ</div>
+<div class="subb_main" style="margin-top:0"><div class="subb_h">描画タイプ</div>
 <div class="subb_txt">ブラシでの描画や、ドット線ツールなどでは、描画タイプを選択することが出来ます。<br>
 <br>
 <table class="tbl1">
@@ -472,8 +450,7 @@ th{ background-color:#ddd; text-align:left; }
 <br>
 <span class="ctl">右ボタン/ESC</span>で、キャンセルとなります。</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">ツールの塗りタイプについて</div>
+<div class="subb_main"><div class="subb_h">ツールの塗りタイプについて</div>
 <div class="subb_txt">
 <table class="tbl1">
 <tr><th>重ね塗り<td>描画先と色を合成して、重ねます</td>
@@ -482,8 +459,7 @@ th{ background-color:#ddd; text-align:left; }
 </table></div></div>
 </div>
 </div>
-
-<a name="link7"></a><div class="ct_main">
+<a name="link6"></a><div class="ct_main">
 <div class="ct_h">パネルについて</div>
 <div class="ct_txt">ツールやオプション、レイヤなどの各コントロールを、「<b>パネル</b>」と呼びます。<br>
 パネルは、メインウィンドウ内のペインに配置させるか、独立したウィンドウにして表示することができます。<br>
@@ -491,13 +467,11 @@ th{ background-color:#ddd; text-align:left; }
 ペイン内での配置順は、メニューから「<b>パネル配置設定</b>」で設定してください。<br>
 ウィンドウ状態に切り離したり、再度ペインに格納しても、ペイン内での配置順は、常に設定された順番で固定されます。</div>
 </div>
-
-<a name="link8"></a><div class="ct_main">
+<a name="link7"></a><div class="ct_main">
 <div class="ct_h">[パネル] ツールリスト</div>
 <div class="ct_txt">ツールやブラシのアイテムの一覧です。<br>
 ツールで [ツールリスト] が選択されている場合、キャンバス上での操作は、このリストで選択されているアイテムの動作となります。
-<div class="subb_main">
-<div class="subb_h">アイテムリスト</div>
+<div class="subb_main"><div class="subb_h">アイテムリスト</div>
 <div class="subb_txt">アイテムは常にグループに格納されます。<br>
 <br>
 <table class="tbl1">
@@ -524,8 +498,7 @@ th{ background-color:#ddd; text-align:left; }
 <br>
 「すべて解除」で、すべての登録アイテムを解除します。</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">リストの下</div>
+<div class="subb_main"><div class="subb_h">リストの下</div>
 <div class="subb_txt">
 <table class="tbl1">
 <tr><th>保存ボタン<td>下にある、ブラシのサイズ・濃度の値を、アイテムに保存します。</td>
@@ -535,8 +508,7 @@ th{ background-color:#ddd; text-align:left; }
 <tr><th>サイズ・濃度<td>現在のブラシのサイズと濃度を設定します。<br>
 「常に保存」が OFF の場合は、手動で保存ボタンを押さないと、一時的な値の変更となります。</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">ブラシサイズリスト</div>
+<div class="subb_main"><div class="subb_h">ブラシサイズリスト</div>
 <div class="subb_txt">ブラシのサイズを登録して、呼び出すことができます。<br>
 <br>
 <table class="tbl1">
@@ -550,8 +522,7 @@ th{ background-color:#ddd; text-align:left; }
 ※ブラシサイズは px/mm の単位がありますが、ブラシリストでは、常に px 単位のサイズとしてプレビューされます。</div></div>
 </div>
 </div>
-
-<a name="link9"></a><div class="ct_main">
+<a name="link8"></a><div class="ct_main">
 <div class="ct_h">[パネル] ブラシ設定</div>
 <div class="ct_txt">選択されているブラシアイテムの設定項目が表示されます。<br>
 <br>
@@ -578,25 +549,25 @@ OFF の場合、変更された値は一時的なものとなり、「保存」�
 <br>
 <ul>
 <li><span class="c1">ピクセル重ね塗り</span><br>
-各ピクセルごとに重ね塗りします。
+各ピクセルごとに重ね塗りします。</li>
 <li><span class="c1">ストローク重ね塗り</span><br>
 重ね塗りしますが、描画を開始してから終了するまでの間（１ストロークの間）は、濃度を一定にします。<br>
-主に線画を描く時などに使います。
+主に線画を描く時などに使います。</li>
 <li><span class="c1">A値比較上書き</span><br>
 描画する色の濃度と、描画先のアルファ値を比較して、描画する色の濃度の方が大きい場合のみ、色を上書きします。<br>
-線画やテクスチャでの描画時など、濃度を常に一定にしたい場合に使います。
+線画やテクスチャでの描画時など、濃度を常に一定にしたい場合に使います。</li>
 <li><span class="c1">形状上書き</span><br>
 ブラシ形状において、透明な部分以外の色を上書きします。<br>
-テクスチャを上書き描画したい時などに使います。
+テクスチャを上書き描画したい時などに使います。</li>
 <li><span class="c1">矩形上書き</span><br>
 ブラシ形状を矩形として、透明な部分も含めて、その矩形全体で色を上書きします。<br>
-形状の矩形全体をイメージとして扱って、上書きしたい時に使います。
+形状の矩形全体をイメージとして扱って、上書きしたい時に使います。</li>
 <li><span class="c1">覆い焼き</span><br>
-描画先の色を明るくします。色は白で固定されます。
+描画先の色を明るくします。色は白で固定されます。</li>
 <li><span class="c1">焼き込み</span><br>
-描画先の色を暗くします。白は白で固定されます。
+描画先の色を暗くします。白は白で固定されます。</li>
 <li><span class="c1">加算</span><br>
-描画先の RGB 値に、描画色の RGB 値を加算します。</ul>
+描画先の RGB 値に、描画色の RGB 値を加算します。</li></ul>
 </td>
 <tr><td colspan="2" class="tblh">色々</td>
 <tr><th>点の間隔<td>ブラシの線は、いくつもの連続した点を並べることで、結果として線として見えるような形になっています。<br>
@@ -664,15 +635,12 @@ ON の場合は、全体で共通の筆圧カーブを設定します。<br>
 <tr><th>進行方向に回転<td>描画する線の進行方向に向けて、形状を回転させます。</td>
 </table></div>
 </div>
-
-<a name="link10"></a><div class="ct_main">
+<a name="link9"></a><div class="ct_main">
 <div class="ct_h">[パネル] オプション</div>
 <div class="ct_txt">
-<div class="subb_main" style="margin-top:0">
-<div class="subb_h">ツール</div>
+<div class="subb_main" style="margin-top:0"><div class="subb_h">ツール</div>
 <div class="subb_txt">現在選択されているツールに関するオプションが表示されます。</div></div>
-<div class="subb_main">
-<div class="subb_h">定規</div>
+<div class="subb_main"><div class="subb_h">定規</div>
 <div class="subb_txt">定規機能を有効にすると、ブラシなどのフリーハンド描画時に、指定した形に沿うように線を描画することができます。<br>
 <br>
 <div class="subh">使い方</div>
@@ -705,12 +673,10 @@ ON の場合は、全体で共通の筆圧カーブを設定します。<br>
 描画開始時に円の半径が決定されます。<br>
 形状設定時：左ドラッグで、円の中心と楕円の形を指定します。</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">テクスチャ</div>
+<div class="subb_main"><div class="subb_h">テクスチャ</div>
 <div class="subb_txt">ツールなどでの描画時に適用される、テクスチャ画像を選択します。<br>
 指定した画像が、原寸のままタイル状に並べられるような描画結果となります。</div></div>
-<div class="subb_main">
-<div class="subb_h">入り抜き</div>
+<div class="subb_main"><div class="subb_h">入り抜き</div>
 <div class="subb_txt">ブラシ描画で、描画タイプが [直線] [連続直線] [集中線] [ベジェ曲線] 時の、筆圧の状態を設定します。<br>
 <br>
 <b>直線</b> は [直線] [連続直線] [集中線] 時。<br>
@@ -731,8 +697,7 @@ ON の場合は、全体で共通の筆圧カーブを設定します。<br>
 「読込」「保存」のボタンでは、現在の値を記録したり、呼び出したりすることができます。</div></div>
 </div>
 </div>
-
-<a name="link11"></a><div class="ct_main">
+<a name="link10"></a><div class="ct_main">
 <div class="ct_h">[パネル] レイヤ</div>
 <div class="ct_txt">レイヤの一覧が表示されます。<br>
 一覧上で上にあるレイヤほど、キャンバス上で前面に表示されます。<br>
@@ -740,8 +705,7 @@ ON の場合は、全体で共通の筆圧カーブを設定します。<br>
 レイヤのプレビューイメージは、描画後すぐには更新されません。<br>
 レイヤの選択を変更した時などに更新されます。<br>
 手動で更新したい場合は、現在のレイヤ上を左クリックしてください。
-<div class="subb_main">
-<div class="subb_h">一覧上の操作</div>
+<div class="subb_main"><div class="subb_h">一覧上の操作</div>
 <div class="subb_txt">
 <table class="tbl1">
 <tr><th>左クリック<td>レイヤの選択、または、各ボタンなどの操作。<br>
@@ -754,21 +718,19 @@ ON の場合は、全体で共通の筆圧カーブを設定します。<br>
 <tr><th>Ctrl＋左クリック<td>指定したレイヤのみを表示状態にし、他のすべてのレイヤを非表示にします。</td>
 <tr><th>一覧上に画像ファイルを D&amp;D<td>複数の画像ファイルをレイヤとして読み込むことができます。</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">フォルダレイヤについて</div>
+<div class="subb_main"><div class="subb_h">フォルダレイヤについて</div>
 <div class="subb_txt">フォルダレイヤを使うと、複数のレイヤをグループとしてまとめることができます。<br>
 <br>
 フォルダレイヤが選択された状態で新規レイヤを作成した場合、作成したレイヤは、フォルダの子になります。<br>
 既存のレイヤをフォルダに格納したい場合は、レイヤを左ドラッグして、フォルダの上に移動させてください。<br>
 <br>
 <ul>
-<li>[移動] ツールでは、フォルダレイヤが選択されている場合、そのフォルダ下のすべてのレイヤが移動対象となります。
-<li>フォルダで指定された表示濃度は、フォルダ下のすべてのレイヤに適用されます。
-<li>フォルダの「描画ロック」が ON の場合、フォルダ下のすべてのレイヤで、描画ロックが ON になります。
-<li>フォルダに対しては、何も描画することが出来ません。</ul>
+<li>[移動] ツールでは、フォルダレイヤが選択されている場合、そのフォルダ下のすべてのレイヤが移動対象となります。</li>
+<li>フォルダで指定された表示濃度は、フォルダ下のすべてのレイヤに適用されます。</li>
+<li>フォルダの「描画ロック」が ON の場合、フォルダ下のすべてのレイヤで、描画ロックが ON になります。</li>
+<li>フォルダに対しては、何も描画することが出来ません。</li></ul>
 </div></div>
-<div class="subb_main">
-<div class="subb_h">レイヤタイプについて</div>
+<div class="subb_main"><div class="subb_h">レイヤタイプについて</div>
 <div class="subb_txt">レイヤイメージのタイプは、以下の中から選択できます。<br>
 <br>
 <table class="tbl1">
@@ -791,8 +753,7 @@ R,G,B がぞれぞれ同じ値の、グレイスケール色となります。</
 <br>
 トーンレイヤの場合は、レイヤ色を設定して、トーンの色を変更することができます。</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">テクスチャ</div>
+<div class="subb_main"><div class="subb_h">テクスチャ</div>
 <div class="subb_txt">レイヤに対して、テクスチャ画像を指定できます。<br>
 キャンバスイメージへの合成時に、イメージのアルファ値に適用されます。<br>
 <br>
@@ -802,8 +763,7 @@ R,G,B がぞれぞれ同じ値の、グレイスケール色となります。</
 テクスチャ画像が設定されていない場合、左クリックで、画像を選択します。<br>
 テクスチャ画像が設定されている場合、左クリックで、メニューが表示されます。<br>
 <span class="ctl">右クリック/Ctrl＋左クリック</span>で、常に画像選択となります。</div></div>
-<div class="subb_main">
-<div class="subb_h">アルファマスク</div>
+<div class="subb_main"><div class="subb_h">アルファマスク</div>
 <div class="subb_txt">レイヤにアルファマスクを指定すると、アルファ値を元にしたマスクを適用できます。<br>
 <br>
 <table class="tbl1">
@@ -814,20 +774,16 @@ R,G,B がぞれぞれ同じ値の、グレイスケール色となります。</
 <tr><th>不透明色保護<td>現在のイメージで、不透明な部分 (透明ではないすべての色) は変更されないようにします。<br>
 透明部分のみに描画したい時に使います。</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">塗りつぶし参照</div>
+<div class="subb_main"><div class="subb_h">塗りつぶし参照</div>
 <div class="subb_txt">[塗りつぶし] [自動選択] ツール時、このチェックが ON になっているレイヤを、塗りつぶし範囲の判定用として使うことが出来ます。<br>
 複数レイヤで指定できます。</div></div>
-<div class="subb_main">
-<div class="subb_h">描画ロック</div>
+<div class="subb_main"><div class="subb_h">描画ロック</div>
 <div class="subb_txt">描画ロックが ON の場合、描画や編集など、イメージ内容が変化するような処理を行うことができなくなります。<br>
 (メニューからの編集などは一部対象外)<br>
 誤って描画することを防ぎたい場合に使ってください。</div></div>
-<div class="subb_main">
-<div class="subb_h">チェック</div>
+<div class="subb_main"><div class="subb_h">チェック</div>
 <div class="subb_txt">レイヤの編集時や、フィルタなどで、任意のレイヤを指定する時に使います。</div></div>
-<div class="subb_main">
-<div class="subb_h">すべてのトーンレイヤをグレイスケール表示</div>
+<div class="subb_main"><div class="subb_h">すべてのトーンレイヤをグレイスケール表示</div>
 <div class="subb_txt">トーンレイヤを、トーンではなく、グレイスケールで表示します。<br>
 塗り残しの確認や、グレイスケールで画像を保存したい時に使ってください。<br>
 <br>
@@ -836,8 +792,7 @@ R,G,B がぞれぞれ同じ値の、グレイスケール色となります。</
 (10% なら、色の最大値 x 90%)<br>
 <br>
 <em>※トーン濃度の濃いレイヤほど前面に配置されていないと、正しく表示できません。</em></div></div>
-<div class="subb_main">
-<div class="subb_h">マスクレイヤ</div>
+<div class="subb_main"><div class="subb_h">マスクレイヤ</div>
 <div class="subb_txt">指定したレイヤのアルファ値を、描画時のマスクとして使用することができます。<br>
 他のグラフィックソフトでは、レイヤマスクといえば、表示時に適用されるマスクですが、ここでは、描画時に適用されるマスクとなります。<br>
 <br>
@@ -863,8 +818,7 @@ layer1 : ON<br>
 layer0 : OFF<br>
 <br>
 この場合、layer1 と layer2 では、layer0 がマスクレイヤとなります。</div></div>
-<div class="subb_main">
-<div class="subb_h">トーンレイヤの項目</div>
+<div class="subb_main"><div class="subb_h">トーンレイヤの項目</div>
 <div class="subb_txt">
 <table class="tbl1">
 <tr><th>線数<td>幅1インチ内の点の数</td>
@@ -877,24 +831,20 @@ layer0 : OFF<br>
 レイヤで透明な部分は、常に透明となります。<br>
 下のレイヤと重なる部分を、白で上書きしたい場合に使います。</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">テンプレート</div>
+<div class="subb_main"><div class="subb_h">テンプレート</div>
 <div class="subb_txt">よく使うレイヤ設定を、テンプレートに登録して、その内容で新規作成したり、各項目をセットすることができます。<br>
 テンプレートは、レイヤの新規作成時、またはレイヤ設定時に、追加・編集できます。</div></div>
 </div>
 </div>
-
-<a name="link12"></a><div class="ct_main">
+<a name="link11"></a><div class="ct_main">
 <div class="ct_h">[パネル] カラー</div>
 <div class="ct_txt">描画する色の選択や、色マスクの設定を行います。
-<div class="subb_main">
-<div class="subb_h">描画色/背景色</div>
+<div class="subb_main"><div class="subb_h">描画色/背景色</div>
 <div class="subb_txt">前面に表示されているのが「描画色」で、描画時に使われる色です。<br>
 背面に表示されているのが「背景色」で、グラデーションやフィルタなどで使われます。<br>
 <br>
 左クリックで、描画色と背景色を入れ替えることができます。</div></div>
-<div class="subb_main">
-<div class="subb_h">色マスク</div>
+<div class="subb_main"><div class="subb_h">色マスク</div>
 <div class="subb_txt">描画時、レイヤ上の色を元にマスクを行います。<br>
 レイヤ上で、指定した色の上には描画できないようにしたり、指定した色の上にしか描画できないようにしたりすることができます。<br>
 <br>
@@ -920,22 +870,19 @@ ON/OFF のチェック部分を押すと、ON/OFF が切り替わります。</t
 </table></div></div>
 </div>
 </div>
-
-<a name="link13"></a><div class="ct_main">
+<a name="link12"></a><div class="ct_main">
 <div class="ct_h">[パネル] カラーパレット</div>
 <div class="ct_txt">複数の色の中から描画色を選択することができます。
-<div class="subb_main">
-<div class="subb_h">メニュー</div>
+<div class="subb_main"><div class="subb_h">メニュー</div>
 <div class="subb_txt">三本線のボタンを押すと、メニューが表示されます。<br>
 項目は、現在の選択タイプによって異なります。<br>
 <br>
 <ul>
 <li><span class="c1">コンパクトモード</span><br>
 上部のボタンを縦に並べて、パレット部分を広げます。<br>
-タイプの選択ボタンは非表示になるので、変更はメニューボタンから行ってください。</ul>
+タイプの選択ボタンは非表示になるので、変更はメニューボタンから行ってください。</li></ul>
 </div></div>
-<div class="subb_main">
-<div class="subb_h">パレット</div>
+<div class="subb_main"><div class="subb_h">パレット</div>
 <div class="subb_txt">よく使う色を登録しておいて、左クリックで色を選択することができます。<br>
 <br>
 左矢印ボタン/右矢印ボタンを押すと、パレットのリストを前後に移動できます。<br>
@@ -963,15 +910,13 @@ ON/OFF のチェック部分を押すと、ON/OFF が切り替わります。</t
 ０で、幅に合わせて、表示できる最大数まで並べます。<br>
 ※指定数よりも少ない数しか表示できない場合は、幅に合わせた数で表示されます。</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">中間色</div>
+<div class="subb_main"><div class="subb_h">中間色</div>
 <div class="subb_txt">２色間のグラデーションの中から、色を選択できます。<br>
 左側と右側の部分では、左クリックで、現在の描画色をセットできます。<br>
 グラデーション部分で左クリックまたはドラッグすると、その色を選択できます。</div></div>
 </div>
 </div>
-
-<a name="link14"></a><div class="ct_main">
+<a name="link13"></a><div class="ct_main">
 <div class="ct_h">[パネル] キャンバスビュー</div>
 <div class="ct_txt">キャンバスのイメージ全体や、その一部を確認できます。<br>
 <br>
@@ -979,18 +924,15 @@ ON/OFF のチェック部分を押すと、ON/OFF が切り替わります。</t
 ツールバーを消して、少しでも大きく表示したい時に使ってください。<br>
 ツールバーを常に表示する設定にした場合、黒いバーは表示されません。</div>
 </div>
-
-<a name="link15"></a><div class="ct_main">
+<a name="link14"></a><div class="ct_main">
 <div class="ct_h">[パネル] イメージビューア</div>
 <div class="ct_txt">画像ファイルを資料などとして読み込んで、表示することができます。<br>
 イメージ表示部分にファイルを D&amp;D すると、画像を読み込むことができます。</div>
 </div>
-
-<a name="link16"></a><div class="ct_main">
+<a name="link15"></a><div class="ct_main">
 <div class="ct_h">テキスト</div>
 <div class="ct_txt">テキスト描画時に表示されるダイアログや、テキスト描画に関する説明です。
-<div class="subb_main">
-<div class="subb_h">テキストダイアログ</div>
+<div class="subb_main"><div class="subb_h">テキストダイアログ</div>
 <div class="subb_txt"><div class="subh">操作</div>
 <table class="tbl1">
 <tr><th>キャンバス上を左クリック<td>描画位置を変更</td>
@@ -1040,8 +982,7 @@ ON の場合は、指定値が使われます。</td>
 フォントの GSUB テーブル内に、<b>ruby</b> のルビグリフ置換情報がある場合、それを使ってグリフを置き換えますが、ルビ用のグリフを使いたくない場合は、ON にしてください。</td>
 <tr><th>回転<td>テキストの回転角度を指定します</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">登録フォント</div>
+<div class="subb_main"><div class="subb_h">登録フォント</div>
 <div class="subb_txt">頻繁に使うフォントを登録して使ったり、一部の文字を別のフォントに置き換えて使ったりすることができます。<br>
 <br>
 <div class="subh">設定項目</div>
@@ -1096,8 +1037,7 @@ CJKの記号及び句読点 (3000-303F)<br>
 そのため、登録名を変更したとしても、（同じ環境であれば）常に同じフォントとして判断されます。<br>
 <br>
 その代わり、登録フォントを別の形で作成して、同じ登録名を指定しても、同じフォントとしては識別されません。</div></div>
-<div class="subb_main">
-<div class="subb_h">特殊表記</div>
+<div class="subb_main"><div class="subb_h">特殊表記</div>
 <div class="subb_txt">「特殊表記有効」が ON の場合、テキスト内で以下の記述を行うと、特殊な処理を行うことができます。<br>
 <br>
 <table class="tbl1">
@@ -1140,57 +1080,51 @@ U+XXXX の XXXX 部分を、16進数値として指定してください (桁数
 (例) \r{\u{8f5f},とどろき}</div></div>
 </div>
 </div>
-
-<a name="link17"></a><div class="ct_main">
+<a name="link16"></a><div class="ct_main">
 <div class="ct_h">グラデーション編集</div>
 <div class="ct_txt">グラデーションツールでは、自分で定義したカスタムのグラデーションを使用できます。<br>
 <br>
 色 (RGB) とアルファ値、それぞれでグラデーションを設定します。
-<div class="subb_main">
-<div class="subb_h">グラデーション編集部分</div>
+<div class="subb_main"><div class="subb_h">グラデーション編集部分</div>
 <div class="subb_txt">色を変化させたい位置にポイントを作り、そのポイントに色を設定します。<br>
 枠が赤いポイントが、現在選択されているポイントです。<br>
 左端と右端の２つのポイントは、常に必要なポイントであるため、位置は変更できず、削除することも出来ません。<br>
 <br>
 <ul>
-<li>ポイントがない部分で<span class="ctl">左クリック</span>すると、その位置に新しいポイントを追加します。
+<li>ポイントがない部分で<span class="ctl">左クリック</span>すると、その位置に新しいポイントを追加します。</li>
 <li>ポイントのある部分で<span class="ctl">左ドラッグ</span>すると、そのポイントの位置を移動します。<br>
-ただし、左右のポイントの間しか移動できません。
-<li><span class="ctl">Ctrl＋左クリック</span>で、現在の選択ポイントから、クリックしたポイントとの間にある、すべてのポイントを、等間隔に並べます。
-<li><span class="ctl">Shift＋左クリック</span>で、クリックしたポイントに、現在の色または不透明度をセットします。
-<li><span class="ctl">Alt＋左クリック</span>で、クリックしたポイントを削除します。
-<li>横の矢印ボタン (左/右) を押すと、選択ポイントを左右に変更できます。
-<li>メニューボタンを押すと、メニューが表示されます。</ul>
+ただし、左右のポイントの間しか移動できません。</li>
+<li><span class="ctl">Ctrl＋左クリック</span>で、現在の選択ポイントから、クリックしたポイントとの間にある、すべてのポイントを、等間隔に並べます。</li>
+<li><span class="ctl">Shift＋左クリック</span>で、クリックしたポイントに、現在の色または不透明度をセットします。</li>
+<li><span class="ctl">Alt＋左クリック</span>で、クリックしたポイントを削除します。</li>
+<li>横の矢印ボタン (左/右) を押すと、選択ポイントを左右に変更できます。</li>
+<li>メニューボタンを押すと、メニューが表示されます。</li></ul>
 </div></div>
-<div class="subb_main">
-<div class="subb_h">メニュー</div>
+<div class="subb_main"><div class="subb_h">メニュー</div>
 <div class="subb_txt">
 <ul>
 <li><span class="c1">次の位置との間を分割</span><br>
 選択ポイントと、その一つ右のポイントとの間を、N 分割して、新しいポイントを作成します。<br>
-２分割であれば、真ん中に新しいポイントが１つ作成されます。
+２分割であれば、真ん中に新しいポイントが１つ作成されます。</li>
 <li><span class="c1">左右の中間位置に移動</span><br>
-選択ポイントの位置を、一つ左のポイントと、一つ右のポイントの中間位置に移動します。
+選択ポイントの位置を、一つ左のポイントと、一つ右のポイントの中間位置に移動します。</li>
 <li><span class="c1">反転</span><br>
-すべてのポイントを、左右に反転します。</ul>
+すべてのポイントを、左右に反転します。</li></ul>
 </div></div>
-<div class="subb_main">
-<div class="subb_h">フラグ</div>
+<div class="subb_main"><div class="subb_h">フラグ</div>
 <div class="subb_txt">
 <ul>
 <li><span class="c1">繰り返す (常に)</span><br>
-常に色を繰り返して描画します。
+常に色を繰り返して描画します。</li>
 <li><span class="c1">単色化</span><br>
-ポイント間をグラデーションせずに、常に左のポイントの色を使います。</ul>
+ポイント間をグラデーションせずに、常に左のポイントの色を使います。</li></ul>
 </div></div>
 </div>
 </div>
-
-<a name="link18"></a><div class="ct_main">
+<a name="link17"></a><div class="ct_main">
 <div class="ct_h">メインメニュー</div>
 <div class="ct_txt">
-<div class="subb_main" style="margin-top:0">
-<div class="subb_h">レイヤ</div>
+<div class="subb_main" style="margin-top:0"><div class="subb_h">レイヤ</div>
 <div class="subb_txt">
 <table class="tbl1">
 <tr><th>現在のレイヤの上に新規作成<td>現在のレイヤがフォルダの場合でも、現在のレイヤの上の位置に、レイヤを新規作成します</td>
@@ -1203,8 +1137,7 @@ PNG の場合は、アルファ付き 8bit RGBA のフォーマットで出力�
 APD (ver 4) の場合は、一つのレイヤのみが含まれた状態で出力されます。<br>
 (保存した APD ファイルは、通常の APD と同じように読み込むこともできます)</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">表示</div>
+<div class="subb_main"><div class="subb_h">表示</div>
 <div class="subb_txt">
 <table class="tbl1">
 <tr><th>パネル表示<td>OFF にした場合、すべてのパネル非表示にします。<br>
@@ -1223,8 +1156,7 @@ ON にすると、元に戻ります。</td>
 </table></div></div>
 </div>
 </div>
-
-<a name="link19"></a><div class="ct_main">
+<a name="link18"></a><div class="ct_main">
 <div class="ct_h">フィルタ</div>
 <div class="ct_txt">選択範囲がある場合は、その範囲内のみ処理されます。<br>
 <br>
@@ -1232,9 +1164,8 @@ ON にすると、元に戻ります。</td>
 <li><span class="c1">カラー &gt; グラデーションマップ</span><br>
 [グラデーション] ツールにおいて、現在選択されているグラデーションパターンを使います。<br>
 イメージ上の色の明るさを元に、グラデーションパターンの色に置き換えます。<br>
-色が暗いほど、グラデーションの左側の色になり、色が明るいほど、グラデーションの右側の色になります。</ul>
-<div class="subb_main">
-<div class="subb_h">アルファ操作 (チェックレイヤ)</div>
+色が暗いほど、グラデーションの左側の色になり、色が明るいほど、グラデーションの右側の色になります。</li></ul>
+<div class="subb_main"><div class="subb_h">アルファ操作 (チェックレイヤ)</div>
 <div class="subb_txt">レイヤ一覧上で、各レイヤのチェックアイコンを ON にすることで、指定したレイヤの色を元に、選択レイヤのアルファ値を編集します。<br>
 色 (RGB) は変化しません。<br>
 <br>
@@ -1242,71 +1173,67 @@ ON にすると、元に戻ります。</td>
 <li><span class="c1">(複数) すべて透明なら透明に</span><br>
 各位置において、指定した複数レイヤのすべてが透明な場合、その位置の色を透明にします。<br>
 一つでも不透明な色がある場合は、何もしません。<br>
-下地レイヤからはみ出した色を消したい場合などに使えます。
+下地レイヤからはみ出した色を消したい場合などに使えます。</li>
 <li><span class="c1">(複数) いずれかが不透明なら透明に</span><br>
 各位置において、複数レイヤの一つ以上が不透明な場合、その位置の色を透明にします。<br>
 すべて透明な場合は、何もしません。<br>
-色のある部分を切り抜きたい場合に使えます。
+色のある部分を切り抜きたい場合に使えます。</li>
 <li><span class="c1">(複数) すべて合成してコピー</span><br>
 各位置において、複数レイヤのアルファ値をすべて合成し、その値をコピーします。<br>
-ただし、選択レイヤ上で透明な部分は対象外となります。
+ただし、選択レイヤ上で透明な部分は対象外となります。</li>
 <li><span class="c1">(複数) すべて加算</span><br>
-複数レイヤのそれぞれのアルファ値を、加算します。
+複数レイヤのそれぞれのアルファ値を、加算します。</li>
 <li><span class="c1">(複数) すべて減算</span><br>
-複数レイヤのそれぞれのアルファ値を、減算します。
+複数レイヤのそれぞれのアルファ値を、減算します。</li>
 <li><span class="c1">(複数) すべて乗算</span><br>
-複数レイヤのそれぞれのアルファ値を、掛けます。
+複数レイヤのそれぞれのアルファ値を、掛けます。</li>
 <li><span class="c1">(単体) 指定レイヤで明るい色ほど透明に</span><br>
 有効なのは、チェックレイヤの最初の一つのみです。<br>
-指定レイヤで明るい色ほど透明に、暗い色ほど不透明にします。
+指定レイヤで明るい色ほど透明に、暗い色ほど不透明にします。</li>
 <li><span class="c1">(単体) 指定レイヤで暗い色ほど透明に</span><br>
 有効なのは、チェックレイヤの最初の一つのみです。<br>
-指定レイヤで暗い色ほど透明に、明るい色ほど不透明にします。</ul>
+指定レイヤで暗い色ほど透明に、明るい色ほど不透明にします。</li></ul>
 </div></div>
-<div class="subb_main">
-<div class="subb_h">アルファ操作 (カレント)</div>
+<div class="subb_main"><div class="subb_h">アルファ操作 (カレント)</div>
 <div class="subb_txt">選択レイヤの色やアルファ値を元に処理します。<br>
 <br>
 <ul>
 <li><span class="c1">明るい色ほど透明に</span><br>
-明るい色ほどアルファ値を透明に、暗い色ほど不透明にします。
+明るい色ほどアルファ値を透明に、暗い色ほど不透明にします。</li>
 <li><span class="c1">暗い色ほど透明に</span><br>
-暗い色ほどアルファ値を透明に、明るい色ほど不透明にします。
+暗い色ほどアルファ値を透明に、明るい色ほど不透明にします。</li>
 <li><span class="c1">テクスチャ適用</span><br>
 オプションパネルの [テクスチャ] において、現在選択されているテクスチャを使います。<br>
-選択レイヤのアルファ値に、テクスチャの濃度を適用します。
+選択レイヤのアルファ値に、テクスチャの濃度を適用します。</li>
 <li><span class="c1">アルファ値からグレイスケール作成</span><br>
 アルファ値を元に色を作成し、グレイスケールのイメージにします。<br>
 透明なら黒、不透明なら白になります。<br>
-アルファ値を目に見える形にしたい場合に使います。</ul>
+アルファ値を目に見える形にしたい場合に使います。</li></ul>
 </div></div>
-<div class="subb_main">
-<div class="subb_h">ほか</div>
+<div class="subb_main"><div class="subb_h">ほか</div>
 <div class="subb_txt">
 <ul>
 <li><span class="c1">色の明るさから線画抽出</span><br>
 スキャナなどから取り込んだ画像から、線画を取り出す場合に使います。<br>
-明るい色ほどアルファ値を透明に、暗い色ほど不透明にして、色は黒で統一します。
+明るい色ほどアルファ値を透明に、暗い色ほど不透明にして、色は黒で統一します。</li>
 <li><span class="c1">1px ドット線の補正</span><br>
 ドットで描かれた 1px の線を、なるべく細く綺麗になるように、補正します。<br>
-不透明なら点があり、透明なら点がないと判断されます。色は関係ありません。
+不透明なら点があり、透明なら点がないと判断されます。色は関係ありません。</li>
 <li><span class="c1">アンチエイリアシング</span><br>
-ドットで描いた絵にアンチエイリアス処理を行います。
+ドットで描いた絵にアンチエイリアス処理を行います。</li>
 <li><span class="c1">縁取り</span><br>
-色を上下左右に合成し、それを複数回繰り返すことによって、輪郭を拡張させます。
+色を上下左右に合成し、それを複数回繰り返すことによって、輪郭を拡張させます。</li>
 <li><span class="c1">立体枠</span><br>
-イメージ全体の枠を作ります。凹凸部分では色を明るくしたり暗くします。
+イメージ全体の枠を作ります。凹凸部分では色を明るくしたり暗くします。</li>
 <li><span class="c1">シフト</span><br>
-イメージ全体を対象に、指定した方向にイメージをずらします。端の部分は繋がった状態となります。</ul>
+イメージ全体を対象に、指定した方向にイメージをずらします。端の部分は繋がった状態となります。</li></ul>
 </div></div>
 </div>
 </div>
-
-<a name="link20"></a><div class="ct_main">
+<a name="link19"></a><div class="ct_main">
 <div class="ct_h">環境設定</div>
 <div class="ct_txt">
-<div class="subb_main" style="margin-top:0">
-<div class="subb_h">設定１</div>
+<div class="subb_main" style="margin-top:0"><div class="subb_h">設定１</div>
 <div class="subb_txt">
 <table class="tbl1">
 <tr><th>キャンバス背景色<td>キャンバスの、イメージ範囲外の部分の色を指定します</td>
@@ -1333,25 +1260,23 @@ ON にすると、元に戻ります。</td>
 100 であれば、100..200..300 というように変化します。</td>
 <tr><th>キャンバス回転の1段階<td>キャンバス回転を左右に１段階回転させる時の、増減幅を指定します</td>
 </table></div></div>
-<div class="subb_main">
-<div class="subb_h">フラグ</div>
+<div class="subb_main"><div class="subb_h">フラグ</div>
 <div class="subb_txt">
 <ul>
 <li><span class="c1">上書き保存時、確認する</span><br>
-上書き保存する時に、確認メッセージを表示します。
+上書き保存する時に、確認メッセージを表示します。</li>
 <li><span class="c1">APD 形式以外での上書き保存時、確認する</span><br>
 上書き保存時、現在の編集ファイルのフォーマットが APD 以外だった場合、そのまま保存するかどうかの確認メッセージを表示します。<br>
-常に APD 形式で保存したい場合に、間違えて上書き保存しないように警告させることができます。
+常に APD 形式で保存したい場合に、間違えて上書き保存しないように警告させることができます。</li>
 <li><span class="c1">APD 保存時、一枚絵イメージを書き込まない</span><br>
 APD で保存する時、APD ファイル内に、全レイヤを合成した一枚絵イメージを書き込まないようにします。<br>
 ※ AzPainter 内では、この情報は使用されることはありません。<br>
 APD を読み込む他のソフトなどで、一枚絵イメージが必要な場合に使用されます。<br>
-一枚絵イメージを使うことがないため、ファイルサイズを削減したいという場合は ON にしてください。
+一枚絵イメージを使うことがないため、ファイルサイズを削減したいという場合は ON にしてください。</li>
 <li><span class="c1">(パネル)フィルタ一覧の項目は、ダブルクリックで実行</span><br>
-[フィルタ一覧] パネル上で、各フィルタ項目を選択する際、通常はシングルクリックで実行されますが、ON にすると、ダブルクリックで実行されます。</ul>
+[フィルタ一覧] パネル上で、各フィルタ項目を選択する際、通常はシングルクリックで実行されますが、ON にすると、ダブルクリックで実行されます。</li></ul>
 </div></div>
-<div class="subb_main">
-<div class="subb_h">ボタン操作</div>
+<div class="subb_main"><div class="subb_h">ボタン操作</div>
 <div class="subb_txt">ポインタデバイスの各ボタンを操作した時の動作を指定します。<br>
 <br>
 「通常デバイス」は、マウスなどの筆圧情報を持たないデバイス。<br>
@@ -1364,8 +1289,7 @@ APD を読み込む他のソフトなどで、一枚絵イメージが必要な�
 左ボタンや「ペンの消しゴム部分」の場合は、通常のツール動作などを行います。<br>
 <br>
 デバイスのボタン番号がわからない場合は、「ボタンの取得」の部分の上で、各デバイスのボタンを押すと、リスト上で、そのボタンの項目が選択されます。</div></div>
-<div class="subb_main">
-<div class="subb_h">システム</div>
+<div class="subb_main"><div class="subb_h">システム</div>
 <div class="subb_txt">
 <table class="tbl1">
 <tr><th>作業用ディレクトリ<td>アンドゥデータなどの作業ファイルを保存するためのディレクトリを指定します。<br>
@@ -1383,19 +1307,16 @@ APD を読み込む他のソフトなどで、一枚絵イメージが必要な�
 </table></div></div>
 </div>
 </div>
-
-<a name="link21"></a><div class="ct_main">
+<a name="link20"></a><div class="ct_main">
 <div class="ct_h">キー設定</div>
 <div class="ct_txt">
-<div class="subb_main" style="margin-top:0">
-<div class="subb_h">メニューのキー設定</div>
+<div class="subb_main" style="margin-top:0"><div class="subb_h">メニューのキー設定</div>
 <div class="subb_txt">メインウィンドウのメニューの、ショートカットキーを設定します。<br>
 <br>
 リストから、変更したい項目のキー部分を左クリック、または、項目を選択した状態でスペースキーを押すと、キーの入力状態になるので、設定したいキーを押した後、Enter キーまたは入力部分以外をクリックして、確定してください。<br>
 <br>
 Enter キーは設定できません。</div></div>
-<div class="subb_main">
-<div class="subb_h">キャンバスのキー設定</div>
+<div class="subb_main"><div class="subb_h">キャンバスのキー設定</div>
 <div class="subb_txt">キャンバス上でキーを押した時（メインウィンドウにフォーカスがある状態でキーを押した時）、または、キャンバス上でキーを押しながら操作をした時に、設定したコマンドなどを実行することができます。<br>
 <br>
 リスト上で項目を選択した状態で、設定したいキーを押すと、キーを設定できます。<br>
@@ -1405,12 +1326,10 @@ Enter キーは設定できません。</div></div>
 ※各キーは、キーボードの物理的なボタン番号で識別されるため、ハードウェアとしてのキーボードが変わると、別のキーとして識別される場合があります。</div></div>
 </div>
 </div>
-
-<a name="link22"></a><div class="ct_main">
+<a name="link21"></a><div class="ct_main">
 <div class="ct_h">FAQ</div>
 <div class="ct_txt">
-<div class="subb_main" style="margin-top:0">
-<div class="subb_h">+Alt の動作が行えない</div>
+<div class="subb_main" style="margin-top:0"><div class="subb_h">+Alt の動作が行えない</div>
 <div class="subb_txt">Linux のデスクトップ環境では、Alt＋ボタンに、何らかのウィンドウ関連の機能が割り当てられていることが多いです (Alt＋左ドラッグでウィンドウ位置移動など)。<br>
 その場合は、通常のアプリケーション側による +Alt が認識できません。<br>
 アプリケーション側で +Alt を使えるようにするためには、デスクトップの設定で、それらの機能を無効にする必要があります。<br>
@@ -1418,5 +1337,4 @@ Enter キーは設定できません。</div></div>
 GUI 上で設定できる場合もあれば、設定ファイルを編集しなければならない場合もあります。</div></div>
 </div>
 </div>
-
 </body></html>

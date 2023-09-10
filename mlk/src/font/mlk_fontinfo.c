@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -21,10 +21,10 @@ $*/
  * mFontInfo
  *****************************************/
 
-#include "mlk.h"
-#include "mlk_fontinfo.h"
-#include "mlk_str.h"
-#include "mlk_textparam.h"
+#include <mlk.h>
+#include <mlk_fontinfo.h>
+#include <mlk_str.h>
+#include <mlk_textparam.h>
 
 
 //ファイルパス内に ';' が含まれる可能性があるため、\ でエスケープ

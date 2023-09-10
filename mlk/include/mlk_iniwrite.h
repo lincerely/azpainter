@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -38,6 +38,7 @@ void mIniWrite_putText(FILE *fp,const char *key,const char *text);
 void mIniWrite_putText_keyno(FILE *fp,int keyno,const char *text);
 void mIniWrite_putStr(FILE *fp,const char *key,mStr *str);
 void mIniWrite_putStrArray(FILE *fp,int keytop,mStr *array,int num);
+void mIniWrite_putDouble(FILE *fp,const char *key,double d);
 
 void mIniWrite_putPoint(FILE *fp,const char *key,mPoint *pt);
 void mIniWrite_putSize(FILE *fp,const char *key,mSize *size);

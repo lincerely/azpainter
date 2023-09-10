@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -35,13 +35,13 @@ $*/
 #define MLKX11_INC_XKB
 #define MLKX11_INC_KEYSYM
 #include "mlk_x11.h"
-#include "mlk_pv_gui.h"
+#include <mlk_pv_gui.h>
 
-#include "mlk_widget_def.h"
-#include "mlk_event.h"
-#include "mlk_list.h"
-#include "mlk_str.h"
-#include "mlk_util.h"
+#include <mlk_widget_def.h>
+#include <mlk_event.h>
+#include <mlk_list.h>
+#include <mlk_str.h>
+#include <mlk_util.h>
 
 //-------------------
 
@@ -497,8 +497,7 @@ static int _backend_mainloop(mAppRunData *run,mlkbool wait)
 		
 		//mGuiQuit() が呼ばれたため、ループ終了
 
-		if(!run->loop)
-			return 0;
+		if(!run->loop) return 0;
 
 		//イベントが起こるまで待つ
 		

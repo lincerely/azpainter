@@ -21,3 +21,8 @@ $ cd build
 $ ninja
 # ninja install
 ~~~
+
+## Link
+
+\* brush, texture, theme, configure\
+https://gitlab.com/pistachio-gitlab/AzPainter-Resources

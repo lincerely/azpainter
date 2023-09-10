@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,21 +23,21 @@ $*/
 
 #include <string.h>
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_window.h"
-#include "mlk_label.h"
-#include "mlk_button.h"
-#include "mlk_lineedit.h"
-#include "mlk_scrollbar.h"
-#include "mlk_iconbar.h"
-#include "mlk_event.h"
-#include "mlk_pixbuf.h"
-#include "mlk_key.h"
-#include "mlk_sysdlg.h"
-#include "mlk_str.h"
-#include "mlk_imagelist.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_window.h>
+#include <mlk_label.h>
+#include <mlk_button.h>
+#include <mlk_lineedit.h>
+#include <mlk_scrollbar.h>
+#include <mlk_iconbar.h>
+#include <mlk_event.h>
+#include <mlk_pixbuf.h>
+#include <mlk_key.h>
+#include <mlk_sysdlg.h>
+#include <mlk_str.h>
+#include <mlk_imagelist.h>
 
 #include "colorvalue.h"
 #include "palettelist.h"

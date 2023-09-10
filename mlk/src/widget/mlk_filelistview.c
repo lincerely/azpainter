@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -24,24 +24,25 @@ $*/
 #include <string.h>
 #include <time.h>
 
-#include "mlk_gui.h"
-#include "mlk_widget_def.h"
-#include "mlk_widget.h"
-#include "mlk_filelistview.h"
-#include "mlk_listheader.h"
-#include "mlk_listviewpage.h"
-#include "mlk_columnitem.h"
-#include "mlk_imagelist.h"
-#include "mlk_font.h"
-#include "mlk_event.h"
+#include <mlk_gui.h>
+#include <mlk_widget_def.h>
+#include <mlk_widget.h>
+#include <mlk_filelistview.h>
+#include <mlk_listheader.h>
+#include <mlk_listviewpage.h>
+#include <mlk_columnitem.h>
+#include <mlk_imagelist.h>
+#include <mlk_font.h>
+#include <mlk_event.h>
+#include <mlk_key.h>
 
-#include "mlk_str.h"
-#include "mlk_util.h"
-#include "mlk_string.h"
-#include "mlk_dir.h"
-#include "mlk_filestat.h"
+#include <mlk_str.h>
+#include <mlk_util.h>
+#include <mlk_string.h>
+#include <mlk_dir.h>
+#include <mlk_filestat.h>
 
-#include "mlk_columnitem_manager.h"
+#include <mlk_columnitem_manager.h>
 
 
 //----------------------
@@ -319,6 +320,56 @@ static void _append_itemname(mStr *str,mColumnItem *pi,mlkbool addsep)
 	}
 }
 
+/* 選択位置のディレクトリへ移動 */
+
+static void _enter_cur_directory(mFileListView *p)
+{
+	mColumnItem *pi;
+
+	pi = p->lv.manager.item_focus;
+	if(!pi || pi->param != _FILETYPE_DIR) return;
+
+	//パス追加
+	_append_itemname(&p->flv.strDir, pi, TRUE);
+
+	_set_filelist(p);
+	_notify(p, MFILELISTVIEW_N_CHANGE_DIR);
+}
+
+
+//=============================
+// mListViewPage
+//=============================
+
+
+/* mListViewPage イベントハンドラ */
+
+static int _page_event_handle(mWidget *wg,mEvent *ev)
+{
+	mFileListView *p = MLK_FILELISTVIEW(wg->parent);
+
+	switch(ev->type)
+	{
+		case MEVENT_KEYDOWN:
+			if(ev->key.key == MKEY_RIGHT || ev->key.key == MKEY_KP_RIGHT)
+			{
+				//右矢印キーでディレクトリへ移動 (".." は除く)
+
+				_enter_cur_directory(p);
+				return 1;
+			}
+			else if(ev->key.key == MKEY_LEFT || ev->key.key == MKEY_KP_LEFT)
+			{
+				//左矢印キーで親ディレクトリへ
+				mFileListView_changeDir_parent(p);
+				return 1;
+			}
+			break;
+	}
+
+	return mListViewPageHandle_event(wg, ev);
+}
+
 
 //=============================
 // main
@@ -357,7 +408,7 @@ mFileListView *mFileListViewNew(mWidget *parent,int size,uint32_t fstyle)
 			((fstyle & MFILELISTVIEW_S_MULTI_SEL)? MLISTVIEW_S_MULTI_SEL: 0)
 			 | MLISTVIEW_S_DESTROY_IMAGELIST | MLISTVIEW_S_GRID_COL
 			 | MLISTVIEW_S_MULTI_COLUMN | MLISTVIEW_S_HAVE_HEADER | MLISTVIEW_S_HEADER_SORT,
-			MSCROLLVIEW_S_HORZVERT_FRAME);
+			MSCROLLVIEW_S_HORZVERT_FRAME | MSCROLLVIEW_S_ALL_NOTIFY_SELF);
 
 	if(!p) return NULL;
 
@@ -367,6 +418,10 @@ mFileListView *mFileListViewNew(mWidget *parent,int size,uint32_t fstyle)
 	p->wg.notify_to_rep = MWIDGET_NOTIFYTOREP_SELF; //自身を送信元とする通知は、自身で受ける
 
 	p->flv.fstyle = fstyle;
+
+	//mListViewPage
+
+	(p->sv.page)->wg.event = _page_event_handle;
 
 	//アイテム高さ
 
@@ -529,13 +584,32 @@ void mFileListView_updateList(mFileListView *p)
 	_set_filelist(p);
 }
 
-/**@ ディレクトリを一つ上の親に移動 */
+/**@ ディレクトリを一つ上の親に移動
+ *
+ * @d:移動後、元のディレクトリ項目を選択する。 */
 
 void mFileListView_changeDir_parent(mFileListView *p)
 {
+	mStr str = MSTR_INIT;
+
+	mStrPathGetBasename(&str, p->flv.strDir.buf);
+
 	mStrPathRemoveBasename(&p->flv.strDir);
 
+	//リストセット (元のディレクトリ位置を選択)
+
 	_set_filelist(p);
+
+	if(mStrIsnotEmpty(&str))
+	{
+		if(mListViewSetFocusItem_text_multi(MLK_LISTVIEW(p), str.buf, 0))
+			mListViewScrollToFocus(MLK_LISTVIEW(p));
+	}
+
+	mStrFree(&str);
+
+	//
+
 	_notify(p, MFILELISTVIEW_N_CHANGE_DIR);
 }
 
@@ -624,11 +698,7 @@ static void _dblclk(mFileListView *p)
 			break;
 		//ディレクトリ
 		case _FILETYPE_DIR:
-			//パス追加
-			_append_itemname(&p->flv.strDir, pi, TRUE);
-
-			_set_filelist(p);
-			_notify(p, MFILELISTVIEW_N_CHANGE_DIR);
+			_enter_cur_directory(p);
 			break;
 		//ファイル
 		case _FILETYPE_FILE:

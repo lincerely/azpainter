@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -23,8 +23,8 @@ $*/
 
 #include <string.h>
 
-#include "mlk_gui.h"
-#include "mlk_guicol.h"
+#include <mlk_gui.h>
+#include <mlk_guicol.h>
 
 #include "mlk_pv_gui.h"
 
@@ -36,13 +36,13 @@ static uint32_t g_guicol_pix[MGUICOL_NUM], g_guicol_rgb[MGUICOL_NUM];
 static const uint32_t g_guicol_default[] = {
 0xffffff, //WHITE
 
-0xeaeaea, //FACE
+0xE6E6E6, //FACE
 0xe4e4e4, //FACE_DISABLE
 0x4797FF, //FACE_SELECT
 0x999999, //FACE_SELECT_UNFOCUS
 0x77B5ED, //FACE_SELECT_LIGHT
 0xffffff, //FACE_TEXTBOX
-0xc0c0c0, //FACE_DARK
+0xB8B8B8, //FACE_DARK
 
 0x666666, //FRAME
 0xa0a0a0, //FRAME_BOX
@@ -62,13 +62,13 @@ static const uint32_t g_guicol_default[] = {
 0xd4d4d4, //SCROLLBAR_FACE
 0x808080, //SCROLLBAR_GRIP
 
-0x525252, //MENU_FACE
+0x4D4D4D, //MENU_FACE
 0,        //MENU_FRAME
-0xa0a0a0, //MENU_SEP
+0x8A8A8A, //MENU_SEP
 0x8A9AFF, //MENU_SELECT
 0xffffff, //MENU_TEXT
 0x9C9C9C, //MENU_TEXT_DISABLE
-0xb0b0b0, //MENU_TEXT_SHORTCUT
+0xB5B5B5, //MENU_TEXT_SHORTCUT
 
 0x333333, //TOOLTIP_FACE
 0,        //TOOLTIP_FRAME

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -103,6 +103,7 @@ mMenuItemInfo *mMenuAppendInfo(mMenu *p,mMenuItemInfo *info);
 mMenuItemInfo *mMenuAppendText(mMenu *p,int id,const char *text);
 mMenuItemInfo *mMenuAppendText_copy(mMenu *p,int id,const char *text,int len);
 mMenuItemInfo *mMenuAppendText_param(mMenu *p,int id,const char *text,intptr_t param);
+mMenuItemInfo *mMenuAppendText_copy_param(mMenu *p,int id,const char *text,intptr_t param);
 mMenuItemInfo *mMenuAppendSubmenu(mMenu *p,int id,const char *text,mMenu *submenu,uint32_t flags);
 void mMenuAppendSep(mMenu *p);
 mMenuItemInfo *mMenuAppendCheck(mMenu *p,int id,const char *text,int checked);

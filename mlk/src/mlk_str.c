@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2022 Azel.
+ Copyright (C) 2013-2023 Azel.
 
  This file is part of AzPainter.
 
@@ -27,12 +27,12 @@ $*/
 #include <stdarg.h>
 #include <ctype.h>
 
-#include "mlk.h"
-#include "mlk_str.h"
-#include "mlk_string.h"
-#include "mlk_charset.h"
-#include "mlk_unicode.h"
-#include "mlk_util.h"
+#include <mlk.h>
+#include <mlk_str.h>
+#include <mlk_string.h>
+#include <mlk_charset.h>
+#include <mlk_unicode.h>
+#include <mlk_util.h>
 
 
 /*-----------
@@ -686,7 +686,7 @@ void mStrSetText_utf16be(mStr *str,const void *text,int len)
 		buf = (uint16_t *)mMalloc(len * 2);
 		if(!buf) return;
 
-		mCopyBuf_16bit_BEtoHOST(buf, text, len);
+		mCopyBuf_BE_16bit(buf, text, len);
 
 		dlen = mUTF16toUTF8(buf, len, NULL, 0);
 
@@ -2154,6 +2154,7 @@ mlkbool mStrPathCompareExts(mStr *str,const char *exts)
 
 /**@ ディレクトリ部分を比較
  *
+ * @d:str のパスからディレクトリを取得し、dir と比較する。
  * @p:dir 終端に余分なパス区切りは含めないこと */
 
 mlkbool mStrPathCompareDir(mStr *str,const char *dir)
