@@ -124,7 +124,7 @@ cf_debug=no
 cf_empty_flags=no
 
 PACKAGE=azpainter
-PACKAGE_VERSION=3.0.6
+PACKAGE_VERSION=3.0.7
 
 for opt;do
 	case $opt in

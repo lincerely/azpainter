@@ -564,10 +564,15 @@ static mlkbool _textsel_release(AppDraw *p)
 
 /* 押し時
  *
- * ※テキストレイヤ時のダブルクリックは、常にグラブしないので、
- *  ダイアログなどの表示をしないキャンバス上の操作処理では、ダブルクリックを除外すること。 */
+ * return: (通常時) グラブするか
+ *  (ダブルクリック時) 負の値で、ダブルクリックとして扱わず、通常の押しとして扱う。
+ *    それ以外の場合は、グラブを行わない。
+ *
+ * ※ダイアログ表示などではなく、キャンバス上で操作する処理の場合、
+ *   ダブルクリック時は負の値を返して、通常の押しとして扱うこと。
+ *   それ以外を返すとグラブを行わないため、ボタン離し時の処理が実行されない。  */
 
-static mlkbool _press_textlayer(AppDraw *p,mlkbool dblclk)
+static int _press_textlayer(AppDraw *p,mlkbool dblclk)
 {
 	LayerTextItem *pi;
 
@@ -585,10 +590,12 @@ static mlkbool _press_textlayer(AppDraw *p,mlkbool dblclk)
 	}
 	else if(p->w.press_state & MLK_STATE_CTRL)
 	{
-		//+Ctrl: 位置移動 (ダブルクリックは除外)
+		//+Ctrl: 位置移動
 
-		if(!pi || dblclk)
+		if(!pi)
 			return FALSE;
+		else if(dblclk)
+			return -1;
 		else
 			return _press_start_move(p, pi);
 	}
@@ -859,12 +866,23 @@ void drawOp_drawtext_press_rbtt(AppDraw *p)
 		_proc_menu(p);
 }
 
-/** ダブルクリック時 */
+/** ダブルクリック時
+ *
+ * return: TRUE でグラブしない。FALSE でダブルクリックとして処理せず、通常の押しとして処理 */
 
-void drawOp_drawtext_dblclk(AppDraw *p)
+mlkbool drawOp_drawtext_dblclk(AppDraw *p)
 {
+	int ret;
+
 	if(LAYERITEM_IS_TEXT(p->curlayer))
-		_press_textlayer(p, TRUE);
+	{
+		//負の場合は、ダブルクリックとして処理しない
+	
+		ret = _press_textlayer(p, TRUE);
+		if(ret < 0) return FALSE;
+	}
+
+	return TRUE;
 }
 
 

@@ -800,13 +800,10 @@ mlkbool drawOp_onLBttDblClk(AppDraw *p,mEvent *ev)
 	}
 	else
 	{
-		//非操作中: テキストツール時
+		//非操作中: テキストレイヤでのテキスト操作時
 
 		if(drawOpSub_isRunTextTool())
-		{
-			drawOp_drawtext_dblclk(p);
-			release = TRUE;
-		}
+			release = drawOp_drawtext_dblclk(p);
 	}
 
 	//解除
