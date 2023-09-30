@@ -72,7 +72,7 @@ mlkbool drawOp_boxsel_press(AppDraw *p);
 
 mlkbool drawOp_drawtext_press(AppDraw *p);
 void drawOp_drawtext_press_rbtt(AppDraw *p);
-void drawOp_drawtext_dblclk(AppDraw *p);
+mlkbool drawOp_drawtext_dblclk(AppDraw *p);
 
 /* xor */
 
