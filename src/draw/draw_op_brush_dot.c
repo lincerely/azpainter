@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -205,6 +205,11 @@ mlkbool drawOp_brush_free_press(AppDraw *p)
 
 	PointBuf_setFirstPoint(p->pointbuf, dpt.x, dpt.y, dpt.pressure);
 
+	//描画開始
+	// :水彩の場合は、開始点の色を取得するため、作業用イメージを先に確保しておく。
+
+	drawOpSub_beginDraw(p);
+
 	//自由線開始
 
 	TileImage_drawBrush_beginFree(p->w.dstimg, 0, dpt.x, dpt.y, dpt.pressure);
@@ -215,10 +220,6 @@ mlkbool drawOp_brush_free_press(AppDraw *p)
 		
 		TileImage_drawBrush_beginFree(p->w.dstimg, i, dpt.x, dpt.y, dpt.pressure);
 	}
-
-	//描画開始
-
-	drawOpSub_beginDraw(p);
 
 	return TRUE;
 }

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -47,10 +47,10 @@ $*/
 #include <mlk_charset.h>
 
 
+/**@group system:システム関連 */
+
 /**@ プロセスごとに異なる名前を取得
  *
- * @g:システム関連
- * 
  * @d:Linux では、プロセスIDを文字列にしたもの。
  *
  * @r:確保された文字列 */

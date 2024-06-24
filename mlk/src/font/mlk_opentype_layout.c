@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -512,6 +512,7 @@ static mlkerr _func_gpos_lookup1_gids(mOTLayout *p,mOT_LOOKUP_SUBTABLE *dat,void
 // main
 //===========================
 
+/**@group layout:mOTLayout */
 
 /**@ 解放 */
 
@@ -521,8 +522,6 @@ void mOTLayout_free(mOTLayout *p)
 }
 
 /**@ mOTLayout 作成
- *
- * @g:mOTLayout
  *
  * @d:GPOS/GSUB のテーブルデータを処理するためのもの
  *

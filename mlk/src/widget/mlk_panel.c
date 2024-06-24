@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -994,10 +994,10 @@ void mPanelSetNotifyWidget(mPanel *p,mWidget *wg)
 
 //===================
 
+/**@group getinfo:情報の取得 */
 
-/**@ 現在の状態を取得
- *
- * @g:情報の取得 */
+
+/**@ 現在の状態を取得 */
 
 void mPanelGetState(mPanel *p,mPanelState *state)
 {
@@ -1098,10 +1098,10 @@ intptr_t mPanelGetParam2(mPanel *p)
 
 //=================
 
+/**@group change:状態変更 */
+
 
 /**@ パネルのウィジェットを作成する
- *
- * @g:状態変更
  *
  * @d:ウィンドウモードの場合、表示は行われないので、この後に mPanelShowWindow() を実行すること。 */
 

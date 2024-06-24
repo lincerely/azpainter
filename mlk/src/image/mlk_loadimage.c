@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -177,7 +177,7 @@ void mLoadImage_setImageConv(mLoadImage *p,mImageConv *dst)
 		dst->convtype = MIMAGECONV_CONVTYPE_NONE;
 }
 
-/** convert_type と src_coltype から、coltype をセットする */
+/**@ convert_type と src_coltype から、coltype をセットする */
 
 void mLoadImage_setColorType_fromSource(mLoadImage *p)
 {

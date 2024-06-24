@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -191,10 +191,9 @@ void mWindowDeco_updateBox(mWindow *p,int x,int y,int w,int h)
 // mToplevel
 //===============================
 
+/**@group toplevel:mTopLevel */
 
-/**@ トップレベルウィンドウ作成
- *
- * @g:mToplevel */
+/**@ トップレベルウィンドウ作成 */
 
 mToplevel *mToplevelNew(mWindow *parent,int size,uint32_t fstyle)
 {
@@ -433,10 +432,9 @@ void mToplevelSetSaveState(mToplevel *p,mToplevelSaveState *st)
 // mDialog
 //===============================
 
+/**@group dialog:mDialog */
 
 /**@ ダイアログ作成
- *
- * @g:mDialog
  *
  * @p:fstyle トップレベルウィンドウスタイル。\
  * MTOPLEVEL_S_DIALOG、MTOPLEVEL_S_PARENT は常に ON。 */
@@ -549,10 +547,9 @@ int mDialogEventDefault_okcancel(mWidget *wg,mEvent *ev)
 // mPopup
 //===============================
 
+/**@group popup:mPopup */
 
 /**@ 作成
- *
- * @g:mPopup
  *
  * @p:fstyle ポップアップのスタイル */
 
@@ -697,6 +694,7 @@ int mPopupEventDefault(mWidget *wg,mEvent *ev)
 // mTooltip
 //===============================
 
+/**@group tooltip:mTooltip */
 
 #define _TOOLTIP_PADDING_X  5
 #define _TOOLTIP_PADDING_Y  4
@@ -730,8 +728,6 @@ static void _tooltip_draw_handle(mWidget *wg,mPixbuf *pixbuf)
 }
 
 /**@ チールチップウィンドウ表示
- *
- * @g:mTooltip
  *
  * @p:p 新規作成時は NULL。\
  *  現在表示しているツールチップがある場合にそれを指定すると、そのウィンドウを削除した上で、

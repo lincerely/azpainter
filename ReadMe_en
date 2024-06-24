@@ -1,6 +1,6 @@
 **********************************************
   AzPainter for Linux
-  Copyright (C) 2013-2023 Azel
+  Copyright (C) 2013-2024 Azel
 
   http://azsky2.html.xdomain.jp/
   https://gitlab.com/azelpg/azpainter
@@ -34,6 +34,7 @@ Paint software for editing illustrations and images.
 - C compiler
 - ninja (build tool)
 - pkg-config
+
 - development files for various libraries:
   x11 xext xcursor xinput
   zlib libpng jpeglib(jpeg-turbo) tiff webp fontconfig freetype2

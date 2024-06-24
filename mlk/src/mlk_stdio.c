@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -92,10 +92,9 @@ mlkfoff mFILEgetSize(FILE *fp)
 // 読み込み
 //===========================
 
+/**@group read:読み込み */
 
 /**@ 指定バイト数読み込み
- *
- * @g:読み込み
  *
  * @r:0 で成功、それ以外で失敗 */
 
@@ -481,11 +480,10 @@ int mFILEreadFormatBE(FILE *fp,const char *format,...)
 // 書き込み
 //===========================
 
+/**@group write:書き込み */
 
 /**@ 指定サイズ書き込み
  *
- * @g:書き込み
- * 
  * @r:0 で成功、それ以外で失敗 */
 
 int mFILEwriteOK(FILE *fp,const void *buf,int32_t size)

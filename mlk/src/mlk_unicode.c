@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -32,10 +32,9 @@ $*/
 // UTF-8
 //=================================
 
+/**@group utf8:UTF-8 */
 
 /**@ UTF-8 1文字のバイト数取得
- *
- * @g:UTF-8
  *
  * @d:先頭のバイトから、UTF-8 1文字のバイト数を判定して返す。
  * @r:バイト数 (1〜4)。\
@@ -349,11 +348,10 @@ mlkuchar *mUTF8toUTF32_alloc(const char *src,int srclen,int *dstlen)
 // UTF-32
 //=============================
 
+/**@group utf32:UTF-32 */
 
 /**@ Unicode 1文字を UTF-8 に変換
  *
- * @g:UTF-32
- * 
  * @p:dst NULL で必要なバイト数のみ計算
  * @p:maxlen 出力先の最大バイト数。\
  * 負の値で制限なし。\
@@ -634,10 +632,9 @@ int mUTF32Compare(const mlkuchar *str1,const uint32_t *str2)
 // UTF-16
 //=============================
 
+/**@group utf16:UTF-16 */
 
-/**@ UTF-16 文字列の長さ取得
- *
- * @g:UTF-16 */
+/**@ UTF-16 文字列の長さ取得 */
 
 int mUTF16GetLen(const mlkuchar16 *p)
 {

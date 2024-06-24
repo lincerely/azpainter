@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -28,10 +28,10 @@ $*/
 // mRect
 //================================
 
+/**@group rect:mRect */
 
 /**@ 範囲がない状態かどうか
  *
- * @g:mRect
  * @r:x1 > x2 or y1 > y2 の場合、TRUE となる */
 
 mlkbool mRectIsEmpty(const mRect *rc)
@@ -317,10 +317,9 @@ void mRectMove(mRect *rc,int mx,int my)
 // mBox
 //================================
 
+/**@group box:mBox */
 
-/**@ 値をセット
- *
- * @g:mBox */
+/**@ 値をセット */
 
 void mBoxSet(mBox *box,int x,int y,int w,int h)
 {

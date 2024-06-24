@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -1054,6 +1054,7 @@ static int _check_img_chnum(mPSDLoad *p)
 // main
 //=========================
 
+/**@group 読み込み */
 
 /**@ 閉じる */
 
@@ -1075,9 +1076,7 @@ void mPSDLoad_close(mPSDLoad *p)
 	}
 }
 
-/**@ PSD 読み込み作成
- *
- * @g:読み込み */
+/**@ PSD 読み込み作成 */
 
 mPSDLoad *mPSDLoad_new(void)
 {

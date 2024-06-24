@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -331,6 +331,8 @@ void mScrollViewHandle_draw(mWidget *wg,mPixbuf *pixbuf)
 // メイン
 //=============================
 
+/**@group scrollview:mScrollView */
+
 
 /**@ mScrollView データ解放 */
 
@@ -339,9 +341,7 @@ void mScrollViewDestroy(mWidget *wg)
 
 }
 
-/**@ 作成
- *
- * @g:mScrollView */
+/**@ 作成 */
 
 mScrollView *mScrollViewNew(mWidget *parent,int size,uint32_t fstyle)
 {
@@ -481,6 +481,8 @@ void mScrollViewGetMaxPageSize(mScrollView *p,mSize *size)
 // mScrollViewPage
 //*********************************
 
+/**@group page:mScrollViewPage */
+
 
 /**@ resize ハンドラ関数
  *
@@ -510,9 +512,7 @@ void mScrollViewPageHandle_resize(mWidget *wg)
 }
 
 
-/**@ 作成
- *
- * @g:mScrollViewPage */
+/**@ 作成 */
 
 mScrollViewPage *mScrollViewPageNew(mWidget *parent,int size)
 {

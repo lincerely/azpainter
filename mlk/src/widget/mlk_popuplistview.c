@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -182,10 +182,9 @@ static mPopupListView *_create_popup(mWidget *parent,
 // main
 //==========================
 
+/**@group popuplistview:mPopupListView */
 
 /**@ ポップアップでリストビューを表示し、アイテム選択
- *
- * @g:mPopupListView
  *
  * @d:mComboBox で使われる。\
  *  現在のフォーカスアイテムが選択された状態で表示され、

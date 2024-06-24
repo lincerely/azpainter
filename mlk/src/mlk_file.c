@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -37,11 +37,11 @@ $*/
 #include <mlk_filestat.h>
 
 
+/**@group mfile:mFile */
+
 
 /**@ 閉じる
  *
- * @g:mFile
- * 
  * @r:正常に閉じられた場合、MLKERR_OK。エラーの場合は MLKERR_IO。 */
 
 mlkerr mFileClose(mFile file)
@@ -339,10 +339,9 @@ static void _conv_filestat(mFileStat *dst,struct stat *src)
 	dst->flags = f;
 }
 
+/**@group filectl:ファイル操作 */
 
-/**@ 指定パスが存在するか
- *
- * @g:ファイル操作 */
+/**@ 指定パスが存在するか */
 
 mlkbool mIsExistPath(const char *path)
 {

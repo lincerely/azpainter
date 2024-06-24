@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -1593,11 +1593,10 @@ mlkbool mStrCompareEq_len(mStr *str,const char *text,int len)
 // パス
 //==================================
 
+/**@group path:パス */
 
 /**@ パスがトップの状態かどうか
  *
- * @g:パス
- * 
  * @d:空文字列、もしくは "/" でトップとみなす。 */
 
 mlkbool mStrPathIsTop(mStr *str)
@@ -2225,10 +2224,9 @@ mlkbool mStrPathExtractMultiFiles(mStr *dst,const char *text,const char **tmp1,c
 // 配列
 //===============================
 
+/**@group array:配列 */
 
 /**@ mStr の配列をすべて解放
- *
- * @g:配列
  *
  * @p:num 配列数 */
 

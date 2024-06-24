@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -36,6 +36,7 @@ $*/
 // mThread
 //*******************************
 
+/**@group thread:mThread */
 
 
 /* スレッド関数 */
@@ -61,7 +62,6 @@ static void *_thread_run(void *arg)
 	return 0;
 }
 
-
 /**@ 削除 */
 
 void mThreadDestroy(mThread *p)
@@ -76,8 +76,6 @@ void mThreadDestroy(mThread *p)
 }
 
 /**@ スレッドデータ作成
- *
- * @g:mThread
  *
  * @p:size 構造体の全体サイズ。\
  * 任意のデータを含める場合、mThread + データの構造体とする。\
@@ -157,6 +155,7 @@ mlkbool mThreadWait(mThread *p)
 // mThreadMutex
 //*******************************
 
+/**@group mutex:mThreadMutex */
 
 /**@ 削除 */
 
@@ -171,8 +170,6 @@ void mThreadMutexDestroy(mThreadMutex p)
 }
 
 /**@ mutex 作成
- *
- * @g:mThreadMutex
  *
  * @d:mutex をロックしている間は、
  * 他のスレッドがその部分を実行できなくなる。\
@@ -219,6 +216,8 @@ void mThreadMutexUnlock(mThreadMutex p)
 // mThreadCond
 //*******************************
 
+/**@group cond:mThreadCond */
+
 
 /**@ 削除 */
 
@@ -232,8 +231,6 @@ void mThreadCondDestroy(mThreadCond p)
 }
 
 /**@ cond 作成
- *
- * @g:mThreadCond
  *
  * @d:他のスレッドとの同期に使う。\
  * 他のスレッドで何かが起こるまで待ちたい場合、wait で待つ。\

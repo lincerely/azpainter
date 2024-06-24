@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -838,10 +838,9 @@ void mAddRecentVal_32bit(void *buf,int num,uint32_t addval,uint32_t endval)
 // Base64
 //================================
 
+/**@group base64:Base64 */
 
-/**@ Base64 エンコード後のサイズを取得
- *
- * @g:Base64 */
+/**@ Base64 エンコード後のサイズを取得 */
 
 int mGetBase64EncodeSize(int size)
 {

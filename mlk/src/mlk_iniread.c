@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -567,9 +567,9 @@ mlkbool mIniRead_getNextItem_keyno_int32(mIniRead *p,int *keyno,void *buf,mlkboo
 //===================
 
 
+/**@group getval:値取得 */
+
 /**@ int 値取得
- *
- * @g:値取得
  *
  * @p:def キーがなかった場合のデフォルト値 */
 

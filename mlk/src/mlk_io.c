@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -244,10 +244,9 @@ int mIO_isExistSize(mIO *p,mlksize size)
 
 //===================
 
+/**@group read:読み込み */
 
 /**@ 読み込み
- *
- * @g:読み込み
  *
  * @r:読み込んだバイト数 */
 

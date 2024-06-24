@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -269,10 +269,9 @@ int mCursorGetType_resize(int flags)
 // mCursorCache
 //============================
 
+/**@group cache:キャッシュ */
 
 /**@ カーソルキャッシュから指定タイプのカーソルを取得
- *
- * @g:mCursorCache
  *
  * @d:キャッシュに存在しない場合は追加する。 */
 

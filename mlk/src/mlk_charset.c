@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -96,10 +96,10 @@ mlkbool mLocaleCharsetIsUTF8(void)
 // iconv
 //==============================
 
+/**@group iconv:iconv */
+
 
 /**@ iconv 開く
- *
- * @g:iconv
  *
  * @p:p 値が格納される
  * @p:from 変換元の文字コード
@@ -498,11 +498,10 @@ static int _wide_to_locale(char *dst,const wchar_t *src,int srclen)
 	return dlen;
 }
 
+/**@group convert:変換 */
 
 /**@ 文字列の文字コードを変換
  *
- * @g:変換
- * 
  * @p:src 変換元文字列
  * @p:srclen 変換元文字列のバイト数 (負の値で、char * におけるヌル文字まで)
  * @p:from 変換元の文字コード
@@ -718,9 +717,9 @@ static int _put_utf8(void *buf,int size,void *param)
 	return 0;
 }
 
+/**@group utf8:UTF-8 文字列出力 */
+
 /**@ UTF-8 文字列をロケール文字列として出力
- *
- * @g:UTF-8 文字列出力
  *
  * @p:fp FILE*
  * @p:str NULL で何もしない

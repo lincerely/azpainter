@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2024 Azel.
 
  This file is part of AzPainter.
 
@@ -115,9 +115,9 @@ int mBufIO_setPos_get(mBufIO *p,mlksize pos,mlksize *plast)
 //=============================
 
 
+/**@group read:読み込み */
+
 /**@ 読み込み
- *
- * @g:読み込み
  *
  * @r:読み込んだバイト数 */
 
@@ -284,9 +284,9 @@ uint32_t mBufIO_get32(mBufIO *p)
 //=============================
 
 
+/**@group write:書き込み */
+
 /**@ 書き込み
- *
- * @g:書き込み
  *
  * @d:バッファが足りない場合は、終端まで書き込み。
  * @r:書き込んだバイト数 */
