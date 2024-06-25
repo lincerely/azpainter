@@ -666,7 +666,7 @@ int main(int argc,char **argv)
 	{
 		str_addtext_sp(&str_cflags, "-I/opt/X11/include");
 		str_addtext_sp(&str_ldflags, "-L/opt/X11/lib");
-		str_addtext_sp(&str_libs, "-lX11 -lXext -lXcursor");
+		str_addtext_sp(&str_libs, "-lX11 -lXext -lXcursor -lXi");
 	}
 #endif
 
