@@ -67,7 +67,7 @@ $*/
 
 //---------------------
 
-#define _APP_VERSION_TEXT  "AzPainter ver 3.0.8\n\nCopyright (c) 2013-2024 Azel"
+#define _APP_VERSION_TEXT  "AzPainter ver 3.0.9\n\nCopyright (c) 2013-2024 Azel"
 
 #define _APP_LICENSE_TEXT \
 "AzPainter is free software: you can redistribute it and/or modify\n" \

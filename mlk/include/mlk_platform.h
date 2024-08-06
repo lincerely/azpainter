@@ -23,7 +23,7 @@ $*/
 #if defined(__FreeBSD__) || defined(__OpenBSD__)
  #define MLK_PLATFORM_BSD
 #elif defined(__APPLE__) && defined(__MACH__)
- #define MLK_PLATFORM_MAC_OS_X
+ #define MLK_PLATFORM_MACOS
 #else
  #define MLK_PLATFORM_LINUX
 #endif
