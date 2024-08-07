@@ -34,7 +34,7 @@ $*/
 /* MacOS */
 #include <mach-o/dyld.h>
 
-#elif defined(MLK_PLATFORM_FREEBSD)
+#elif defined(MLK_PLATFORM_BSD)
 /* FreeBSD */
 #include <sys/types.h>
 #include <sys/sysctl.h>
@@ -127,8 +127,8 @@ char *mGetSelfExePath(void)
 		}
 	}
 
-#elif defined(MLK_PLATFORM_FREEBSD)
-	/* FreeBSD */
+#elif defined(MLK_PLATFORM_BSD)
+	/* BSD */
 
 	int mib[4];
 	size_t len;
