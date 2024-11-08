@@ -665,6 +665,30 @@ mlkbool mWidgetIsPointIn(mWidget *p,int x,int y)
 	return (x >= 0 && x < p->w && y >= 0 && y < p->h);
 }
 
+/**@ 現在のカーソル位置を取得
+ *
+ * @d:指定ウィジェットが Enter 状態であること。
+ *
+ * @p:dst ウィジェットからの相対位置で返る
+ * @r:p のウィジェットが Enter 状態か。FALSE の場合、dst は変更されない。 */
+
+mlkbool mWidgetGetCursorPos(mWidget *p,mPoint *dst)
+{
+	mWindow *win;
+
+	if(p != MLKAPP->widget_enter)
+		return FALSE;
+	else
+	{
+		win = g_mlk_app->window_enter;
+	
+		dst->x = (g_mlk_app->pointer_last_win_fx >> 8) - win->win.deco.w.left - p->absX;
+		dst->y = (g_mlk_app->pointer_last_win_fy >> 8) - win->win.deco.w.top - p->absY;
+		
+		return TRUE;
+	}
+}
+
 /**@ 下位ウィジェットの中から id を検索
  *
  * @p:root このウィジェットの下位のみ対象 */

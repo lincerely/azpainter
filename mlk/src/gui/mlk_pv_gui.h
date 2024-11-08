@@ -173,7 +173,7 @@ typedef struct _mAppBase
 		*window_enter;			//一番最後に Enter イベントが来たウィンドウ
 
 	int32_t pointer_last_win_fx,	//Enter & Motion イベントの一番最後の位置
-		pointer_last_win_fy;		//(装飾含含むウィンドウ座標、24:8 固定少数)
+		pointer_last_win_fy;		//(装飾含むウィンドウ座標、24:8 固定少数)
 
 	uint32_t flags;
 }mAppBase;

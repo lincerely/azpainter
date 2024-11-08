@@ -42,7 +42,7 @@ mlkbool MainWindow_loadImage(MainWindow *p,const char *filename,LoadImageOption 
 
 /* mainwin_cmd.c */
 
-void MainWindow_runCanvasKeyCmd(int cmd);
+void MainWindow_runCanvasKeyCmd(int cmd,mlkbool is_ptdev);
 void MainWindow_undo_redo(MainWindow *p,mlkbool redo);
 
 /* mainwin_layer.c */

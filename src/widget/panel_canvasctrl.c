@@ -64,12 +64,15 @@ static void _notify_zoom(_topct *p,mEventNotify *ev)
 			if(ev->param1 == CANVASSLIDER_BTT_RESET)
 			{
 				//リセット
+
+				drawCanvas_scroll_default(APPDRAW);
+				
 				drawCanvas_update(APPDRAW, 1000, 0,
 					DRAWCANVAS_UPDATE_ZOOM | DRAWCANVAS_UPDATE_RESET_SCROLL);
 			}
 			else
 				//一段階変更
-				drawCanvas_zoomStep(APPDRAW, (ev->param1 == CANVASSLIDER_BTT_ADD));
+				drawCanvas_zoomStep(APPDRAW, (ev->param1 == CANVASSLIDER_BTT_ADD), FALSE);
 			break;
 		//バー操作
 		default:
@@ -77,8 +80,6 @@ static void _notify_zoom(_topct *p,mEventNotify *ev)
 				drawCanvas_lowQuality();
 			else if(ev->notify_type == CANVASSLIDER_N_BAR_RELEASE)
 				drawCanvas_normalQuality();
-
-			//スクロール位置がすでにリセットされている場合は、リセット処理は行われない。
 
 			drawCanvas_update(APPDRAW, ev->param1, 0,
 				DRAWCANVAS_UPDATE_ZOOM | DRAWCANVAS_UPDATE_RESET_SCROLL);

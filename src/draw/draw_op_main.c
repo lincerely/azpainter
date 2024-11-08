@@ -565,7 +565,7 @@ static int _on_press_command(AppDraw *p,int btt,int is_pentab_eraser,int is_pent
 	{
 		//他コマンド (左ボタン以外のボタン操作時)
 
-		MainWindow_runCanvasKeyCmd(cmd);
+		MainWindow_runCanvasKeyCmd(cmd, TRUE);
 	}
 
 	return ret;

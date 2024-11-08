@@ -197,7 +197,7 @@ static void _page_event_keydown(MainCanvasPage *p,mEventKey *ev)
 	{
 		//キャンバスキーのコマンド実行 (非操作時)
 
-		MainWindow_runCanvasKeyCmd(APPCONF->canvaskey[ev->raw_code]);
+		MainWindow_runCanvasKeyCmd(APPCONF->canvaskey[ev->raw_code], FALSE);
 	}
 }
 

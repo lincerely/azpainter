@@ -295,7 +295,7 @@ mlkbool EnvOpt_createPage_opt1(mPager *p,mPagerInfo *info)
 // フラグ
 //**********************************
 
-#define FLAGS_CKNUM  4
+#define FLAGS_CKNUM  5
 
 typedef struct
 {

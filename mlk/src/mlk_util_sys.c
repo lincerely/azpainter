@@ -35,7 +35,7 @@ $*/
 #include <mach-o/dyld.h>
 
 #elif defined(MLK_PLATFORM_BSD)
-/* FreeBSD */
+/* BSD */
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
