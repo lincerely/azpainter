@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2024 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -426,6 +426,41 @@ int mStringCompare_number(const char *str1,const char *str2)
 		else
 			return (v1 < v2)? -1: 1;
 	}
+}
+
+/**@ 文字列内に指定文字列が含まれているか (大文字小文字区別しない)
+ *
+ * @p:cmp すべて小文字とする */
+
+mlkbool mStringIsInclude_case(const char *str,const char *cmp)
+{
+	char c1,c2;
+	const char *pc = cmp;
+
+	c2 = *(pc++);
+
+	while(*str)
+	{
+		c1 = *(str++);
+		if(c1 >= 'A' && c1 <= 'Z') c1 += 0x20;
+
+		if(c1 != c2)
+		{
+			if(pc != cmp + 1)
+			{
+				pc = cmp;
+				c2 = *(pc++);
+			}
+		}
+		else
+		{
+			if(!(*pc)) return TRUE;
+
+			c2 = *(pc++);
+		}
+	}
+
+	return FALSE;
 }
 
 /**@ 指定文字を 0 に置き換えた文字列を複製

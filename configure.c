@@ -571,6 +571,7 @@ static void _proc_config_h(void)
 
 static void _buildfile_rep(string *str,int flag,const char *txt1,const char *txt2,const char *txt3)
 {
+	//txt1 を先に処理する
 	if(flag)
 	{
 		_delete_line(str, txt1);
@@ -599,10 +600,10 @@ static void _proc_buildfile(const char *input,const char *output)
 	_replace_text(&str, "@LDFLAGS@", str_ldflags.buf);
 	_replace_text(&str, "@LIBS@", str_libs.buf);
 	_replace_text(&str, "@PACKAGE_NAME@", "azpainter");
-	_replace_text(&str, "@PACKAGE_VERSION@", "3.0.10");
+	_replace_text(&str, "@PACKAGE_VERSION@", "3.0.11");
 
 #if CONFIG_NASM
-	_buildfile_rep(&str, !enable_nasm, "@ASM_x86_64:", "@ASM_x86_64>", "@ASM_x86_64<");
+	_buildfile_rep(&str, !enable_nasm, "@ASM_x86_64>>", "@ASM_x86_64>", "@ASM_x86_64<");
 #endif
 
 	_replace_text(&str, "@NASM_FMT@", (os_type == OS_MAC)? "macho64 --prefix _": "elf64");

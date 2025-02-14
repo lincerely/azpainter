@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2024 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -733,7 +733,7 @@ mlkerr mGuiCreateConfigDir(const char *subpath)
  * @d:設定ファイルディレクトリ内にファイルが存在していない場合のみコピーする。
  *
  * @p:srcpath ソースのファイル名。データディレクトリからの相対パス。
- * @p:dstdir コピー先のパスとファイル名。設定ファイルディレクトリからの相対パス。
+ * @p:dstpath コピー先のパスとファイル名。設定ファイルディレクトリからの相対パス。
  * @r:コピーが行われたか */
 
 mlkbool mGuiCopyFile_dataToConfig(const char *srcpath,const char *dstpath)

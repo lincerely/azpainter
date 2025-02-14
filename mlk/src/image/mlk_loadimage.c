@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2024 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -456,9 +456,7 @@ static int _exif_getunit(int unit)
 
 /* EXIF 値取得
  *
- * pos: 値のオフセット位置。
- *  0 で現在位置。値分だけ進める。
- *  負の値で現在位置からのオフセット。位置はそのまま。 */
+ * pos: 値のオフセット位置。 */
 
 static int _exif_getval(_exifval *p,int pos,int vsize,void *dst)
 {
@@ -519,7 +517,7 @@ int mLoadImage_getEXIF_resolution(mLoadImage *p,const uint8_t *buf,int size)
 {
 	_exifval v;
 	uint16_t fnum,tag,dattype,v16;
-	uint32_t cnt,pos;
+	uint32_t cnt,pos,v32[2];
 	int flags = 0;
 
 	//Exif
@@ -561,9 +559,10 @@ int mLoadImage_getEXIF_resolution(mLoadImage *p,const uint8_t *buf,int size)
 		{
 			//解像度水平
 
-			if(_exif_getval(&v, pos, 4, &pos) == 0)
+			if(_exif_getval(&v, pos, 4, v32) == 0
+				&& _exif_getval(&v, pos + 4, 4, v32 + 1) == 0)
 			{
-				p->reso_horz = pos;
+				p->reso_horz = v32[0] / v32[1];
 				flags |= 1;
 			}
 		}
@@ -571,9 +570,10 @@ int mLoadImage_getEXIF_resolution(mLoadImage *p,const uint8_t *buf,int size)
 		{
 			//解像度垂直
 
-			if(_exif_getval(&v, pos, 4, &pos) == 0)
+			if(_exif_getval(&v, pos, 4, v32) == 0
+				&& _exif_getval(&v, pos + 4, 4, v32 + 1) == 0)
 			{
-				p->reso_vert = pos;
+				p->reso_vert = v32[0] / v32[1];
 				flags |= 2;
 			}
 		}
