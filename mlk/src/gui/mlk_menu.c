@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -163,10 +163,10 @@ static void _append_item_array16(mMenu *top,const uint16_t *buf,mlkbool radio)
 // mMenuItem
 //========================
 
+/**@group menuitem:mMenuItem */
 
-/**@ 次のアイテム取得
- *
- * @g:mMenuItem */
+
+/**@ 次のアイテム取得 */
 
 mMenuItem *mMenuItemGetNext(mMenuItem *item)
 {
@@ -206,6 +206,8 @@ mMenuItemInfo *mMenuItemGetInfo(mMenuItem *item)
 // mMenu
 //****************************
 
+/**@group menu:mMenu */
+
 
 /**@ メニュー削除
  *
@@ -221,9 +223,7 @@ void mMenuDestroy(mMenu *p)
 	}
 }
 
-/**@ メニュー作成
- *
- * @g:mMenu */
+/**@ メニュー作成 */
 
 mMenu *mMenuNew(void)
 {

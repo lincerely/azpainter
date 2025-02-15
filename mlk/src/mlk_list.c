@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -496,10 +496,10 @@ int mListItemGetIndex(mListItem *item)
 // リンク操作
 //================================
 
+/**@group link:リンク操作 */
 
 /**@ リストの末尾にリンクを追加
  *
- * @g:リンク操作
  * @d:{em:mList::num の値は操作されない:em} */
 
 void mListLinkAppend(mList *list,mListItem *item)
@@ -560,10 +560,10 @@ void mListLinkRemove(mList *list,mListItem *item)
 // キャッシュリスト
 //================================
 
+/**@group cache:キャッシュリスト */
 
 /**@ キャッシュリストにアイテムを新規作成
  *
- * @g:キャッシュリスト
  * @d:キャッシュリスト内では、
  * 参照カウンタ (mListCacheItem::refcnt) が 1 以上のアイテムは常に存在する。\
  * 参照カウンタが 0 のアイテムは、明示的に削除するまで保持される。\

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -109,7 +109,9 @@ enum
 	DRAWCANVAS_UPDATE_ANGLE = 1<<1,
 	DRAWCANVAS_UPDATE_RESET_SCROLL = 1<<2,		//スクロール位置をリセット (現在の状態から)
 	DRAWCANVAS_UPDATE_NO_CANVAS_UPDATE = 1<<3,	//キャンバスを更新しない
-
+	DRAWCANVAS_UPDATE_SCROLL_AT_CURSOR = 1<<4,	//ポインタデバイス操作でのズーム時、現在のカーソル位置が中心になるようスクロール調整
+	DRAWCANVAS_UPDATE_SCROLL_AT_CURSOR_PRESS = 1<<5,	//↑時、ボタン押し位置を使う (ドラッグ操作時)
+		
 	DRAWCANVAS_UPDATE_DEFAULT = 0	//値の変更なし & キャンバス更新
 };
 
@@ -119,7 +121,7 @@ void drawCanvas_normalQuality(void);
 void drawCanvas_scroll_reset(AppDraw *p,const mDoublePoint *origin);
 void drawCanvas_scroll_at_imagecenter(AppDraw *p,const mDoublePoint *dpt);
 void drawCanvas_scroll_default(AppDraw *p);
-void drawCanvas_zoomStep(AppDraw *p,mlkbool zoomup);
+void drawCanvas_zoomStep(AppDraw *p,mlkbool zoomup,mlkbool is_ptdev);
 void drawCanvas_rotateStep(AppDraw *p,mlkbool left);
 void drawCanvas_fitWindow(AppDraw *p);
 void drawCanvas_mirror(AppDraw *p);

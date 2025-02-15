@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -67,7 +67,7 @@ $*/
 
 //---------------------
 
-#define _APP_VERSION_TEXT  "AzPainter ver 3.0.7\n\nCopyright (c) 2013-2023 Azel"
+#define _APP_VERSION_TEXT  "AzPainter ver 3.0.11\n\nCopyright (c) 2013-2025 Azel"
 
 #define _APP_LICENSE_TEXT \
 "AzPainter is free software: you can redistribute it and/or modify\n" \
@@ -868,11 +868,11 @@ static void _event_command(MainWindow *p,mEventCommand *ev)
 
 		//表示倍率拡大
 		case TRMENU_VIEW_CANVASZOOM_UP:
-			drawCanvas_zoomStep(APPDRAW, TRUE);
+			drawCanvas_zoomStep(APPDRAW, TRUE, FALSE);
 			break;
 		//表示倍率縮小
 		case TRMENU_VIEW_CANVASZOOM_DOWN:
-			drawCanvas_zoomStep(APPDRAW, FALSE);
+			drawCanvas_zoomStep(APPDRAW, FALSE, FALSE);
 			break;
 		//表示倍率100%
 		case TRMENU_VIEW_CANVASZOOM_ORIGINAL:

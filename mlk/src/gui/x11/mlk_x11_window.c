@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -130,16 +130,41 @@ void __mX11WindowDestroy(mWindow *p)
 	}
 }
 
+/* ウィンドウサイズが表示前のサイズと同じになっているか
+ *
+ * Unmap 状態でのサイズ変更が適用されていない場合は、
+ * マップ時にサイズを変更する。 */
+
+static void _check_win_size(mWindow *p,int tw,int th)
+{
+	Window root;
+	int x,y;
+	unsigned int w,h,bw,depth;
+
+	XGetGeometry(MLKX11_DISPLAY, MLKX11_WINDATA(p)->winid,
+		&root, &x, &y, &w, &h, &bw, &depth);
+
+	if(tw != w || th != h)
+	{
+		XResizeWindow(MLKX11_DISPLAY, MLKX11_WINDATA(p)->winid, tw, th);
+		XFlush(MLKX11_DISPLAY);
+	}
+}
+
 /** ウィンドウ表示/非表示 */
 
 void __mX11WindowShow(mWindow *p,int f)
 {
 	mAppX11 *app = MLKAPPX11;
 	Window id = MLKX11_WINDATA(p)->winid;
+	int w,h;
 
 	if(f)
 	{
 		mX11WindowSetUserTime(p, app->evtime_user);
+
+		w = p->wg.w;
+		h = p->wg.h;
 
 		//表示
 
@@ -149,6 +174,11 @@ void __mX11WindowShow(mWindow *p,int f)
 		//MAP イベントが来るまで待つ
 
 		mX11EventTranslate_wait(p, MLKX11_WAITEVENT_MAP);
+
+		//上記の間に configure イベントが来るかもしれないので、
+		//表示前に記録したサイズを使う。
+
+		_check_win_size(p, w, h);
 	}
 	else
 	{

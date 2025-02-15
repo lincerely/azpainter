@@ -277,7 +277,6 @@ build sel_material.o: cc ../src/widget/sel_material.c
 build statusbar.o: cc ../src/widget/statusbar.c
 build valuebar.o: cc ../src/widget/valuebar.c
 build widget_func.o: cc ../src/widget/widget_func.c
-
 build mlk.o: ccmlk ../mlk/src/mlk.c
 build mlk_argparse.o: ccmlk ../mlk/src/mlk_argparse.c
 build mlk_buf.o: ccmlk ../mlk/src/mlk_buf.c
@@ -416,4 +415,3 @@ build mlk_tab.o: ccmlk ../mlk/src/widget/mlk_tab.c
 build mlk_widget.o: ccmlk ../mlk/src/widget/mlk_widget.c
 build mlk_widgettextedit.o: ccmlk ../mlk/src/widget/mlk_widgettextedit.c
 build mlk_window.o: ccmlk ../mlk/src/widget/mlk_window.c
-

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -27,6 +27,7 @@ extern "C" {
 void mBufInit(mBuf *p);
 void mBufFree(mBuf *p);
 mlkbool mBufAlloc(mBuf *p,mlksize allocsize,mlksize expand_size);
+mlkbool mBufResizeAdd(mBuf *p,int size);
 
 void mBufReset(mBuf *p);
 void mBufSetCurrent(mBuf *p,mlksize pos);

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -67,6 +67,7 @@ int mWidgetGetHeight_visible(mWidget *p);
 mWidget *mWidgetGetWidget_atPoint(mWidget *root,int x,int y);
 void mWidgetMapPoint(mWidget *src,mWidget *dst,mPoint *pt);
 mlkbool mWidgetIsPointIn(mWidget *p,int x,int y);
+mlkbool mWidgetGetCursorPos(mWidget *p,mPoint *dst);
 mWidget *mWidgetFindFromID(mWidget *root,int id);
 
 mlkbool mWidgetIsVisible(mWidget *p);

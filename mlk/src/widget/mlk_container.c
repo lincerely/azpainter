@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -41,10 +41,10 @@ void __mLayoutGrid(mWidget *);
 
 //---------------------
 
+/**@group container:mContainer */
+
 
 /**@ コンテナ作成
- *
- * @g:mContainer
  *
  * @d:デフォルトで垂直コンテナとなる。 */
 

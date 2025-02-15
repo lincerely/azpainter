@@ -1067,6 +1067,8 @@ by left-clicking on the canvas
 +=Check when overwriting in a format other than APD
 +=Do not write a single picture image when saving APD
 +=(Panel) Filter list items can be executed by double-clicking
++=When zooming in or out using buttons or dragging,\
+use the cursor position as the basis
 
 200=Normal device
 +=Devices with pressure

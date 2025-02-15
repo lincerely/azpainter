@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -34,8 +34,8 @@ $*/
 /* MacOS */
 #include <mach-o/dyld.h>
 
-#elif defined(MLK_PLATFORM_FREEBSD)
-/* FreeBSD */
+#elif defined(MLK_PLATFORM_BSD)
+/* BSD */
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
@@ -47,10 +47,10 @@ $*/
 #include <mlk_charset.h>
 
 
+/**@group system:システム関連 */
+
 /**@ プロセスごとに異なる名前を取得
  *
- * @g:システム関連
- * 
  * @d:Linux では、プロセスIDを文字列にしたもの。
  *
  * @r:確保された文字列 */
@@ -127,8 +127,8 @@ char *mGetSelfExePath(void)
 		}
 	}
 
-#elif defined(MLK_PLATFORM_FREEBSD)
-	/* FreeBSD */
+#elif defined(MLK_PLATFORM_BSD)
+	/* BSD */
 
 	int mib[4];
 	size_t len;

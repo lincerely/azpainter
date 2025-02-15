@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -28,6 +28,7 @@ $*/
 
 #include <mlk_list.h>
 #include <mlk_event.h>
+#include <mlk_string.h>
 
 
 //----------------
@@ -68,13 +69,9 @@ typedef struct
 
 static int _get_device_type(char *name)
 {
-	int len;
-
-	len = strlen(name);
-
-	if(len >= 6 && strcasecmp(name + len - 6, "stylus") == 0)
+	if(mStringIsInclude_case(name, "stylus"))
 		return 1;
-	else if(len >= 6 && strcasecmp(name + len - 6, "eraser") == 0)
+	else if(mStringIsInclude_case(name, "eraser"))
 		return 2;
 	else
 		return 0;

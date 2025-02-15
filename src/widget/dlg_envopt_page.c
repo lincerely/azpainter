@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -295,7 +295,7 @@ mlkbool EnvOpt_createPage_opt1(mPager *p,mPagerInfo *info)
 // フラグ
 //**********************************
 
-#define FLAGS_CKNUM  4
+#define FLAGS_CKNUM  5
 
 typedef struct
 {

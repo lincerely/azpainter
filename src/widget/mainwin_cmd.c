@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -68,11 +68,13 @@ int EnvOptionDlg_run(mWindow *parent);
 //----------------
 
 
-/** キャンバスでのキー押し時
+/** キャンバスでのキー押し時 or ボタン操作時
  *
- * 即座に実行するタイプのコマンドを実行 */
+ * 即座に実行するタイプのコマンドを実行
+ *
+ * is_ptdev: ポインタデバイス操作による実行か。FALSE で、キー押しやメニューなど */
 
-void MainWindow_runCanvasKeyCmd(int cmd)
+void MainWindow_runCanvasKeyCmd(int cmd,mlkbool is_ptdev)
 {
 	AppDraw *p = APPDRAW;
 	int n;
@@ -118,7 +120,7 @@ void MainWindow_runCanvasKeyCmd(int cmd)
 			//一段階拡大/縮小
 			case CANVASKEY_CMD_OTHER_ZOOM_UP:
 			case CANVASKEY_CMD_OTHER_ZOOM_DOWN:
-				drawCanvas_zoomStep(p, (cmd == CANVASKEY_CMD_OTHER_ZOOM_UP));
+				drawCanvas_zoomStep(p, (cmd == CANVASKEY_CMD_OTHER_ZOOM_UP), is_ptdev);
 				break;
 			//キャンバス回転リセット
 			case CANVASKEY_CMD_OTHER_ROTATE_RESET:

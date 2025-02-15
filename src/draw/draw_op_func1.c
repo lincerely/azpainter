@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -36,6 +36,7 @@ $*/
 
 #include "def_draw.h"
 #include "def_tool_option.h"
+#include "def_config.h"
 
 #include "draw_main.h"
 #include "draw_calc.h"
@@ -695,6 +696,9 @@ mlkbool drawOp_canvasRotate_press(AppDraw *p)
 //===============================
 // 上下ドラッグで表示倍率変更
 //===============================
+/*
+	ptd_tmp[0] : ボタン押し時のイメージ位置
+*/
 
 
 /* 移動 */
@@ -702,6 +706,7 @@ mlkbool drawOp_canvasRotate_press(AppDraw *p)
 static void _canvaszoom_motion(AppDraw *p,uint32_t state)
 {
 	int n,cur;
+	uint32_t flags;
 
 	if(p->w.dpt_canv_cur.y == p->w.dpt_canv_last.y)
 		return;
@@ -719,7 +724,14 @@ static void _canvaszoom_motion(AppDraw *p,uint32_t state)
 		if(n == cur) n = cur - 1;
 	}
 
-	drawCanvas_update(p, n, 0, DRAWCANVAS_UPDATE_ZOOM | DRAWCANVAS_UPDATE_NO_CANVAS_UPDATE);
+	//更新
+
+	flags = DRAWCANVAS_UPDATE_ZOOM | DRAWCANVAS_UPDATE_NO_CANVAS_UPDATE;
+
+	if(g_app_config->foption & CONFIG_OPTF_ZOOM_AT_CURSOR)
+		flags |= DRAWCANVAS_UPDATE_SCROLL_AT_CURSOR | DRAWCANVAS_UPDATE_SCROLL_AT_CURSOR_PRESS;
+	
+	drawCanvas_update(p, n, 0, flags);
 
 	MainCanvasPage_setTimer_updatePage(5);
 }
@@ -733,6 +745,11 @@ mlkbool drawOp_canvasZoom_press(AppDraw *p)
 
 	p->w.opflags |= DRAW_OPFLAGS_MOTION_POS_INT;
 	p->w.drag_cursor_type = APPCURSOR_ZOOM_DRAG;
+
+	//ボタン押し時のイメージ位置
+	p->w.pttmp[0].x = (int)p->w.dpt_canv_press.x;
+	p->w.pttmp[0].y = (int)p->w.dpt_canv_press.y;
+	drawCalc_canvas_to_image_double_pt(p, p->w.ptd_tmp, p->w.pttmp);
 
 	drawCanvas_lowQuality();
 	drawCanvas_update(p, 0, 0, DRAWCANVAS_UPDATE_RESET_SCROLL | DRAWCANVAS_UPDATE_NO_CANVAS_UPDATE);

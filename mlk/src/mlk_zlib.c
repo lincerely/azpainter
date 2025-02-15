@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -193,10 +193,9 @@ void mZlibSetIO_stdio(mZlib *p,void *fp)
 // 圧縮
 //=================================
 
+/**@group comp:圧縮 */ 
 
 /**@ 圧縮用に作成
- *
- * @g:圧縮
  *
  * @p:bufsize 作業用バッファのサイズ (0 以下で適当なサイズ)
  * @p:level 圧縮率 (0-9)
@@ -345,10 +344,9 @@ mlkerr mZlibEncFinish(mZlib *p)
 // 展開
 //===========================
 
+/**@group decode:展開 */
 
 /**@ 展開用に作成
- *
- * @g:展開
  *
  * @p:bufsize 入力用のバッファサイズ (0 以下で適当なサイズ)
  * @p:windowbits 圧縮時と同じ (default: 15) */

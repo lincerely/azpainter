@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -565,7 +565,7 @@ static int _on_press_command(AppDraw *p,int btt,int is_pentab_eraser,int is_pent
 	{
 		//他コマンド (左ボタン以外のボタン操作時)
 
-		MainWindow_runCanvasKeyCmd(cmd);
+		MainWindow_runCanvasKeyCmd(cmd, TRUE);
 	}
 
 	return ret;

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -37,10 +37,9 @@ $*/
 // 数値 <=> 文字列
 //==========================
 
+/**@group intconv:数値と文字列の変換 */
 
 /**@ 数値を文字列に変換
- *
- * @g:数値と文字列の変換
  *
  * @p:buf 格納先。最大で 12byte 必要。
  * @r:格納した文字長さ (ヌル文字は含まない) */
@@ -191,10 +190,9 @@ int mStrToInt_range(const char *str,int min,int max)
 // 文字列処理
 //=============================
 
+/**@group string:文字列処理 */
 
 /**@ 文字列の配列バッファを解放
- *
- * @g:文字列処理
  *
  * @d:各文字列バッファと配列バッファを解放する。\
  * *buf == NULL となるまで *buf のポインタを解放し、最後に buf を解放する。
@@ -428,6 +426,41 @@ int mStringCompare_number(const char *str1,const char *str2)
 		else
 			return (v1 < v2)? -1: 1;
 	}
+}
+
+/**@ 文字列内に指定文字列が含まれているか (大文字小文字区別しない)
+ *
+ * @p:cmp すべて小文字とする */
+
+mlkbool mStringIsInclude_case(const char *str,const char *cmp)
+{
+	char c1,c2;
+	const char *pc = cmp;
+
+	c2 = *(pc++);
+
+	while(*str)
+	{
+		c1 = *(str++);
+		if(c1 >= 'A' && c1 <= 'Z') c1 += 0x20;
+
+		if(c1 != c2)
+		{
+			if(pc != cmp + 1)
+			{
+				pc = cmp;
+				c2 = *(pc++);
+			}
+		}
+		else
+		{
+			if(!(*pc)) return TRUE;
+
+			c2 = *(pc++);
+		}
+	}
+
+	return FALSE;
 }
 
 /**@ 指定文字を 0 に置き換えた文字列を複製

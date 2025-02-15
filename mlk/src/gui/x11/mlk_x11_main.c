@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -375,7 +375,7 @@ static mlkbool _backend_init(void)
 	
 	//ディスプレイ開く
 	
-	p->display = disp = XOpenDisplay(NULL);
+	p->display = disp = XOpenDisplay(MLKAPP->opt_dispname);
 	if(!disp) return FALSE;
 	
 	//ロケール＆入力メソッドセット

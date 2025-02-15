@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -57,6 +57,8 @@ static int _get_line_bytes(int w,int bits,int line_bytes)
 // mImageBuf
 //=============================
 
+/**@group mImageBuf */
+
 
 /**@ 解放 */
 
@@ -70,8 +72,6 @@ void mImageBuf_free(mImageBuf *p)
 }
 
 /**@ 作成
- *
- * @g:mImageBuf
  *
  * @p:bits イメージのビット数 (24, 32)
  * @p:line_bytes Y1行のバイト数。\
@@ -214,6 +214,8 @@ void mImageBuf_blendColor(mImageBuf *p,mRgbCol col)
 // mImageBuf2
 //=============================
 
+/**@group mImageBuf2 */
+
 
 /* イメージバッファ確保
  *
@@ -297,8 +299,6 @@ void mImageBuf2_free(mImageBuf2 *p)
 }
 
 /**@ mImageBuf2 作成
- *
- * @g:mImageBuf2
  *
  * @p:bits イメージのビット数 (制限なし)
  * @p:line_bytes Y1行のバイト数。\

@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -197,7 +197,7 @@ static void _page_event_keydown(MainCanvasPage *p,mEventKey *ev)
 	{
 		//キャンバスキーのコマンド実行 (非操作時)
 
-		MainWindow_runCanvasKeyCmd(APPCONF->canvaskey[ev->raw_code]);
+		MainWindow_runCanvasKeyCmd(APPCONF->canvaskey[ev->raw_code], FALSE);
 	}
 }
 

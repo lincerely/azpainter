@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -27,40 +27,6 @@ $*/
 #include <mlk_buf.h>
 #include <mlk_unicode.h>
 
-
-
-/**@ 指定サイズ分を追加してリサイズ */
-
-static mlkbool _resize_add(mBuf *p,int size)
-{
-	uint8_t *newbuf;
-	mlksize addsize,newsize;
-
-	if(size == 0) return TRUE;
-	
-	if(!p->buf) return FALSE;
-
-	addsize = p->cursize + size;
-
-	if(addsize > p->allocsize)
-	{
-		//リサイズ
-		
-		newsize = p->allocsize + p->expand_size;
-		if(newsize < addsize) newsize = addsize;
-
-		newbuf = (uint8_t *)mRealloc(p->buf, newsize);
-		if(!newbuf) return FALSE;
-
-		p->buf = newbuf;
-		p->allocsize = newsize;
-	}
-
-	return TRUE;
-}
-
-
-//========================
 
 
 /**@ 初期化 */
@@ -101,6 +67,39 @@ mlkbool mBufAlloc(mBuf *p,mlksize allocsize,mlksize expand_size)
 	p->allocsize = allocsize;
 	p->cursize = 0;
 	p->expand_size = expand_size;
+
+	return TRUE;
+}
+
+/**@ 現在位置に指定サイズを追加して、バッファリサイズ
+ *
+ * @r:TRUE で、成功またはリサイズが必要ない。\
+ * FALSE でリサイズに失敗 (バッファサイズは元のまま) */
+
+mlkbool mBufResizeAdd(mBuf *p,int size)
+{
+	uint8_t *newbuf;
+	mlksize addsize,newsize;
+
+	if(size == 0) return TRUE;
+	
+	if(!p->buf) return FALSE;
+
+	addsize = p->cursize + size;
+
+	if(addsize > p->allocsize)
+	{
+		//リサイズ
+		
+		newsize = p->allocsize + p->expand_size;
+		if(newsize < addsize) newsize = addsize;
+
+		newbuf = (uint8_t *)mRealloc(p->buf, newsize);
+		if(!newbuf) return FALSE;
+
+		p->buf = newbuf;
+		p->allocsize = newsize;
+	}
 
 	return TRUE;
 }
@@ -174,7 +173,7 @@ mlkbool mBufAppend(mBuf *p,const void *buf,int size)
 
 	//サイズ拡張
 
-	if(!_resize_add(p, size))
+	if(!mBufResizeAdd(p, size))
 		return FALSE;
 
 	//データ追加
@@ -213,7 +212,7 @@ mlkbool mBufAppendByte(mBuf *p,uint8_t dat)
 
 mlkbool mBufAppend0(mBuf *p,int size)
 {
-	if(!_resize_add(p, size))
+	if(!mBufResizeAdd(p, size))
 		return FALSE;
 
 	memset(p->buf + p->cursize, 0, size);
@@ -243,7 +242,7 @@ int32_t mBufAppendUTF8(mBuf *p,const char *buf,int len)
 	if(len < 0)
 		len = mStrlen(buf);
 
-	if(!_resize_add(p, len + 1)) return -1;
+	if(!mBufResizeAdd(p, len + 1)) return -1;
 
 	//セット
 

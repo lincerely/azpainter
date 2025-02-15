@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -573,10 +573,9 @@ void mGuiThreadWakeup(void)
 // パス
 //=========================
 
+/**@group path:パス */
 
 /**@ データ用ファイルのパスをセット
- *
- * @g:パス
  *
  * @d:プログラムで使用されるデータファイルのディレクトリを、
  * 実行ファイルからの相対パスで指定する。\
@@ -734,7 +733,7 @@ mlkerr mGuiCreateConfigDir(const char *subpath)
  * @d:設定ファイルディレクトリ内にファイルが存在していない場合のみコピーする。
  *
  * @p:srcpath ソースのファイル名。データディレクトリからの相対パス。
- * @p:dstdir コピー先のパスとファイル名。設定ファイルディレクトリからの相対パス。
+ * @p:dstpath コピー先のパスとファイル名。設定ファイルディレクトリからの相対パス。
  * @r:コピーが行われたか */
 
 mlkbool mGuiCopyFile_dataToConfig(const char *srcpath,const char *dstpath)
@@ -803,10 +802,9 @@ void mGuiReadIni_system(mIniRead *ini)
 // 翻訳
 //=================================
 
+/**@group trans:翻訳 */
 
 /**@ デフォルトの埋め込み用翻訳データのみセットする
- *
- * @g:翻訳
  *
  * @d:翻訳ファイルを使わず、特定の言語のみ固定で使う場合。 */
 
@@ -975,10 +973,9 @@ const char *mGuiTransGetText2Raw(uint16_t groupid,uint16_t strid)
 // ほか
 //=================================
 
+/**@group other:ほか */
 
 /**@ レイアウトサイズを計算する
- *
- * @g:ほか
  *
  * @d:計算対象のすべてのウィジェットで、calc_hint ハンドラを実行して、
  * レイアウトサイズを計算する。 */

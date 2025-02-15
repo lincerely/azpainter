@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -797,9 +797,9 @@ void mImageConv_cmyk16(mImageConv *p)
 //===============================
 
 
+/**@group チャンネルデータ */
+
 /**@ [チャンネル] GRAY+A (8bit) -> GRAY+A/RGB/RGBA
- *
- * @g:チャンネルデータ
  *
  * @d:PSD など、チャンネルごとにデータが分かれている場合に使う。\
  * 各チャンネルを結合した位置に出力。\

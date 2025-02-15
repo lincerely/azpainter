@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -22,10 +22,12 @@ $*/
  *****************************************/
 
 #include <mlk_gui.h>
+#include <mlk_widget.h>
 
 #include "def_macro.h"
 #include "def_config.h"
 #include "def_draw.h"
+#include "def_widget.h"
 
 #include "maincanvas.h"
 #include "panel_func.h"
@@ -90,12 +92,20 @@ void drawCanvas_scroll_default(AppDraw *p)
 	p->canvas_scroll.x = p->canvas_scroll.y = 0;
 }
 
-/** 表示倍率を一段階上げ下げ */
+/** 表示倍率を一段階上げ下げ
+ *
+ * is_ptdev: ポインタデバイスによる操作か */
 
-void drawCanvas_zoomStep(AppDraw *p,mlkbool zoomup)
+void drawCanvas_zoomStep(AppDraw *p,mlkbool zoomup,mlkbool is_ptdev)
 {
-	drawCanvas_update(p, drawCalc_getZoom_step(p, zoomup), 0,
-		DRAWCANVAS_UPDATE_ZOOM | DRAWCANVAS_UPDATE_RESET_SCROLL);
+	uint32_t flags;
+
+	flags = DRAWCANVAS_UPDATE_ZOOM | DRAWCANVAS_UPDATE_RESET_SCROLL;
+
+	if(is_ptdev && (g_app_config->foption & CONFIG_OPTF_ZOOM_AT_CURSOR))
+		flags |= DRAWCANVAS_UPDATE_SCROLL_AT_CURSOR;
+
+	drawCanvas_update(p, drawCalc_getZoom_step(p, zoomup), 0, flags);
 }
 
 /** 一段階左右に回転 */
@@ -178,8 +188,32 @@ void drawCanvas_update_scrollpos(AppDraw *p,mlkbool update)
 
 void drawCanvas_update(AppDraw *p,int zoom,int angle,int flags)
 {
+	mPoint pt,pt2;
+	mDoublePoint dpt;
+	int at_cursor = FALSE;
+
+	//同時にズームを行う時、指定されたキャンバス位置のイメージが動かないように、スクロール調整
+
+	if(flags & DRAWCANVAS_UPDATE_SCROLL_AT_CURSOR)
+	{
+		if(flags & DRAWCANVAS_UPDATE_SCROLL_AT_CURSOR_PRESS)
+		{
+			//ボタン押し時の位置 (ドラッグ操作時)
+			at_cursor = TRUE;
+			pt.x = (int)p->w.dpt_canv_press.x;
+			pt.y = (int)p->w.dpt_canv_press.y;
+			dpt = p->w.ptd_tmp[0];
+		}
+		else if(mWidgetGetCursorPos(MLK_WIDGET(g_app_widgets->canvaspage), &pt))
+		{
+			//現在のカーソル位置
+			at_cursor = TRUE;
+			drawCalc_canvas_to_image_double_pt(p, &dpt, &pt);
+		}
+	}
+
 	//スクロールリセット
-	//[!] すでにスクロール位置が (0,0) ならそのまま
+	// スクロール位置が (0,0) の場合は、そのまま
 
 	if((flags & DRAWCANVAS_UPDATE_RESET_SCROLL)
 		&& (p->canvas_scroll.x || p->canvas_scroll.y))
@@ -213,6 +247,16 @@ void drawCanvas_update(AppDraw *p,int zoom,int angle,int flags)
 
 	drawCalc_setCanvasViewParam(p);
 
+	//イメージ位置が移動しないように、差分をスクロールする
+
+	if(at_cursor)
+	{
+		drawCalc_image_to_canvas_pt_double(p, &pt2, dpt.x, dpt.y);
+
+		p->canvas_scroll.x += pt2.x - pt.x;
+		p->canvas_scroll.y += pt2.y - pt.y;
+	}
+
 	//定規ガイド再計算
 
 	if(p->rule.func_set_guide)
@@ -221,6 +265,9 @@ void drawCanvas_update(AppDraw *p,int zoom,int angle,int flags)
 	//キャンバススクロール情報
 
 	MainCanvas_setScrollInfo();
+
+	if(at_cursor)
+		MainCanvas_setScrollPos();
 
 	//ほか、関連するウィジェット
 

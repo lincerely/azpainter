@@ -1,6 +1,6 @@
 # AzPainter
 
-http://azsky2.html.xdomain.jp/
+https://azelpg.gitlab.io/azsky2
 
 イラストや画像編集用のペイントソフト。<br>
 8bit/16bit カラーに対応。

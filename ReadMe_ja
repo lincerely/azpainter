@@ -1,8 +1,8 @@
 **********************************************
   AzPainter for Linux
-  Copyright (C) 2013-2023 Azel
+  Copyright (C) 2013-2025 Azel
 
-  http://azsky2.html.xdomain.jp/
+  https://azelpg.gitlab.io/azsky2
   https://gitlab.com/azelpg/azpainter
   <azelpg@gmail.com>
 **********************************************
@@ -24,7 +24,7 @@
  * 動作環境
 =====================================
 
-- Linux、macOS(要XQuartz) ほか
+- Linux, macOS(要XQuartz) ほか
 
 - X11R6 以降
   (筆圧を認識したい場合は X11R7.5 以降)
@@ -37,10 +37,11 @@
 - C コンパイラ
 - ninja (ビルドツール)
 - pkg-config
+
 - 以下のライブラリの開発用ファイル
   x11 xext xcursor xinput
   zlib libpng jpeglib(jpeg-turbo) tiff webp fontconfig freetype2
-  Linux 以外: libiconv
+  <場合によっては必要> libiconv
 
 
 --- 必要なパッケージ ---

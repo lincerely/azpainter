@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -265,6 +265,8 @@ static int _write_row_image(mPSDSave *p,uint8_t *buf)
 // main
 //=========================
 
+/**@group 保存 */
+
 
 /* レイヤ情報解放 */
 
@@ -317,9 +319,7 @@ void mPSDSave_close(mPSDSave *p)
 	}
 }
 
-/**@ PSD 保存の作成
- *
- * @g:保存 */
+/**@ PSD 保存の作成 */
 
 mPSDSave *mPSDSave_new(void)
 {

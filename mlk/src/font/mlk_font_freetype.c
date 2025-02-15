@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -74,7 +74,7 @@ void mFontFT_setLCDFilter(mFont *p)
 {	
 #ifdef FT_CONFIG_OPTION_SUBPIXEL_RENDERING
 
-	if(p->gdraw.render_mode == FT_RENDER_MODE_LCD
+	if((p->gdraw.render_mode == FT_RENDER_MODE_LCD || p->gdraw.render_mode == FT_RENDER_MODE_LCD_V)
 		&& p->sys->lcd_filter != p->gdraw.lcd_filter)
 	{
 		FT_Library_SetLcdFilter(p->sys->lib, p->gdraw.lcd_filter);

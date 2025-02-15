@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -378,10 +378,10 @@ void mPixbufGetFunc_getbuf(mPixbuf *p,mFuncPixbufGetBuf *dst)
 // クリッピング
 //===========================
 
+/**@group clipping:クリッピング */
 
-/**@ クリッピング範囲をクリアする
- *
- * @g:クリッピング */
+
+/**@ クリッピング範囲をクリアする */
 
 void mPixbufClip_clear(mPixbuf *p)
 {
@@ -581,13 +581,11 @@ uint8_t *mPixbufClip_getBltInfo_srcpos(mPixbuf *p,mPixbufClipBlt *dst,
 // 位置
 //===========================
 
+/**@group pixel:ピクセル */
 
 /**@ ピクセルバッファ位置取得
  *
- * @g:ピクセル
- *
  * @d:クリッピング範囲は関係ない。
- * 
  * @r:範囲外は NULL */
 
 uint8_t *mPixbufGetBufPt(mPixbuf *p,int x,int y)
@@ -691,10 +689,10 @@ void mPixbufGetPixelBufRGB(mPixbuf *p,uint8_t *buf,int *pr,int *pg,int *pb)
 // 描画
 //===========================
 
+/**@group draw:描画 */
 
-/**@ 点を描画 (PIXCOL)
- *
- * @g:描画 */
+
+/**@ 点を描画 (PIXCOL) */
 
 void mPixbufSetPixel(mPixbuf *p,int x,int y,mPixCol pix)
 {
@@ -1478,10 +1476,10 @@ void mPixbufDrawNumberPattern_5x7(mPixbuf *p,int x,int y,const char *text,mPixCo
 // 転送
 //======================
 
+/**@group blt:転送 */
+
 
 /**@ mPixbuf から mPixbuf へ転送
- *
- * @g:転送
  *
  * @d:ソースの位置とサイズは範囲内であること。
  *
@@ -1862,6 +1860,7 @@ void mPixbufBltScale_oversamp_imagebuf(mPixbuf *p,int x,int y,int w,int h,
 // UI 描画
 //======================
 
+/**@group drawui:UI 描画 */
 
 /**@ 指定色に影を付けた背景を描画
  *
@@ -1930,9 +1929,7 @@ void mPixbufDrawBkgndShadowRev(mPixbuf *p,int x,int y,int w,int h,int colno)
 	}
 }
 
-/**@ ボタン描画
- *
- * @g:UI 描画 */
+/**@ ボタン描画 */
 
 void mPixbufDrawButton(mPixbuf *p,int x,int y,int w,int h,uint8_t flags)
 {

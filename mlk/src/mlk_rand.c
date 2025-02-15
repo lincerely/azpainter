@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -33,10 +33,10 @@ $*/
 
 static mRandXor g_xorshift;
 
+/**@group xorshift:XorShift */
 
 /**@ 初期化
  *
- * @g:XorShift
  * @d:作業用のデータを初期化する
  * 
  * @p:p 作業用で使うデータ。\
@@ -260,10 +260,10 @@ static void _sfmt_gen_rand(mRandSFMT *p)
 
 #endif
 
+/**@group sfmt:SFMT */
+
 /**@ 作成
  *
- * @g:SFMT
- * 
  * @d:作業用データを確保する。\
  * 確保後は常に初期化を行うこと。
  * 

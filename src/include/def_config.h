@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -258,7 +258,8 @@ enum
 	CONFIG_OPTF_MES_SAVE_OVERWRITE = 1<<0,	//上書き保存確認
 	CONFIG_OPTF_MES_SAVE_APD = 1<<1,		//上書き時、APD で保存するか確認
 	CONFIG_OPTF_SAVE_APD_NOPICT = 1<<2,		//APD 保存時、一枚絵イメージを含めない
-	CONFIG_OPTF_FILTERLIST_DBLCLK = 1<<3	//フィルタ一覧はダブルクリックで実行
+	CONFIG_OPTF_FILTERLIST_DBLCLK = 1<<3,	//フィルタ一覧はダブルクリックで実行
+	CONFIG_OPTF_ZOOM_AT_CURSOR = 1<<4		//ポインタデバイス操作でのズーム時、カーソル位置を中心にズーム
 };
 
 /* fview */

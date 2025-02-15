@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -60,11 +60,10 @@ static void _delete_item(mTree *p,mTreeItem *item)
 // mTree
 //***********************************
 
-
+/**@group tree:mTree */
 
 /**@ アイテムを新規作成して親の末尾に追加
  *
- * @g:mTree
  * @p:parent NULL でルート
  * @p:size アイテム構造体のサイズ */
 
@@ -525,10 +524,10 @@ void mTreeSortAll(mTree *p,int (*comp)(mTreeItem *,mTreeItem *,void *),void *par
 //***********************************
 
 
+/**@group treeitem:mTreeItem */
 
 /**@ アイテムを新規作成
  *
- * @g:mTreeItem
  * @d:サイズ分ゼロクリアされる。 */
 
 mTreeItem *mTreeItemNew(int size)

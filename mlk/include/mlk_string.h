@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -37,6 +37,7 @@ int mStringCompare_null_len(const char *str1,const char *str2,int len2);
 int mStringCompare_len(const char *str1,const char *str2,int len1,int len2);
 int mStringCompare_tochar(const char *str1,const char *str2,char ch);
 int mStringCompare_number(const char *str,const char *str2);
+mlkbool mStringIsInclude_case(const char *str,const char *cmp);
 char *mStringDup_replace0(const char *str,char ch);
 
 mlkbool mStringGetNextSplit(const char **pptop,const char **ppend,char ch);

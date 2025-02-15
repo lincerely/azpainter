@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -20,8 +20,8 @@ $*/
 #ifndef MLK_PLATFORM_H
 #define MLK_PLATFORM_H
 
-#if defined(__FreeBSD__)
- #define MLK_PLATFORM_FREEBSD
+#if defined(__FreeBSD__) || defined(__OpenBSD__)
+ #define MLK_PLATFORM_BSD
 #elif defined(__APPLE__) && defined(__MACH__)
  #define MLK_PLATFORM_MACOS
 #else

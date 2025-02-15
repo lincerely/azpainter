@@ -1,5 +1,5 @@
 /*$
- Copyright (C) 2013-2023 Azel.
+ Copyright (C) 2013-2025 Azel.
 
  This file is part of AzPainter.
 
@@ -189,9 +189,6 @@ static mWidget *_get_notify_widget(mWidget *p,mlkbool enable_replace)
 // main
 //==========================
 
-
-/**@ ウィジェット削除 */
-
 /* [!] destroy ハンドラ内で、自身以外のウィジェットを削除する場合があるので、
  *     再帰的に直接ウィジェットの削除を行わないようにする。
  * 
@@ -199,6 +196,8 @@ static mWidget *_get_notify_widget(mWidget *p,mlkbool enable_replace)
  * destroy ハンドラ内で mWidgetDestroy() が呼ばれた場合、フラグだけ ON にして戻る。
  * フラグが処理できたら、トップレベルの mWidgetDestroy() 上で、
  * フラグが ON のウィジェットを順番に削除する。 */
+
+/**@ ウィジェット削除 */
 
 void mWidgetDestroy(mWidget *p)
 {
@@ -666,6 +665,30 @@ mlkbool mWidgetIsPointIn(mWidget *p,int x,int y)
 	return (x >= 0 && x < p->w && y >= 0 && y < p->h);
 }
 
+/**@ 現在のカーソル位置を取得
+ *
+ * @d:指定ウィジェットが Enter 状態であること。
+ *
+ * @p:dst ウィジェットからの相対位置で返る
+ * @r:p のウィジェットが Enter 状態か。FALSE の場合、dst は変更されない。 */
+
+mlkbool mWidgetGetCursorPos(mWidget *p,mPoint *dst)
+{
+	mWindow *win;
+
+	if(p != MLKAPP->widget_enter)
+		return FALSE;
+	else
+	{
+		win = g_mlk_app->window_enter;
+	
+		dst->x = (g_mlk_app->pointer_last_win_fx >> 8) - win->win.deco.w.left - p->absX;
+		dst->y = (g_mlk_app->pointer_last_win_fy >> 8) - win->win.deco.w.top - p->absY;
+		
+		return TRUE;
+	}
+}
+
 /**@ 下位ウィジェットの中から id を検索
  *
  * @p:root このウィジェットの下位のみ対象 */
@@ -684,10 +707,9 @@ mWidget *mWidgetFindFromID(mWidget *root,int id)
 // 状態
 //============================
 
+/**@group state:状態 */
 
 /**@ 表示されているか
- *
- * @g:状態
  *
  * @d:親の表示状態も含む。\
  * ウィンドウの範囲外にある場合など、画面上では見えないが表示状態である場合も含める。 */
@@ -910,10 +932,9 @@ mlkbool mWidgetMoveResize(mWidget *p,int x,int y,int w,int h)
 // フォーカス関連
 //============================
 
+/**@group focus:フォーカス */
 
 /**@ フォーカスウィジェットを変更
- *
- * @g:フォーカス
  *
  * @r:フォーカス状態が変更されたか */
 
@@ -956,10 +977,9 @@ void mWidgetSetNoTakeFocus_under(mWidget *root)
 // レイアウト関連
 //============================
 
+/**@group layout:レイアウト */
 
 /**@ レイアウトサイズを再計算させる
- *
- * @g:レイアウト
  *
  * @d:上位の推奨サイズ計算フラグを ON にする。\
  * ここではフラグを ON にするだけなので、実際に計算させる場合は mGuiCalcHintSize() を実行する。 */
@@ -1124,10 +1144,9 @@ void mWidgetRunConstruct(mWidget *p)
 // 描画・更新
 //============================
 
+/**@group draw:描画・更新 */
 
 /**@ draw ハンドラ時の描画範囲を取得
- *
- * @g:描画・更新
  *
  * @d:draw ハンドラ内で、全体を描画せず、
  *  事前に指定した範囲のみを描画したい時に使う。\
@@ -1325,10 +1344,9 @@ void mWidgetDirectDraw_end(mWidget *p,mPixbuf *pixbuf)
 // イベント
 //============================
 
+/**@group event:イベント関連 */
 
 /**@ 通知先ウィジェット取得
- *
- * @g:イベント関連
  *
  * @d:通知先の置き換えは有効。 */
 
@@ -1486,10 +1504,9 @@ void mWidgetTimerDeleteAll(mWidget *p)
 // ほか
 //===============================
 
+/**@group other:ほか */
 
 /**@ ウィジェットにカーソルをセット
- *
- * @g:ほか
  *
  * @d:カーソルポインタがこのウィジェット上にいる間は、指定したカーソルに変更される。\
  * 新規作成したカーソルをセットした場合は、必要なくなった時に、明示的に削除すること。\
@@ -1643,10 +1660,9 @@ mWidget *mWidgetGetGrabPointer(void)
 // テキスト
 //===============================
 
+/**@group labeltext:mWidgetLabelText */
 
 /**@ 複数行ラベル文字列から、各行の情報データを作成
- *
- * @g:mWidgetLabelText
  *
  * @d:text の文字列を元に、複数行の場合は、
  * mWidgetLabelTextLineInfo x (行数 + 1) 分のバッファを確保し、各行の位置と長さをセットして返す。\

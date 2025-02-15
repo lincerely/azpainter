@@ -1,18 +1,14 @@
 #!/bin/sh
 
-if type setopt > /dev/null 2>&1;then setopt SH_WORD_SPLIT; fi
-
 fc_put_help() {
 cat <<_ZYXW_
 [Usage] ./configure [option] [VAR=VALUE]...
 
 Options:
   --help         display this help
-  --debug        create debug exe (CFLAGS='-g')
-  --prefix=[PREFIX]   install directory
-                      [/usr/local]
-
-  --empty-flags  empty CFLAGS and LDFLAGS by default
+  --debug        create for debug (CFLAGS='-g')
+  --prefix=[PREFIX]  install directory
+                     (default = /usr/local)
 
 Optional flags:
 
@@ -25,10 +21,6 @@ _ZYXW_
 exit 0
 }
 
-fc_check_command() {
-	type "$1" > /dev/null 2>&1
-}
-
 fc_check_command_err() {
 	if ! type "$1" > /dev/null 2>&1;then
 		echo "[!] '$1' command not found."
@@ -38,265 +30,22 @@ fc_check_command_err() {
 	fi
 }
 
-fc_add_string() {
-	tmpstr=`echo "$2" | sed -e 's|^ *||' -e 's| *$||'`
-	if test -z "$1";then
-		echo "$tmpstr"
-	elif test -z "$tmpstr";then
-		echo "$1"
-	else
-		echo "$1 $tmpstr"
-	fi
-}
+if test "$1" = "--help";then
+	fc_put_help
+fi
 
-fc_check_func() {
-	echo "char $1(); int main() { return $1(); }" > conftest.c
-
-	if $CC $LDFLAGS $LDFLAGS_ADD -o conftest conftest.c $2 > /dev/null 2>&1;then
-		tmp=0
-	else
-		tmp=1
-	fi
-
-	rm -f conftest.c conftest
-
-	return $tmp
-}
-
-fc_check_lib() {
-	tmp_name=$1
-	tmp_pkgconf=$2
-	tmp_help=$3
-
-	echo "checking $tmp_name"
-
-	if ! pkg-config --exists $tmp_pkgconf > /dev/null 2>&1;then
-		echo "----- Error ----"
-		echo "[!] '$tmp_name' not found"
-		echo "please install: $3"
-		exit 1
-	fi
-	
-	tmp1=`pkg-config --cflags $tmp_pkgconf`
-	tmp2=`pkg-config --libs $tmp_pkgconf`
-
-	CFLAGS_ADD=`fc_add_string "$CFLAGS_ADD" "$tmp1"`
-	LIBS_ADD=`fc_add_string "$LIBS_ADD" "$tmp2"`
-}
-
-fc_create_buildfile() {
-	cat - <<_ZYXW_ > conftmp
-s|@CC@|$CC|
-s|@CFLAGS@|$CFLAGS|
-s|@LDFLAGS@|$LDFLAGS|
-s|@LIBS@|$LIBS|
-s|@PREFIX@|$cf_prefix|
-s|@PACKAGE_NAME@|$PACKAGE|
-s|@PACKAGE_VERSION@|$PACKAGE_VERSION|
-_ZYXW_
-
-
-	sed -f conftmp $1 > $2
-	rm -f conftmp
-	echo "create $2"
-}
-
-#----------------
-
-fc_check_command_err sed
 fc_check_command_err ninja "ninja or ninja-build"
 fc_check_command_err pkg-config "pkg-config or pkgconf"
 
-#-------------
-# option
-
-CC=
-CFLAGS=
-LDFLAGS=
-LIBS=
-
-CFLAGS_ADD="-I/usr/local/include"
-LDFLAGS_ADD="-L/usr/local/lib"
-LIBS_ADD=
-
-cf_prefix=/usr/local
-cf_debug=no
-cf_empty_flags=no
-
-PACKAGE=azpainter
-PACKAGE_VERSION=3.0.7
-
-for opt;do
-	case $opt in
-	*=?*) tmp1=`expr "X$opt" : '[^=]*=\(.*\)'` ;;
-	*) tmp1= ;;
-	esac
-
-	case $opt in
-	--help)
-		fc_put_help ;;
-	--debug)
-		cf_debug=yes ;;
-	--prefix=*)
-		cf_prefix=$tmp1 ;;
-	--empty-flags)
-		cf_empty_flags=yes ;;
-	--without-*)
-		tmp1=`expr "x$opt" : 'x--without-\(.*\)'`
-		eval cf_without_$tmp1=yes ;;
-	*=*)
-		tmp2=`expr "X$opt" : 'X\([^=]*\)=.*'`
-		eval $tmp2=\'$tmp1\' ;;
-	*)
-		echo "unknown option: $opt"
-		exit 1 ;;
-	esac
-done
-
-# debug/release
-
-if test -z "$CFLAGS";then
-	if test "$cf_debug" = yes;then
-		CFLAGS_ADD=`fc_add_string "$CFLAGS_ADD" "-g"`
-	else
-		CFLAGS_ADD=`fc_add_string "$CFLAGS_ADD" "-O2"`
-	fi
-fi
-
-if test "$cf_empty_flags" = yes;then
-	CFLAGS_ADD=""
-	LDFLAGS_ADD=""
-fi
-
-cf_os=`uname`
-if test "$cf_os" = Darwin;then
-	cf_os=mac
-else
-	cf_os=n
-fi
-
-if test "$cf_os" = mac;then
-	CFLAGS_ADD=`fc_add_string "$CFLAGS_ADD" "-DMLK_NO_SIMD"`
-	CFLAGS_ADD=`fc_add_string "$CFLAGS_ADD" "-I/opt/X11/include"`
-	LDFLAGS_ADD=`fc_add_string "$LDFLAGS_ADD" "-L/opt/X11/lib"`
-	LIBS_ADD=`fc_add_string "$LIBS_ADD" "-lX11 -lXext -lXcursor -lXi"`
-fi
-
-#-------------
-# compiler
-
-if test -z "$CC";then
-	if fc_check_command clang;then CC=clang
-	elif fc_check_command gcc;then CC=gcc
-	else CC=cc
-	fi
-fi
-
-echo "c compiler = $CC"
-
-#---------------
-# bigendian
-
-cf_bigendian=no
-
-cat - <<_SRC > conftest.c
-int main()
-{
-	unsigned short a = 0x1234;
-	if(*((unsigned char *)&a) == 0x12)
-		return 0;
-	else
-		return 1;
-}
-_SRC
-
-if $CC -o conftest conftest.c > /dev/null 2>&1 && ./conftest;then
-	cf_bigendian=yes
-	echo "endian = big"
-else
-	echo "endian = little"
-fi
-
-rm -f conftest.c conftest
-
-#------------------
-
-echo "checking iconv"
-if fc_check_func iconv_open -liconv || fc_check_func libiconv_open -liconv;then
-	LIBS_ADD=`fc_add_string "$LIBS_ADD" "-liconv"`
-elif ! fc_check_func iconv_open;then
-	echo "[!] 'iconv' not found"
-	echo "please install 'libiconv'"
+echo "compiling configure.c..."
+if ! cc -o configure_c configure.c -ldl;then
 	exit 1
 fi
 
-if test $cf_os != mac;then
-	fc_check_lib x11 x11 "libx11-dev or libX11-devel or libx11"
-fi
-if test $cf_os != mac;then
-	fc_check_lib xext xext "libxext-dev or libXext-devel or libxext"
-fi
-if test $cf_os != mac;then
-	fc_check_lib xcursor xcursor "libxcursor-dev or libXcursor-devel or libxcursor"
-fi
-if test $cf_os != mac;then
-	fc_check_lib xinput xi "libxi-dev or libXi-devel or libxi"
-fi
-fc_check_lib png libpng "libpng-dev or libpng-devel or libpng or png"
-fc_check_lib zlib zlib "zlib1g-dev or zlib-devel or zlib"
-fc_check_lib tiff libtiff-4 "libtiff-dev or libtiff-devel or libtiff or tiff"
-fc_check_lib jpeg libjpeg "libjpeg-dev or libjpeg-devel or libjpeg-turbo or jpeg-turbo"
-fc_check_lib webp libwebp "libwebp-dev or libwebp-devel or libwebp or webp"
-fc_check_lib freetype2 freetype2 "libfreetype6-dev or libfreetype6-devel or freetype2"
-fc_check_lib fontconfig fontconfig "libfontconfig1-dev or libfontconfig-devel or fontconfig"
-
-if test ! -d build;then mkdir build; fi
-
-#--------------------
-# config.h
-
-touch conftmp
-
-if test $cf_bigendian = yes;then
-	cat - <<_ZYXW_ >> conftmp
-s|\\#undef MLK_BIG_ENDIAN|\\#define MLK_BIG_ENDIAN|
-_ZYXW_
-fi
-if ! fc_check_func FT_Done_MM_Var "-lfreetype";then
-	cat - <<_ZYXW_ >> conftmp
-s|\\#undef MLK_NO_FREETYPE_VARIABLE|\\#define MLK_NO_FREETYPE_VARIABLE|
-_ZYXW_
+if test ! -d build;then
+	echo "mkdir ./build"
+	mkdir build
 fi
 
-if test -s conftmp;then
-	sed -f conftmp config.h.in > build/config.h
-else
-	cp config.h.in build/config.h
-fi
-
-rm -f conftmp
-echo "create build/config.h"
-
-#------------------
-
-CFLAGS=`fc_add_string "$CFLAGS" "$CFLAGS_ADD"`
-LDFLAGS=`fc_add_string "$LDFLAGS" "$LDFLAGS_ADD"`
-LIBS=`fc_add_string "$LIBS" "$LIBS_ADD"`
-
-fc_create_buildfile build.ninja.in build/build.ninja
-fc_create_buildfile install.sh.in build/install.sh
-
-cat <<_ZYXW_
----------------
-
-CFLAGS = $CFLAGS
-LDFLAGS = $LDFLAGS
-LIBS = $LIBS
-
-please run...
-$ cd build
-$ ninja
-# ninja install
----------------
-_ZYXW_
-
+echo "configure..."
+./configure_c "$@"
