@@ -35,6 +35,7 @@ $*/
 #include "def_draw.h"
 #include "def_mainwin.h"
 #include "def_canvaskey.h"
+#include "def_draw_toollist.h"
 
 #include "mainwindow.h"
 #include "maincanvas.h"
@@ -104,6 +105,13 @@ void MainWindow_runCanvasKeyCmd(int cmd,mlkbool is_ptdev)
 
 		PanelOption_changeRuleType();
 	}
+	else if(cmd >= CANVASKEY_CMD_REGIST && cmd < CANVASKEY_CMD_REGIST + DRAW_TOOLLIST_REG_NUM)
+	{
+		//登録ツール変更
+
+		if(drawToolList_selectRegItem(p, cmd - CANVASKEY_CMD_REGIST))
+			PanelToolList_changeItem();
+	}
 	else if(cmd >= CANVASKEY_CMD_OTHER && cmd < CANVASKEY_CMD_OTHER + CANVASKEY_CMD_OTHER_NUM)
 	{
 		//他コマンド
@@ -142,16 +150,16 @@ void MainWindow_runCanvasKeyCmd(int cmd,mlkbool is_ptdev)
 				drawLayer_toggle_visible(p, p->curlayer);
 				PanelLayer_update_curlayer(FALSE);
 				break;
-			//一つ次/前のブラシ選択
+			//一つ次/前のツールリスト選択
 			case CANVASKEY_CMD_OTHER_TOOLLIST_NEXT:
 			case CANVASKEY_CMD_OTHER_TOOLLIST_PREV:
 				if(drawToolList_selectMove(p, (cmd == CANVASKEY_CMD_OTHER_TOOLLIST_NEXT)))
-					PanelToolList_updateList();
+					PanelToolList_changeItem();
 				break;
-			//直前のブラシと切り替え
+			//直前のツールリストと切り替え
 			case CANVASKEY_CMD_OTHER_TOOLLIST_TOGGLE_SEL:
 				if(drawToolList_toggleSelect_last(p))
-					PanelToolList_updateList();
+					PanelToolList_changeItem();
 				break;
 		}
 	}

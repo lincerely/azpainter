@@ -154,44 +154,12 @@ static void _event_enterleave(_X11_EVENT *p,int enter)
 	_X11_DEBUG("%s: %p: mode(%d) detail(%d)\n",
 		(enter)? "Enter": "Leave", p->win, mode, xev->detail);
 
-	//通常の Enter/Leave 時、または Enter + NotifyUngrab 時
-	
-	//[Enter + NotifyUngrab]
-	//  ボタンを押したまま移動している状態で、
-	//  押したウィンドウ以外のウィンドウ (同プログラム内) 上でボタンを離した時。
-
-	if(mode == NotifyNormal
-		|| (enter && mode == NotifyUngrab))
+	if(mode == NotifyNormal || mode == NotifyUngrab)
 	{
 		if(enter)
 			__mEventProcEnter(p->win, xev->x << 8, xev->y << 8);
 		else
 			__mEventProcLeave(p->win);
-	}
-
-	//[Leave + NotifyGrab]
-	//  ポップアップグラブ開始時
-
-	if(!enter && mode == NotifyGrab)
-	{
-		//基本的に、ポップアップウィンドウに対する Enter は来ないので、
-		//ポップアップ開始時にポインタがウィンドウ内にあれば、手動で Leave/Enter を送る
-
-		mAppRunData *run = MLKAPP->run_current;
-
-		if(run && run->type == MAPPRUN_TYPE_POPUP)
-		{
-			mWindow *popup = run->window;
-			mPoint pt;
-
-			mX11WindowGetCursorPos(popup, &pt);
-
-			if(mWidgetIsPointIn(MLK_WIDGET(popup), pt.x, pt.y))
-			{
-				__mEventProcLeave(MLKAPP->window_enter);
-				__mEventProcEnter(popup, pt.x << 8, pt.y << 8);
-			}
-		}
 	}
 }
 

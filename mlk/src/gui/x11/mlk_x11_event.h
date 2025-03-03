@@ -35,7 +35,6 @@ typedef struct
 
 mWindow *mX11Event_getWindow(mAppX11 *p,Window id);
 void mX11Event_setTime(mAppX11 *p,XEvent *ev);
-int mX11Event_convertButton(int btt);
 uint32_t mX11Event_convertState(unsigned int state);
 
 char *mX11Event_key_getIMString(_X11_EVENT *p,XKeyEvent *xev,KeySym *keysym,char *dst_char,int *dst_len);

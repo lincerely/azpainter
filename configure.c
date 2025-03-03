@@ -600,7 +600,7 @@ static void _proc_buildfile(const char *input,const char *output)
 	_replace_text(&str, "@LDFLAGS@", str_ldflags.buf);
 	_replace_text(&str, "@LIBS@", str_libs.buf);
 	_replace_text(&str, "@PACKAGE_NAME@", "azpainter");
-	_replace_text(&str, "@PACKAGE_VERSION@", "3.0.11");
+	_replace_text(&str, "@PACKAGE_VERSION@", "3.0.12");
 
 #if CONFIG_NASM
 	_buildfile_rep(&str, !enable_nasm, "@ASM_x86_64>>", "@ASM_x86_64>", "@ASM_x86_64<");

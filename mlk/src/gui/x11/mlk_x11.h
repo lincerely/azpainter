@@ -269,10 +269,6 @@ void mX11WindowGetFrameWidth(mWindow *p,mRect *rc);
 void mX11WindowGetFullSize(mWindow *p,mSize *size);
 void mX11WindowAdjustPosDesktop(mWindow *p,mPoint *pt,mlkbool workarea);
 
-//mlk_x11_dnd.c
-
-mlkbool mX11DND_client_message(XClientMessageEvent *ev);
-
 //mlk_x11_clipboard.c
 
 void mX11Clipboard_selection_request(XSelectionRequestEvent *ev);

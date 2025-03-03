@@ -373,6 +373,21 @@ void PanelToolList_updateList(void)
 		ToolListView_update(p->toollist);
 }
 
+/** 外部の操作によってツールリストのアイテムが変更された時 (キャンバスキーなど) */
+
+void PanelToolList_changeItem(void)
+{
+	_topct *p = _get_topct();
+
+	if(p)
+	{
+		_update_iteminfo(p);
+
+		PanelBrushOpt_setValue();
+		ToolListView_update(p->toollist);
+	}
+}
+
 /** ブラシサイズの更新 */
 
 void PanelToolList_updateBrushSize(void)
@@ -396,5 +411,4 @@ void PanelToolList_updateBrushOpacity(void)
 	if(p)
 		ValueBar_setPos(p->bar_opacity, APPDRAW->tlist->brush->v.opacity);
 }
-
 

@@ -212,6 +212,16 @@ mlkbool drawToolList_toggleSelect_last(AppDraw *p)
 		return drawToolList_setSelItem(p, p->tlist->last_selitem);
 }
 
+/** 指定登録ツールに切り替え */
+
+mlkbool drawToolList_selectRegItem(AppDraw *p,int no)
+{
+	if(p->tlist->regitem[no])
+		return drawToolList_setSelItem(p, p->tlist->regitem[no]);
+	else
+		return FALSE;
+}
+
 /** アイテム削除
  *
  * 選択アイテムだった場合、削除後は、グループ内の前後のアイテムが選択される。
