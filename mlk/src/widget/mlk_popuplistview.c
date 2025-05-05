@@ -127,7 +127,7 @@ static int _popup_event_handle(mWidget *wg,mEvent *ev)
 
 /** ポップアップ作成
  *
- * height: 枠は含まない高さ */
+ * height: アイテム全体の高さ */
 
 static mPopupListView *_create_popup(mWidget *parent,
 	mCIManager *manager,int itemh,int height)
@@ -211,7 +211,7 @@ mlkbool mPopupListView_run(mWidget *parent,
 	mCIManager *manager,int itemh,int width,int maxh)
 {
 	mPopupListView *p;
-	int w,h;
+	int w,h,items_h;
 	mlkbool ret;
 
 	if(manager->list.num == 0) return FALSE;
@@ -228,7 +228,9 @@ mlkbool mPopupListView_run(mWidget *parent,
 
 	//高さ
 
-	h = itemh * manager->list.num + 2;
+	items_h = itemh * manager->list.num;
+
+	h = items_h + 2;
 
 	if(maxh > 0 && h > maxh)
 		h = maxh;
@@ -236,7 +238,7 @@ mlkbool mPopupListView_run(mWidget *parent,
 	//作成
 	//[!] height は、枠を含まない高さ
 
-	p = _create_popup(parent, manager, itemh, h - 2);
+	p = _create_popup(parent, manager, itemh, items_h);
 	if(!p) return FALSE;
 
 	//

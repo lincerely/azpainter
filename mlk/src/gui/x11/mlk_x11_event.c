@@ -82,11 +82,6 @@ static void _event_configure(_X11_EVENT *p)
 	mRect rc;
 	int x,y,w,h,sendevent;
 
-	//表示されていない状態では無効
-
-	if(MLK_WINDOW_IS_UNMAP(win))
-		return;
-
 	data = MLKX11_WINDATA(win);
 
 	//---- 同じウィンドウの ConfigureNotify はまとめて処理する

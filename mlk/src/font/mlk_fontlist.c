@@ -62,8 +62,13 @@ static FcFontSet *_create_fontset(const char *family)
  	if(family)
  	{
 		//スタイルリスト
+
 		os = FcObjectSetBuild(FC_STYLE, FC_WEIGHT, FC_SLANT, (void *)0);
-		pat = FcPatternBuild(0, FC_FAMILY, FcTypeString, family, (void *)0);
+
+		pat = FcPatternBuild(0,
+			FC_FAMILY, FcTypeString, family,
+			FC_NAMELANG, FcTypeString, "en",
+			(void *)0);
  	}
  	else
  	{
