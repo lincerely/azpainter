@@ -29,7 +29,6 @@ enum
 };
 
 mlkbool __mEventIsModalSkip(mWindow *win);
-mlkbool __mEventIsModalWindow(mWindow *win);
 void __mEventOnUngrab(void);
 char **__mEventGetURIList_ptr(uint8_t *datbuf);
 

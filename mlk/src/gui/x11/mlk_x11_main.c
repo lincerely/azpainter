@@ -494,6 +494,8 @@ static int _backend_mainloop(mAppRunData *run,mlkbool wait)
 		
 		if(__mAppAfterEvent())
 			XSync(disp, False);
+		else
+			XFlush(disp);
 		
 		//mGuiQuit() が呼ばれたため、ループ終了
 
@@ -505,13 +507,9 @@ static int _backend_mainloop(mAppRunData *run,mlkbool wait)
 			break;
 		else
 		{
-			//イベントが残っている場合は続ける
-
-			XFlush(disp);
+			//何かが起こるまで待つ
 
 			if(XPending(disp)) continue;
-
-			//何かが起こるまで待つ
 			
 			mX11WaitEvent(p);
 		}
@@ -788,8 +786,6 @@ void mX11EventTranslate_wait(mWindow *wait_win,int wait_evtype)
 
 		//イベントが残っている場合は続ける
 
-		XFlush(p->display);
-
 		if(XPending(p->display)) continue;
 
 		//何かが起こるまで待つ
@@ -817,8 +813,6 @@ void mX11EventTranslate_waitEvent(int wait_evtype,XEvent *evdst)
 		if(mX11EventTranslate(p, NULL, wait_evtype, evdst)) break;
 
 		//イベントが残っている場合は続ける
-
-		XFlush(p->display);
 
 		if(XPending(p->display)) continue;
 

@@ -33,6 +33,7 @@ enum
 	CANVASKEY_OP_REGIST = 150,		//+キー:登録ツール
 	CANVASKEY_OP_OTHER = 160,		//+キー:他
 	CANVASKEY_CMD_RULE = 180,		//定規ON/OFF
+	CANVASKEY_CMD_REGIST = 190,		//登録ツール変更
 
 	CANVASKEY_CMD_OTHER_NUM = 12,	//他コマンドの数
 	CANVASKEY_OP_OTHER_NUM = 3		//+キー:他の数

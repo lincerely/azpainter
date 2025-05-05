@@ -31,6 +31,7 @@ void PanelTool_changeToolSub(void);
 //ツールリスト
 
 void PanelToolList_updateList(void);
+void PanelToolList_changeItem(void);
 void PanelToolList_updateBrushSize(void);
 void PanelToolList_updateBrushOpacity(void);
 

@@ -71,7 +71,7 @@ elif test "$1" = uninstall;then
 
 elif test "$1" = dist;then
 	cd ..
-	tar czf $package_full.tar.gz --anchored --exclude build --exclude .git *
+	tar czf $package_full.tar.gz --anchored --exclude build --exclude configure_c --exclude .git *
 
 	if test ! -d $package_full;then mkdir $package_full; fi
 	tar xf $package_full.tar.gz -C $package_full

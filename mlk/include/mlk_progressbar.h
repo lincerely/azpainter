@@ -21,7 +21,7 @@ $*/
 #define MLK_PROGRESSBAR_H
 
 #define MLK_PROGRESSBAR(p)  ((mProgressBar *)(p))
-#define MLK_PROGRESSBAR_DEF mWidget wg; mProgressBar pb;
+#define MLK_PROGRESSBAR_DEF mWidget wg; mProgressBarData pb;
 
 typedef struct
 {

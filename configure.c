@@ -204,7 +204,7 @@ static void str_addtext_sp(string *p,const char *txt)
 	}
 }
 
-/* 文字列の置き換え
+/* 文字列の置き換え (複数)
  *
  * dst: NULL の場合、空文字列 */
 
@@ -251,7 +251,7 @@ static void _replace_text(string *p,const char *src,const char *dst)
 	}
 }
 
-/* top 〜 end の範囲を削除 */
+/* top の文字列 〜 end の文字列の範囲を削除 (複数) */
 
 static void _delete_area(string *p,const char *top,const char *end)
 {
@@ -259,21 +259,24 @@ static void _delete_area(string *p,const char *top,const char *end)
 
 	if(str_is_empty(p)) return;
 
-	ptop = strstr(p->buf, top);
-	if(!ptop) return;
-	
-	pend = strstr(ptop, end);
-	if(!pend) return;
+	while(1)
+	{
+		ptop = strstr(p->buf, top);
+		if(!ptop) break;
+		
+		pend = strstr(ptop, end);
+		if(!pend) break;
 
-	pend += strlen(end);
+		pend += strlen(end);
 
-	memmove(ptop, pend, p->buf + p->len - pend);
+		memmove(ptop, pend, p->buf + p->len - pend);
 
-	p->len -= pend - ptop;
-	p->buf[p->len] = 0;
+		p->len -= pend - ptop;
+		p->buf[p->len] = 0;
+	}
 }
 
-/* top 〜 行末までを削除 */
+/* top の文字列 〜 行末までを削除 (複数) */
 
 static void _delete_line(string *p,const char *top)
 {
@@ -281,28 +284,31 @@ static void _delete_line(string *p,const char *top)
 
 	if(str_is_empty(p)) return;
 
-	ptop = strstr(p->buf, top);
-	if(!ptop) return;
-
-	pend = ptop;
-	while(*pend)
+	while(1)
 	{
-		c = *(pend++);
-		if(c == '\n')
-			break;
-		else if(c == '\r')
+		ptop = strstr(p->buf, top);
+		if(!ptop) break;
+
+		pend = ptop;
+		while(*pend)
 		{
-			if(*pend == '\n') pend++;
-			break;
+			c = *(pend++);
+			if(c == '\n')
+				break;
+			else if(c == '\r')
+			{
+				if(*pend == '\n') pend++;
+				break;
+			}
 		}
+
+		//削除
+
+		memmove(ptop, pend, p->buf + p->len - pend);
+
+		p->len -= pend - ptop;
+		p->buf[p->len] = 0;
 	}
-
-	//削除
-
-	memmove(ptop, pend, p->buf + p->len - pend);
-
-	p->len -= pend - ptop;
-	p->buf[p->len] = 0;
 }
 
 /* テキストファイル読み込み */
@@ -580,8 +586,8 @@ static void _buildfile_rep(string *str,int flag,const char *txt1,const char *txt
 	else
 	{
 		_replace_text(str, txt1, 0);
-		_replace_text(str, txt2, 0);
-		_replace_text(str, txt3, 0);
+		_delete_line(str, txt2);
+		_delete_line(str, txt3);
 	}
 }
 
@@ -600,7 +606,7 @@ static void _proc_buildfile(const char *input,const char *output)
 	_replace_text(&str, "@LDFLAGS@", str_ldflags.buf);
 	_replace_text(&str, "@LIBS@", str_libs.buf);
 	_replace_text(&str, "@PACKAGE_NAME@", "azpainter");
-	_replace_text(&str, "@PACKAGE_VERSION@", "3.0.11");
+	_replace_text(&str, "@PACKAGE_VERSION@", "3.0.12");
 
 #if CONFIG_NASM
 	_buildfile_rep(&str, !enable_nasm, "@ASM_x86_64>>", "@ASM_x86_64>", "@ASM_x86_64<");

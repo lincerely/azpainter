@@ -24,5 +24,5 @@ $ ninja
 
 ## Link
 
-\* brush, texture, theme, configure\
+\* brush, texture, theme, configure (for ver 2.x)\
 https://gitlab.com/pistachio-gitlab/AzPainter-Resources

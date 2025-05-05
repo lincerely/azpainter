@@ -31,6 +31,7 @@ BrushEditData *drawToolList_getBrush(void);
 mlkbool drawToolList_setSelItem(AppDraw *p,ToolListItem *item);
 mlkbool drawToolList_selectMove(AppDraw *p,mlkbool next);
 mlkbool drawToolList_toggleSelect_last(AppDraw *p);
+mlkbool drawToolList_selectRegItem(AppDraw *p,int no);
 
 mlkbool drawToolList_deleteItem(ToolListItem *item);
 void drawToolList_deleteGroup(ToolListGroupItem *item);

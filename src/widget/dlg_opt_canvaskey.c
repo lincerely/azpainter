@@ -142,6 +142,22 @@ static void _add_group_item(_dialog *p,int trid_group,
 		_add_item(p, trid_item_top + i, keycmd_top + i, str);
 }
 
+/* 登録ツールの項目追加 */
+
+static void _add_group_regist_tool(_dialog *p,int trid_group,int cmdid,mStr *str)
+{
+	int i;
+
+	_add_group(p, trid_group);
+
+	for(i = 0; i < DRAW_TOOLLIST_REG_NUM; i++)
+	{
+		mStrSetFormat(str, " tool%d", i + 1);
+
+		_add_item(p, -1, cmdid + i, str);
+	}
+}
+
 /* 初期リストセット */
 
 static void _set_list(_dialog *p)
@@ -165,6 +181,10 @@ static void _set_list(_dialog *p)
 
 	_add_group_item(p, TRID_DLG_KEYOPT_GROUP_CMD_RULE, TRGROUP_RULE,
 		1, CANVASKEY_CMD_RULE, DRAW_RULE_TYPE_NUM - 1, str);
+
+	//登録ツール変更
+
+	_add_group_regist_tool(p, TRID_DLG_KEYOPT_GROUP_CMD_REGIST, CANVASKEY_CMD_REGIST, str);
 
 	//他コマンド
 
@@ -196,14 +216,7 @@ static void _set_list(_dialog *p)
 
 	//+キーで登録ツール動作
 
-	_add_group(p, TRID_DLG_KEYOPT_GROUP_OP_REGIST);
-
-	for(i = 0; i < DRAW_TOOLLIST_REG_NUM; i++)
-	{
-		mStrSetFormat(str, " tool%d", i + 1);
-
-		_add_item(p, -1, CANVASKEY_OP_REGIST + i, str);
-	}
+	_add_group_regist_tool(p, TRID_DLG_KEYOPT_GROUP_OP_REGIST, CANVASKEY_OP_REGIST, str);
 
 	//+キーで他動作
 

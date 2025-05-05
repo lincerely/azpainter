@@ -244,6 +244,8 @@ int mX11Event_proc_button(_X11_EVENT *p,int btt,uint32_t state,int press)
 			return MLK_BTT_MIDDLE;
 		else if(btt == 3)
 			return MLK_BTT_RIGHT;
+		else if(btt >= 8)
+			return btt - 8 + MLK_BTT_EXTRA;
 		else
 			return MLK_BTT_NONE;
 	}
@@ -295,7 +297,7 @@ void mX11Event_clientmessage_wmprotocols(_X11_EVENT *p)
 		mX11WindowSetUserTime(win, app->evtime_user);
 		
 		XSetInputFocus(app->display, MLKX11_WINDATA(win)->winid, RevertToParent, xev->data.l[1]);
-		XFlush(app->display);
+		XSync(app->display, False);
 	}
 	else if(mestype == app->atoms[MLKX11_ATOM_NET_WM_PING])
 	{

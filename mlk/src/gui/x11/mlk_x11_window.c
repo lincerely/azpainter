@@ -123,31 +123,10 @@ void __mX11WindowDestroy(mWindow *p)
 	
 		XDestroyWindow(MLKX11_DISPLAY, MLKX11_WINDATA(p)->winid);
 
-		//ダイアログ時は、実際に削除されるまでイベントを処理
-
-		if(p->wg.ftype & MWIDGET_TYPE_DIALOG)
-			mX11EventTranslate_wait(p, MLKX11_WAITEVENT_DESTROY);
-	}
-}
-
-/* ウィンドウサイズが表示前のサイズと同じになっているか
- *
- * Unmap 状態でのサイズ変更が適用されていない場合は、
- * マップ時にサイズを変更する。 */
-
-static void _check_win_size(mWindow *p,int tw,int th)
-{
-	Window root;
-	int x,y;
-	unsigned int w,h,bw,depth;
-
-	XGetGeometry(MLKX11_DISPLAY, MLKX11_WINDATA(p)->winid,
-		&root, &x, &y, &w, &h, &bw, &depth);
-
-	if(tw != w || th != h)
-	{
-		XResizeWindow(MLKX11_DISPLAY, MLKX11_WINDATA(p)->winid, tw, th);
 		XFlush(MLKX11_DISPLAY);
+
+		//if(p->wg.ftype & MWIDGET_TYPE_DIALOG)
+		//	mX11EventTranslate_wait(p, MLKX11_WAITEVENT_DESTROY);
 	}
 }
 
@@ -157,28 +136,18 @@ void __mX11WindowShow(mWindow *p,int f)
 {
 	mAppX11 *app = MLKAPPX11;
 	Window id = MLKX11_WINDATA(p)->winid;
-	int w,h;
 
 	if(f)
 	{
 		mX11WindowSetUserTime(p, app->evtime_user);
 
-		w = p->wg.w;
-		h = p->wg.h;
-
 		//表示
 
-		XMapWindow(app->display, id);
-		XRaiseWindow(app->display, id);
+		XMapRaised(app->display, id);
 
 		//MAP イベントが来るまで待つ
 
 		mX11EventTranslate_wait(p, MLKX11_WAITEVENT_MAP);
-
-		//上記の間に configure イベントが来るかもしれないので、
-		//表示前に記録したサイズを使う。
-
-		_check_win_size(p, w, h);
 	}
 	else
 	{
@@ -205,7 +174,7 @@ void __mX11WindowSetCursor(mWindow *p,mCursor cur)
 		MLKX11_WINDATA(p)->cursor = cur;
 	
 		XDefineCursor(MLKX11_DISPLAY, MLKX11_WINDATA(p)->winid, cur);
-		XFlush(MLKX11_DISPLAY);
+		XSync(MLKX11_DISPLAY, False);
 	}
 }
 
@@ -303,8 +272,8 @@ mlkbool __mX11ToplevelCreate(mToplevel *p)
 	
 	//親ウィンドウ
 	
-	if((p->top.fstyle & MTOPLEVEL_S_PARENT)
-		&& p->win.parent)
+	if(p->win.parent
+		&& (p->top.fstyle & MTOPLEVEL_S_PARENT))
 	{
 		XSetTransientForHint(appx->display, id,
 			MLKX11_WINDATA((p->win.parent)->toplevel)->winid);
@@ -343,6 +312,8 @@ mlkbool __mX11ToplevelCreate(mToplevel *p)
 		mX11XI2_selectEvent(id);
 
 #endif
+
+	XFlush(appx->display);
 
 	return TRUE;
 }
@@ -443,9 +414,7 @@ void __mX11ToplevelFullscreen(mToplevel *p,int type)
 
 void __mX11ToplevelMinimize(mToplevel *p)
 {
-	_change_NET_WM_STATE(p, 1,
-		MLKX11_ATOM_NET_WM_STATE_HIDDEN,
-		MLKX11_WIN_MAP_REQUEST_HIDDEN);
+	XIconifyWindow(MLKX11_DISPLAY, MLKX11_WINDATA(p)->winid, MLKAPPX11->screen);
 }
 
 /** ドラッグによるウィンドウの移動を開始させる */
